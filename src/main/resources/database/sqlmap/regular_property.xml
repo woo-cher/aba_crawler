@@ -5,9 +5,27 @@
     <!-- Mapper -->
     <resultMap id="RegularProperty" type="RegularProperty" />
 
-    <!-- Sample select Query -->
-    <select id="findAll" resultMap="RegularProperty">
+    <select id="selectProps" resultMap="RegularProperty">
         SELECT * FROM regular_properties;
     </select>
 
+    <select id="selectPropById" resultMap="RegularProperty" parameterType="int">
+        SELECT * FROM regular_properties WHERE id = #{id};
+    </select>
+
+    <insert id="insertProp" useGeneratedKeys="true" keyProperty="id" parameterType="RegularProperty">
+        INSERT INTO regular_properties (title, url, description, date) VALUES (#{title}, #{url}, #{description}, #{date})
+    </insert>
+
+    <update id="updateProp" parameterType="RegularProperty">
+        UPDATE regular_properties SET phone = #{phone} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteProp" parameterType="int">
+        DELETE FROM regular_properties WHERE id = #{id}
+    </delete>
+
+    <select id="selectLastId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
 </mapper>

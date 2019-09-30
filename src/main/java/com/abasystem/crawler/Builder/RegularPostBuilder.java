@@ -33,6 +33,13 @@ public class RegularPostBuilder implements Buildable {
         this.date = date;
     }
 
+    public RegularPostBuilder(String title, String url, String date, String description) {
+        this.title = title;
+        this.url = url;
+        this.date = date;
+        this.description = description;
+    }
+
     public RegularPostBuilder phone(String phone) {
         this.phone = phone;
         return this;

@@ -11,6 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 public class RegularProperty implements ModelMapper {
+    private int id;
     private String title;
     private String url;
     private String date;
