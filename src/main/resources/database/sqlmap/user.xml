@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abasystem.crawler.Model.PeterPan.RegularProperty">
+
+    <!-- Mapper -->
+    <resultMap id="RegularProperty" type="RegularProperty" />
+
+    <!-- Sample select Query -->
+    <select id="findAll" resultMap="RegularProperty">
+        SELECT * FROM regular_properties;
+    </select>
+
+</mapper>
