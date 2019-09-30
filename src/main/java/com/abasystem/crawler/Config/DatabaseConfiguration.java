@@ -1,4 +1,4 @@
-package com.abasystem.crawler.config;
+package com.abasystem.crawler.Config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
