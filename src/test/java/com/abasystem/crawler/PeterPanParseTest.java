@@ -5,21 +5,21 @@ import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
 import com.abasystem.crawler.Model.PeterPan.RegularProperty;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.PeterPanService;
-import com.abasystem.crawler.Service.PeterPanValidator;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -30,43 +30,42 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class PeterPanParseTest {
     private static final Logger logger = LoggerFactory.getLogger(PeterPanParseTest.class);
 
     private static final String REGULAR_POST = "https://cafe.naver.com/ArticleRead.nhn?clubid=10322296&page=1&inCafeSearch=true&searchBy=1&query=%C1%F8%C1%D6&includeAll=&exclude=&include=&exact=&searchdate=all&media=0&sortBy=date&articleid=12953032&referrerAllArticles=true";
     private static final String IRREGULAR_POST = "https://cafe.naver.com/ArticleRead.nhn?clubid=10322296&page=2&inCafeSearch=true&searchBy=1&query=%C1%F8%C1%D6&includeAll=&exclude=&include=&exact=&searchdate=all&media=0&sortBy=date&articleid=12885000&referrerAllArticles=true";
+
+    private static NaverLoginService service;
     private static Map<String, String> cookies;
     private static WebClient webClient;
-    private static ValidationStrategy validator;
-    private static PeterPanService pService;
-    private static NaverLoginService service;
+
+    @Autowired
+    private ValidationStrategy validationStrategy;
+
+    @Autowired
+    private PeterPanService pService;
+
     private Elements elements;
 
     @BeforeClass
-    public static void setup() throws Exception {
-        service = new NaverLoginService();
-        cookies = new HashMap<>();
+    public static void initialize() throws Exception {
         webClient = new WebClient();
-        validator = new PeterPanValidator();
-        pService = new PeterPanService();
-
+        cookies = new HashMap<>();
+        service = new NaverLoginService();
         service.doLogin(webClient, LoginTest.id, LoginTest.pw);
-    }
-
-    @Before
-    public void before() {
         cookies = service.makeLoginCookie(webClient);
     }
 
-    @After
-    public void after() {
+    @AfterClass
+    public static void after() {
         cookies.clear();
     }
 
     @Test
     public void postValidator() throws IOException {
-        logger.debug("쿠키는 ? {}", cookies);
         Document doc = Jsoup.connect(REGULAR_POST)
                 .cookies(cookies)
                 .get();
@@ -75,7 +74,7 @@ public class PeterPanParseTest {
 
         logger.debug(elements.text());
 
-        assertFalse(validator.postValidate(elements));
+        assertFalse(validationStrategy.postValidate(elements));
     }
 
     @Test
@@ -87,7 +86,7 @@ public class PeterPanParseTest {
                 .select("#tbody");
 
         logger.debug("elements : {}", elements);
-        assertTrue(validator.isRegularPost(elements));
+        assertTrue(validationStrategy.isRegularPost(elements));
     }
 
     @Test
@@ -151,7 +150,6 @@ public class PeterPanParseTest {
                 .select("#tbody");
 
         post = new IrregularProperty("TITLE", elements.select("#tbody").text(), "DATE", "URL");
-
         logger.debug("Post? {}", post);
     }
 }

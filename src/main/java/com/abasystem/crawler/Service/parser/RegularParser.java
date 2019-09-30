@@ -6,16 +6,16 @@ import com.abasystem.crawler.Strategy.ParseStrategy;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-
+@Service
 public class RegularParser implements ParseStrategy<RegularProperty> {
     private static final Logger logger = LoggerFactory.getLogger(RegularParser.class);
 
     private String date;
 
     @Override
-    public RegularProperty parse(Document document, String url, String title) throws IOException {
+    public RegularProperty parse(Document document, String url, String title) {
         logger.debug("RegularParser.parse initialize");
         date = document.select(".date").text();
 

@@ -8,32 +8,35 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class PeterPanService implements InitStrategy {
     public final String postfix = "&search.sortBy=date";
     public final String prefix = "https://cafe.naver.com";
 
-    public ValidationStrategy validator;
+    @Autowired
+    public ValidationStrategy validationStrategy;
+
+    @Autowired
+    private ServiceFactory factory;
 
     private Elements elements;
     private Document document;
 
     private List<ModelMapper> properties;
-    private ServiceFactory factory;
 
     private String pageUrl;
     private String url;
     private String title;
 
-    public PeterPanService() {
-        this.validator = new PeterPanValidator();
-        this.factory = new ServiceFactory();
-    }
+    public PeterPanService() {}
 
     public List<ModelMapper> parseAll(Elements elements, Map<String, String> cookies) throws IOException {
         properties = new ArrayList<>();
@@ -47,11 +50,11 @@ public class PeterPanService implements InitStrategy {
                     .get();
 
 //            if (validator.isInvalidPost(document.select(".tit-box div table tbody tr td a"))) {
-            if (validator.postValidate(document.select(".inbox"))) {
+            if (validationStrategy.postValidate(document.select(".inbox"))) {
                 continue;
             }
 
-            boolean flag = validator.isRegularPost(document.select("#tbody"));
+            boolean flag = validationStrategy.isRegularPost(document.select("#tbody"));
 
             properties.add(factory.getTypeServiceCreator(flag).parse(document, url, title));
         }

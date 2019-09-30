@@ -10,11 +10,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@Service
 public class NaverLoginService implements Login {
 
     private static final Logger logger = LoggerFactory.getLogger(NaverLoginService.class);

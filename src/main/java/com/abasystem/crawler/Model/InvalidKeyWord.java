@@ -1,7 +1,9 @@
 package com.abasystem.crawler.Model;
 
 import com.abasystem.crawler.Mapper.TypeMapper;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum InvalidKeyWord implements TypeMapper {
     KEY1("구해요"),
     KEY2("머무를"),

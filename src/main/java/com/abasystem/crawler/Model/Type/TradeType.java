@@ -1,7 +1,9 @@
 package com.abasystem.crawler.Model.Type;
 
 import com.abasystem.crawler.Mapper.TypeMapper;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum TradeType implements TypeMapper {
     /**
      * 매물 거래 유형
