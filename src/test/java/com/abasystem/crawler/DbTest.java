@@ -3,6 +3,7 @@ package com.abasystem.crawler;
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
 import com.abasystem.crawler.Model.PeterPan.RegularProperty;
+import com.abasystem.crawler.Repository.IrregularPropertyRepository;
 import com.abasystem.crawler.Repository.RegularPropertyRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,9 @@ public class DbTest {
     @Autowired
     private RegularPropertyRepository rRepository;
 
+    @Autowired
+    private IrregularPropertyRepository iRepository;
+
     @Test
     public void dataSource() throws SQLException {
         logger.debug("Datasource : {}", dataSource.getConnection());
@@ -42,13 +46,14 @@ public class DbTest {
 
     @Test
     @Transactional
-    public void crud() {
+    public void regularCrud() {
         // Create
         assertThat(rRepository.createProp(R_MOCK), is(1));
         int generateKey = R_MOCK.getId();
 
         // Read
         RegularProperty actual = rRepository.selectOneById(generateKey);
+        assertNotNull(actual);
         assertThat(actual, is(R_MOCK));
 
         // Update
@@ -59,5 +64,27 @@ public class DbTest {
 
         // Delete
         assertThat(rRepository.deleteProp(generateKey), is(1));
+    }
+
+    @Test
+    @Transactional
+    public void irregularCrud() {
+        // Create
+        assertThat(iRepository.createProp(I_MOCK), is(1));
+        int generateKey = I_MOCK.getId();
+
+        // Read
+        IrregularProperty actual = iRepository.selectOneById(generateKey);
+        assertNotNull(actual);
+        assertThat(actual, is(I_MOCK));
+
+        // Update
+        actual.setDescription("update_desc");
+        assertThat(iRepository.updateProp(actual), is(1));
+        assertThat(actual.getDescription(), is(iRepository.selectOneById(actual.getId()).getDescription()));
+        logger.debug("actual {}", actual);
+
+        // Delete
+        assertThat(iRepository.deleteProp(generateKey), is(1));
     }
 }

@@ -16,23 +16,23 @@ public class RegularPropertyRepository {
     private SqlSession sqlSession;
 
     public List<RegularProperty> findAll() {
-        return sqlSession.selectList("selectProps");
+        return sqlSession.selectList("selectRegularProps");
     }
 
     public RegularProperty selectOneById(int propertyId) {
-        return sqlSession.selectOne("selectPropById", propertyId);
+        return sqlSession.selectOne("selectRegularPropById", propertyId);
     }
 
     public int createProp(RegularProperty property) {
-        return sqlSession.insert("insertProp", property);
+        return sqlSession.insert("insertRegularProp", property);
     }
 
     public int updateProp(RegularProperty property) {
-        return sqlSession.update("updateProp", property);
+        return sqlSession.update("updateRegularProp", property);
     }
 
     public int deleteProp(int propertyId) {
-        return sqlSession.delete("deleteProp", propertyId);
+        return sqlSession.delete("deleteRegularProp", propertyId);
     }
 
     public int getLastIndexId() {

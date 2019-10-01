@@ -9,6 +9,7 @@
 
 	<typeAliases>
 		<typeAlias alias="RegularProperty" type="com.abasystem.crawler.Model.PeterPan.RegularProperty"/>
+		<typeAlias alias="IrregularProperty" type="com.abasystem.crawler.Model.PeterPan.IrregularProperty"/>
 	</typeAliases>
 
 	<typeHandlers>
