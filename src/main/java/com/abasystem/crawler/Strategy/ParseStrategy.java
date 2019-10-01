@@ -6,5 +6,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public interface ParseStrategy<P extends ModelMapper> {
-   <P> P parse(Document document, String url, String title);
+    P parse(Document document, String url, String title);
 }

@@ -1,10 +1,10 @@
 package com.abasystem.crawler;
 
 import com.abasystem.crawler.Builder.RegularPostBuilder;
+import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
 import com.abasystem.crawler.Model.PeterPan.RegularProperty;
-import com.abasystem.crawler.Repository.IrregularPropertyRepository;
-import com.abasystem.crawler.Repository.RegularPropertyRepository;
+import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,11 +33,9 @@ public class DbTest {
     private DataSource dataSource;
 
     @Autowired
-    private RegularPropertyRepository rRepository;
+    private RepositoryFactory factory;
 
-    @Autowired
-    private IrregularPropertyRepository iRepository;
-
+    private BasicQueryStrategy repository;
     @Test
     public void dataSource() throws SQLException {
         logger.debug("Datasource : {}", dataSource.getConnection());
@@ -47,44 +45,55 @@ public class DbTest {
     @Test
     @Transactional
     public void regularCrud() {
+        repository = factory.getTypeRepositoryCreator(RegularProperty.class);
         // Create
-        assertThat(rRepository.createProp(R_MOCK), is(1));
+        assertThat(repository.createProp(R_MOCK), is(1));
         int generateKey = R_MOCK.getId();
 
         // Read
-        RegularProperty actual = rRepository.selectOneById(generateKey);
+        RegularProperty actual = (RegularProperty) repository.selectOneById(generateKey);
         assertNotNull(actual);
         assertThat(actual, is(R_MOCK));
 
         // Update
         actual.setPhone("update_phone");
-        assertThat(rRepository.updateProp(actual), is(1));
-        assertThat(actual.getPhone(), is(rRepository.selectOneById(actual.getId()).getPhone()));
-        logger.debug("actual {}", actual);
+        assertThat(repository.updateProp(actual), is(1));
+
+        RegularProperty matcher = (RegularProperty) repository.selectOneById(actual.getId());
+        assertThat(actual.getPhone(), is(matcher.getPhone()));
 
         // Delete
-        assertThat(rRepository.deleteProp(generateKey), is(1));
+        assertThat(repository.deleteProp(generateKey), is(1));
     }
 
     @Test
     @Transactional
     public void irregularCrud() {
+        repository = factory.getTypeRepositoryCreator(IrregularProperty.class);
         // Create
-        assertThat(iRepository.createProp(I_MOCK), is(1));
+        assertThat(repository.createProp(I_MOCK), is(1));
         int generateKey = I_MOCK.getId();
 
         // Read
-        IrregularProperty actual = iRepository.selectOneById(generateKey);
+        IrregularProperty actual = (IrregularProperty) repository.selectOneById(generateKey);
         assertNotNull(actual);
         assertThat(actual, is(I_MOCK));
 
         // Update
         actual.setDescription("update_desc");
-        assertThat(iRepository.updateProp(actual), is(1));
-        assertThat(actual.getDescription(), is(iRepository.selectOneById(actual.getId()).getDescription()));
+        assertThat(repository.updateProp(actual), is(1));
+
+        IrregularProperty matcher = (IrregularProperty) repository.selectOneById(actual.getId());
+        assertThat(actual.getDescription(), is(matcher.getDescription()));
         logger.debug("actual {}", actual);
 
         // Delete
-        assertThat(iRepository.deleteProp(generateKey), is(1));
+        assertThat(repository.deleteProp(generateKey), is(1));
+    }
+
+    @Test
+    public void test() {
+        BasicQueryStrategy repository = factory.getTypeRepositoryCreator(RegularProperty.class);
+        logger.debug("repository {}", repository);
     }
 }
