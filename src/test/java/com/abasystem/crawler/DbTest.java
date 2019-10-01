@@ -29,13 +29,14 @@ public class DbTest {
     private static final RegularProperty R_MOCK = new RegularPostBuilder("R_TITLE", "R_URL", "R_2018.09.20", "R_DESC").build();
     private static final IrregularProperty I_MOCK = new IrregularProperty("I_TITLE", "I_URL", "I_2020.12.12", "I_DESC");
 
+    private BasicQueryStrategy repository;
+
     @Autowired
     private DataSource dataSource;
 
     @Autowired
     private RepositoryFactory factory;
 
-    private BasicQueryStrategy repository;
     @Test
     public void dataSource() throws SQLException {
         logger.debug("Datasource : {}", dataSource.getConnection());

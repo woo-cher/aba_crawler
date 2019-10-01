@@ -1,6 +1,6 @@
 package com.abasystem.crawler.Service;
 
-import com.abasystem.crawler.Strategy.Login;
+import com.abasystem.crawler.Strategy.LoginStrategy;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Service
-public class NaverLoginService implements Login {
+public class NaverLoginService implements LoginStrategy {
 
     private static final Logger logger = LoggerFactory.getLogger(NaverLoginService.class);
 

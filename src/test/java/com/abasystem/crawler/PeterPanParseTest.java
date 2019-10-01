@@ -3,10 +3,12 @@ package com.abasystem.crawler;
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
 import com.abasystem.crawler.Model.PeterPan.RegularProperty;
+import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.PeterPanService;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.google.gson.JsonObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -115,6 +117,9 @@ public class PeterPanParseTest {
                 .build();
 
         logger.debug("Parsed post : {}", post);
+
+        JsonObject object = ModelConverter.convertModelToJsonObject(post);
+        logger.debug("Result : " + object.get("제목"));
     }
 
     @Test

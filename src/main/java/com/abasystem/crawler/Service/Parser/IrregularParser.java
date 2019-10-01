@@ -1,4 +1,4 @@
-package com.abasystem.crawler.Service.parser;
+package com.abasystem.crawler.Service.Parser;
 
 import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
 import com.abasystem.crawler.Strategy.ParseStrategy;

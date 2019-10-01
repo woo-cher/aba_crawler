@@ -1,4 +1,4 @@
-package com.abasystem.crawler.Service.parser;
+package com.abasystem.crawler.Service.Parser;
 
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Model.PeterPan.RegularProperty;

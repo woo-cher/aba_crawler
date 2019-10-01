@@ -1,7 +1,7 @@
 package com.abasystem.crawler;
 
 import com.abasystem.crawler.Service.NaverLoginService;
-import com.abasystem.crawler.Strategy.Login;
+import com.abasystem.crawler.Strategy.LoginStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.jsoup.Jsoup;
@@ -28,7 +28,7 @@ public class Main {
 
     private String pageUrl;
     private WebClient webClient;
-    private Login loginService;
+    private LoginStrategy loginService;
     private Map<String, String> cookies;
 
     private String id;
