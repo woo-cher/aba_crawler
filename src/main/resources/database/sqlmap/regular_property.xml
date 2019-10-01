@@ -14,11 +14,11 @@
     </select>
 
     <insert id="insertProp" useGeneratedKeys="true" keyProperty="id" parameterType="RegularProperty">
-        INSERT INTO regular_properties (title, url, description, date) VALUES (#{title}, #{url}, #{description}, #{date})
+        INSERT INTO regular_properties (title, url, description, date, created_at) VALUES (#{title}, #{url}, #{description}, #{date}, current_date)
     </insert>
 
     <update id="updateProp" parameterType="RegularProperty">
-        UPDATE regular_properties SET phone = #{phone} WHERE id = #{id}
+        UPDATE regular_properties SET phone = #{phone}, updated_at = current_date WHERE id = #{id}
     </update>
 
     <delete id="deleteProp" parameterType="int">

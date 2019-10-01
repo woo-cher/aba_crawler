@@ -16,5 +16,4 @@
     <logger name="ch.qos.*" level="off"/>
     <logger name="o.s.t.*" level="off"/>
     <logger name="o.springframework.test.*" level="off"/>
-    <logger name="o.*" level="off"/>
 </configuration>
