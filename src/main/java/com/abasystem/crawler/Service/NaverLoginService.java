@@ -1,6 +1,7 @@
 package com.abasystem.crawler.Service;
 
 import com.abasystem.crawler.Strategy.LoginStrategy;
+import com.abasystem.crawler.Storage.Naver;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -19,7 +20,6 @@ import java.util.Set;
 @Service
 public class NaverLoginService implements LoginStrategy {
     private static final Logger logger = LoggerFactory.getLogger(NaverLoginService.class);
-    private final String LOGIN_URL = "https://nid.naver.com/nidlogin.login";
 
     boolean isLogin;
 
@@ -42,11 +42,11 @@ public class NaverLoginService implements LoginStrategy {
     }
 
     public boolean doLogin(WebClient webClient, String id, String pw) throws Exception {
-        HtmlPage page = webClient.getPage(LOGIN_URL);
+        HtmlPage page = webClient.getPage(Naver.LOGIN_URL);
 
-        HtmlTextInput inputId = page.getFirstByXPath("//*[@id=\"id\"]");
-        HtmlPasswordInput inputPassword = page.getFirstByXPath("//*[@id=\"pw\"]");
-        HtmlSubmitInput inputSubmit = page.getFirstByXPath("//*[@id=\"frmNIDLogin\"]/fieldset/input");
+        HtmlTextInput inputId = page.getFirstByXPath(Naver.ID_XPATH);
+        HtmlPasswordInput inputPassword = page.getFirstByXPath(Naver.PW_XPATH);
+        HtmlSubmitInput inputSubmit = page.getFirstByXPath(Naver.SUBMIT_XPATH);
 
         inputId.setText(id);
         inputPassword.setText(pw);

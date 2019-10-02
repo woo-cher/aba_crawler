@@ -3,6 +3,7 @@ package com.abasystem.crawler.Service;
 import com.abasystem.crawler.Model.InvalidKeyWord;
 import com.abasystem.crawler.Model.Type.RegularType;
 import com.abasystem.crawler.Model.ValidKeyword;
+import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class PeterPanValidator implements ValidationStrategy {
         }
 
         for (ValidKeyword keyword : ValidKeyword.values()) {
-            if (elements.select(".tit-box div table tbody tr td a").text().equals(keyword.getName())) {
+            if (elements.select(Naver.POST_MINI_TITLE).text().equals(keyword.getName())) {
                 return false;
             }
         }

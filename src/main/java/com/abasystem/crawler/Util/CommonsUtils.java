@@ -1,5 +1,6 @@
 package com.abasystem.crawler.Util;
 
+import com.abasystem.crawler.Storage.Naver;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -16,14 +17,12 @@ import java.io.IOException;
  *  2. 이름이 갖는 의미가 에매하다
  */
 public class CommonsUtils {
-
-    private static final String APT_DIRECT_PROVINCES_URL = "https://cafe.naver.com/ArticleList.nhn?search.clubid=10322296&search.menuid=1115&search.boardtype=L";
     private static final Logger logger = LoggerFactory.getLogger(CommonsUtils.class);
 
     public static String getPostsUrlWithKeyword(String key, WebClient webClient) throws IOException {
 
         // Get Page
-        HtmlPage currPage = webClient.getPage(APT_DIRECT_PROVINCES_URL);
+        HtmlPage currPage = webClient.getPage(Naver.APT_DIRECT_PROVINCES_URL);
         logger.debug("page ? {}", currPage);
 
         // Find Form with 'name' attribute
@@ -35,8 +34,7 @@ public class CommonsUtils {
         logger.debug("query ? {}", query);
 
         // Find 'button' element with XPath
-        HtmlButton btn = (HtmlButton) form
-                .getByXPath("//*[@id=\"info-search\"]/form/button").get(0);
+        HtmlButton btn = (HtmlButton) form.getByXPath(Naver.ALL_SEARCH_BUTTON_XPATH).get(0);
 
         /**
          * Result URL : https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=10322296&search.searchBy=0&search.query=%C1%F8%C1%D6
@@ -48,6 +46,6 @@ public class CommonsUtils {
         currPage = btn.click();
         logger.debug("currPage ? {}", currPage.getUrl());
 
-        return currPage.getUrl().toString().concat("&search.sortBy=date");
+        return currPage.getUrl().toString().concat(Naver.CAFE_POSTFIX);
     }
 }

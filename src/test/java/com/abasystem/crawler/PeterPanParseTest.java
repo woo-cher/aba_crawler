@@ -6,6 +6,7 @@ import com.abasystem.crawler.Model.PeterPan.RegularProperty;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.PeterPanService;
+import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.gson.JsonObject;
@@ -57,7 +58,7 @@ public class PeterPanParseTest {
     public static void initialize() throws Exception {
         webClient = new WebClient();
         service = new NaverLoginService();
-        service.doLogin(webClient, LoginTest.id, LoginTest.pw);
+        service.doLogin(webClient, Naver.ID, Naver.PASSWORD);
         cookies = service.makeLoginCookie(webClient);
     }
 
@@ -99,7 +100,7 @@ public class PeterPanParseTest {
         elements = Jsoup.connect(REGULAR_POST)
                 .cookies(cookies)
                 .get()
-                .select("#tbody table tbody");
+                .select(Naver.POST_TABLE_TBODY);
 
         post = new RegularPostBuilder("TITLE", REGULAR_POST, "DATE")
                 .address(elements.select("#pp_location").text())

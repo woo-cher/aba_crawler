@@ -7,11 +7,14 @@ import com.abasystem.crawler.Service.Writer.CustomOpenCsv;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
 import com.abasystem.crawler.Strategy.InitStrategy;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
+import com.abasystem.crawler.Storage.Naver;
 import com.google.gson.JsonObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +28,9 @@ import java.util.Map;
  */
 @Service
 public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv implements InitStrategy {
-    public final String postfix = "&search.sortBy=date";
-    public final String prefix = "https://cafe.naver.com";
+    private static final Logger logger = LoggerFactory.getLogger(PeterPanService.class);
+
+    private static final String[] TABLE_ROW = {"번호", "제목", "링크", "날짜", "설명"};
 
     @Autowired
     public ValidationStrategy validationStrategy;
@@ -46,7 +50,7 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
     }
 
     public boolean writeAll(List<P> properties) {
-        cw.writeNext(new String[] {"번호", "제목", "링크", "날짜", "설명"});
+        cw.writeNext(TABLE_ROW);
 
         int index = 1;
         for(P property : properties) {
@@ -63,7 +67,7 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
         properties = new ArrayList<>();
 
         for (Element post : elements) {
-            url = prefix.concat(post.select("a").attr("href"));
+            url = Naver.CAFE_PREFIX.concat(post.select("a").attr("href"));
             title = post.select("a").text();
 
             document = Jsoup.connect(url)
@@ -84,12 +88,12 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
 
     @Override
     public Elements initPosts(Document document, int maxPage) throws IOException {
-        this.elements = document.select(".board-list .article");
-        this.pageUrl = prefix.concat(document.select(".prev-next .on").attr("href"));
+        this.elements = document.select(Naver.POST_ARTICLE);
+        this.pageUrl = Naver.CAFE_PREFIX.concat(document.select(Naver.PAGE_NAVIGATOR).attr("href"));
 
         for (int n = 2; n < maxPage + 1; n++) {
             elements.addAll(
-                    Jsoup.connect(convertPageToNext(pageUrl, n)).get().select(".board-list .article")
+                    Jsoup.connect(convertPageToNext(pageUrl, n)).get().select(Naver.POST_ARTICLE)
             );
         }
 
@@ -103,6 +107,6 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
         str = url.substring(0, url.length() - 1);
         str = str.concat(Integer.toString(next));
 
-        return str.concat(postfix);
+        return str.concat(Naver.CAFE_POSTFIX);
     }
 }

@@ -1,5 +1,6 @@
 package com.abasystem.crawler;
 
+import com.abasystem.crawler.Storage.Naver;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
@@ -22,12 +23,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class LoginTest {
-
     private static final Logger logger = LoggerFactory.getLogger(LoginTest.class);
-
-    protected static final String id = "uioo9034";
-    protected static final String pw = "tkfkd01";
-    protected static final String LOGIN_URL = "https://nid.naver.com/nidlogin.login";
 
     private WebClient webClient;
     private HtmlPage htmlPage;
@@ -49,14 +45,14 @@ public class LoginTest {
 
     @Test
     public void doLogin() throws IOException {
-        htmlPage = webClient.getPage(LOGIN_URL);
+        htmlPage = webClient.getPage(Naver.LOGIN_URL);
 
-        HtmlTextInput inputId = htmlPage.getFirstByXPath("//*[@id=\"id\"]");
-        HtmlPasswordInput inputPassword = htmlPage.getFirstByXPath("//*[@id=\"pw\"]");
-        HtmlSubmitInput inputSubmit = htmlPage.getFirstByXPath("//*[@id=\"frmNIDLogin\"]/fieldset/input");
+        HtmlTextInput inputId = htmlPage.getFirstByXPath(Naver.ID_XPATH);
+        HtmlPasswordInput inputPassword = htmlPage.getFirstByXPath(Naver.PW_XPATH);
+        HtmlSubmitInput inputSubmit = htmlPage.getFirstByXPath(Naver.SUBMIT_XPATH);
 
-        inputId.setText(id);
-        inputPassword.setText(pw);
+        inputId.setText(Naver.ID);
+        inputPassword.setText(Naver.PASSWORD);
         inputSubmit.dblClick();
 
         assertTrue(htmlPage.asText().contains("Naver Sign in"));
