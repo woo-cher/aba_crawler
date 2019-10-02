@@ -1,4 +1,4 @@
-package com.abasystem.crawler;
+package com.abasystem.crawler.unit;
 
 import com.abasystem.crawler.Storage.Naver;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -14,25 +14,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LoginTest {
     private static final Logger logger = LoggerFactory.getLogger(LoginTest.class);
 
     private WebClient webClient;
     private HtmlPage htmlPage;
-    protected Map<String, String> cookies;
 
     @Before
     public void setup() {
         this.webClient = new WebClient();
-        this.cookies = new HashMap<>();
 
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         webClient.getOptions().setThrowExceptionOnScriptError(false);

@@ -30,7 +30,10 @@ import java.util.Map;
 public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv implements InitStrategy {
     private static final Logger logger = LoggerFactory.getLogger(PeterPanService.class);
 
-    private static final String[] TABLE_ROW = {"번호", "제목", "링크", "날짜", "설명"};
+    private static final String[] TABLE_ROW = {
+            "번호", "제목", "링크", "설명", "등록일", "주소", "타입", "연락처", "가격", "관리비", "옵션", "이사가능일",
+            "방개수", "해당층/전체층", "관리비항목", "난방방식"
+    };
 
     @Autowired
     public ValidationStrategy validationStrategy;
@@ -53,6 +56,7 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
         cw.writeNext(TABLE_ROW);
 
         int index = 1;
+
         for(P property : properties) {
             CsvWriteStrategy csvWriteStrategy = factory.writerCreator(property.getClass());
             JsonObject object = ModelConverter.convertModelToJsonObject(property);
@@ -60,10 +64,13 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
             index++;
         }
 
-        return cw.checkError();
+        if(cw.checkError() == true) {
+            return false;
+        }
+        return true;
     }
 
-    public List<ModelMapper> parseAll(Elements elements, Map<String, String> cookies) throws IOException {
+    public List<P> parseAll(Elements elements, Map<String, String> cookies) throws IOException {
         properties = new ArrayList<>();
 
         for (Element post : elements) {
@@ -83,7 +90,7 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
             properties.add(factory.parserCreator(flag).parse(document, url, title));
         }
 
-        return properties;
+        return (List<P>) properties;
     }
 
     @Override

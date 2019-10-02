@@ -28,7 +28,7 @@ public class NaverLoginService implements LoginStrategy {
         return isLogin;
     }
 
-    public Map<String, String> makeLoginCookie(WebClient webClient) {
+    public Map<String, String> getLoginCookie(WebClient webClient) {
         Map<String, String> cookies = new HashMap<>();
         CookieManager cookieManager = webClient.getCookieManager();
 
@@ -59,7 +59,7 @@ public class NaverLoginService implements LoginStrategy {
 
         else {
             isLogin = true;
-            logger.debug("login success !!");
+            logger.info("login success !!");
         }
 
         return isLogin;

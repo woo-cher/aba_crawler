@@ -18,8 +18,8 @@ public class IrregularWriter implements CsvWriteStrategy<IrregularProperty> {
                 String.valueOf(index),
                 object.get("title").getAsString(),
                 object.get("url").getAsString(),
-                object.get("date").getAsString(),
-                object.get("description").getAsString()
+                object.get("description").getAsString(),
+                object.get("date").getAsString()
         });
     }
 }

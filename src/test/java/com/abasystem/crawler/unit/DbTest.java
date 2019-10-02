@@ -1,4 +1,4 @@
-package com.abasystem.crawler;
+package com.abasystem.crawler.unit;
 
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Factory.RepositoryFactory;

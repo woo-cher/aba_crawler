@@ -15,7 +15,7 @@ public class CustomOpenCsv {
     public CSVWriter cw;
 
     public CustomOpenCsv() throws Exception {
-        this.stream = new FileOutputStream("C:\\Users\\ABA_System_WC\\Desktop\\test-property.csv");
+        this.stream = new FileOutputStream("C:\\Users\\ABA_System_WC\\Desktop\\peterpan-property.csv");
         writer = new OutputStreamWriter(stream, "EUC-KR");
         cw = new CSVWriter(writer, ',', '"');
     }

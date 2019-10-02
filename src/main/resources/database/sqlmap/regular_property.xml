@@ -14,7 +14,16 @@
     </select>
 
     <insert id="insertRegularProp" useGeneratedKeys="true" keyProperty="id" parameterType="RegularProperty">
-        INSERT INTO regular_properties (title, url, description, date, created_at) VALUES (#{title}, #{url}, #{description}, #{date}, current_date)
+        INSERT INTO regular_properties
+        (
+            title, url, description, date, created_at, phone, address, price, management_price,
+            property_type, room_count, floor, management_category, heating_type, options, move_possible_date
+        )
+        VALUES
+        (
+            #{title}, #{url}, #{description}, #{date}, current_date, #{phone}, #{address}, #{price}, #{managementPrice},
+            #{propertyType}, #{roomCount}, #{floor}, #{managementCategory}, #{heatingType}, #{options}, #{movePossibleDate}
+        )
     </insert>
 
     <update id="updateRegularProp" parameterType="RegularProperty">

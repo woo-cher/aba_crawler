@@ -1,7 +1,6 @@
 package com.abasystem.crawler.Builder;
 
 import com.abasystem.crawler.Model.PeterPan.RegularProperty;
-import com.abasystem.crawler.Model.Type.TradeType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,10 +21,9 @@ public class RegularPostBuilder implements Buildable {
     private String floor;
     private String managementCategory;
     private String heatingType;
-    private String option;
+    private String options;
     private String description;
     private String movePossibleDate;
-    private TradeType tradeType;
 
     public RegularPostBuilder(String title, String url, String date) {
         this.title = title;
@@ -38,6 +36,17 @@ public class RegularPostBuilder implements Buildable {
         this.url = url;
         this.date = date;
         this.description = description;
+        this.phone = "";
+        this.address = "";
+        this.price = "";
+        this.managementPrice = "";
+        this.propertyType = "";
+        this.roomCount = "";
+        this.floor = "";
+        this.managementCategory = "";
+        this.heatingType = "";
+        this.options = "";
+        this.movePossibleDate = "";
     }
 
     public RegularPostBuilder phone(String phone) {
@@ -57,11 +66,6 @@ public class RegularPostBuilder implements Buildable {
 
     public RegularPostBuilder propertyType(String propertyType) {
         this.propertyType = propertyType;
-        return this;
-    }
-
-    public RegularPostBuilder tradeType(String tradeTypeCode) {
-        this.tradeType = TradeType.create(tradeTypeCode);
         return this;
     }
 
@@ -94,8 +98,8 @@ public class RegularPostBuilder implements Buildable {
         return this;
     }
 
-    public RegularPostBuilder option(String option) {
-        this.option = option;
+    public RegularPostBuilder options(String options) {
+        this.options = options;
         return this;
     }
 

@@ -1,4 +1,4 @@
-package com.abasystem.crawler;
+package com.abasystem.crawler.unit;
 
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
@@ -14,7 +14,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +44,7 @@ public class PeterPanParseTest {
     private static WebClient webClient;
 
     @Autowired
-    private static Map<String, String> cookies;
+    private Map<String, String> cookies;
 
     @Autowired
     private ValidationStrategy validationStrategy;
@@ -54,17 +54,16 @@ public class PeterPanParseTest {
 
     private Elements elements;
 
+    @Before
+    public void setup() {
+        cookies = service.getLoginCookie(webClient);
+    }
+
     @BeforeClass
-    public static void initialize() throws Exception {
+    public static void initialize() throws Exception{
         webClient = new WebClient();
         service = new NaverLoginService();
         service.doLogin(webClient, Naver.ID, Naver.PASSWORD);
-        cookies = service.makeLoginCookie(webClient);
-    }
-
-    @AfterClass
-    public static void after() {
-        cookies.clear();
     }
 
     @Test
@@ -112,7 +111,7 @@ public class PeterPanParseTest {
                 .floor(elements.select("#pp_floor").text())
                 .managementCategory(elements.select("#pp_maintenance_include").text())
                 .movePossibleDate(elements.select("#pp_moving_date").text())
-                .option(elements.select("#pp_options").text())
+                .options(elements.select("#pp_options").text())
                 .heatingType(elements.select("#pp_heating").text())
                 .description(elements.select("#pp_description").text())
                 .build();

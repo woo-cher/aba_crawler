@@ -80,7 +80,7 @@ public class Main {
         if (!loginService.isLogin()) {
             boolean flag = loginService.doLogin(webClient, id, pw);
             if (flag) {
-                cookies = loginService.makeLoginCookie(webClient);
+                cookies = loginService.getLoginCookie(webClient);
             }
         }
 

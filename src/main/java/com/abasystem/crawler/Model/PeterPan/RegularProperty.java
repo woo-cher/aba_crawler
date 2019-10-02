@@ -2,7 +2,6 @@ package com.abasystem.crawler.Model.PeterPan;
 
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Mapper.ModelMapper;
-import com.abasystem.crawler.Model.Type.TradeType;
 import lombok.*;
 
 @AllArgsConstructor
@@ -24,10 +23,9 @@ public class RegularProperty implements ModelMapper {
     private String floor;
     private String managementCategory;
     private String heatingType;
-    private String option;
+    private String options;
     private String description;
     private String movePossibleDate;
-    private TradeType tradeType;
 
     public RegularProperty(RegularPostBuilder builder) {
         this.title = builder.getTitle();
@@ -38,12 +36,11 @@ public class RegularProperty implements ModelMapper {
         this.price = builder.getPrice();
         this.managementPrice = builder.getManagementPrice();
         this.propertyType = builder.getPropertyType();
-        this.tradeType = builder.getTradeType();
         this.roomCount = builder.getRoomCount();
         this.floor = builder.getFloor();
         this.managementCategory = builder.getManagementCategory();
         this.heatingType = builder.getHeatingType();
-        this.option = builder.getOption();
+        this.options = builder.getOptions();
         this.description = builder.getDescription();
         this.movePossibleDate = builder.getMovePossibleDate();
     }
@@ -63,10 +60,9 @@ public class RegularProperty implements ModelMapper {
                 ",\n\t floor='" + floor + '\'' +
                 ",\n\t managementCategory='" + managementCategory + '\'' +
                 ",\n\t heatingType='" + heatingType + '\'' +
-                ",\n\t option='" + option + '\'' +
+                ",\n\t options='" + options + '\'' +
                 ",\n\t description='" + description + '\'' +
                 ",\n\t movePossibleDate='" + movePossibleDate + '\'' +
-//                ",\n\t tradeType=" + tradeType.getName() +
                 "\n}";
     }
 }

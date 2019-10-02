@@ -13,7 +13,7 @@ public class IrregularParser implements ParseStrategy<IrregularProperty> {
 
     @Override
     public IrregularProperty parse(Document document, String url, String title) {
-        logger.debug("IrregularParser.parse initialize");
+        logger.info("IrregularParser.parse initialize");
         return new IrregularProperty(title, document.select("#tbody").text(), document.select(".date").text(), url);
     }
 }

@@ -16,7 +16,7 @@ public class RegularParser implements ParseStrategy<RegularProperty> {
 
     @Override
     public RegularProperty parse(Document document, String url, String title) {
-        logger.debug("RegularParser.parse initialize");
+        logger.info("RegularParser.parse initialize");
         date = document.select(".date").text();
 
         return new RegularPostBuilder(title, url, date)
@@ -29,7 +29,7 @@ public class RegularParser implements ParseStrategy<RegularProperty> {
                 .floor(document.select("#pp_floor").text())
                 .managementCategory(document.select("#pp_maintenance_include").text())
                 .movePossibleDate(document.select("#pp_moving_date").text())
-                .option(document.select("#pp_options").text())
+                .options(document.select("#pp_options").text())
                 .heatingType(document.select("#pp_heating").text())
                 .description(document.select("#pp_description").text())
                 .build();

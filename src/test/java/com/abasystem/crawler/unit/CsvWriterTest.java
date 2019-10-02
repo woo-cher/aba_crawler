@@ -1,4 +1,4 @@
-package com.abasystem.crawler;
+package com.abasystem.crawler.unit;
 
 import au.com.bytecode.opencsv.CSVWriter;
 import com.abasystem.crawler.Builder.RegularPostBuilder;
@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -81,6 +82,6 @@ public class CsvWriterTest {
             properties.add(new IrregularProperty("TITLE" + i, "DESCRIPTION" + i, "DATE" + i, "URL" + i));
         }
 
-        assertFalse(service.writeAll(properties));
+        assertTrue(service.writeAll(properties));
     }
 }
