@@ -1,4 +1,4 @@
-package com.abasystem.crawler;
+package com.abasystem.crawler.Config;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
