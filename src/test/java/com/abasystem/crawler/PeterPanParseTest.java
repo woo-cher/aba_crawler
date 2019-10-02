@@ -24,7 +24,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -41,8 +40,10 @@ public class PeterPanParseTest {
     private static final String IRREGULAR_POST = "https://cafe.naver.com/ArticleRead.nhn?clubid=10322296&page=2&inCafeSearch=true&searchBy=1&query=%C1%F8%C1%D6&includeAll=&exclude=&include=&exact=&searchdate=all&media=0&sortBy=date&articleid=12885000&referrerAllArticles=true";
 
     private static NaverLoginService service;
-    private static Map<String, String> cookies;
     private static WebClient webClient;
+
+    @Autowired
+    private static Map<String, String> cookies;
 
     @Autowired
     private ValidationStrategy validationStrategy;
@@ -55,7 +56,6 @@ public class PeterPanParseTest {
     @BeforeClass
     public static void initialize() throws Exception {
         webClient = new WebClient();
-        cookies = new HashMap<>();
         service = new NaverLoginService();
         service.doLogin(webClient, LoginTest.id, LoginTest.pw);
         cookies = service.makeLoginCookie(webClient);

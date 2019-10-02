@@ -18,13 +18,8 @@ import java.util.Set;
 
 @Service
 public class NaverLoginService implements LoginStrategy {
-
     private static final Logger logger = LoggerFactory.getLogger(NaverLoginService.class);
-
     private final String LOGIN_URL = "https://nid.naver.com/nidlogin.login";
-
-    private Map<String, String> cookies;
-    private HtmlPage page;
 
     boolean isLogin;
 
@@ -34,7 +29,7 @@ public class NaverLoginService implements LoginStrategy {
     }
 
     public Map<String, String> makeLoginCookie(WebClient webClient) {
-        cookies = new HashMap<>();
+        Map<String, String> cookies = new HashMap<>();
         CookieManager cookieManager = webClient.getCookieManager();
 
         Set<Cookie> cookieSet = cookieManager.getCookies();
@@ -47,7 +42,7 @@ public class NaverLoginService implements LoginStrategy {
     }
 
     public boolean doLogin(WebClient webClient, String id, String pw) throws Exception {
-        page = webClient.getPage(LOGIN_URL);
+        HtmlPage page = webClient.getPage(LOGIN_URL);
 
         HtmlTextInput inputId = page.getFirstByXPath("//*[@id=\"id\"]");
         HtmlPasswordInput inputPassword = page.getFirstByXPath("//*[@id=\"pw\"]");
