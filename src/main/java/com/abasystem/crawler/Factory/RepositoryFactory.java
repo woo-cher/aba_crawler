@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RepositoryFactory <P extends ModelMapper> {
+public class RepositoryFactory {
     private static final Logger logger = LoggerFactory.getLogger(RepositoryFactory.class);
 
     @Autowired
@@ -19,7 +19,7 @@ public class RepositoryFactory <P extends ModelMapper> {
     @Autowired
     private BasicQueryStrategy<IrregularProperty> irregularRepository;
 
-    public BasicQueryStrategy<P> getTypeRepositoryCreator(Class clazz) {
+    public <P extends ModelMapper> BasicQueryStrategy<P> getTypeRepositoryCreator(Class clazz) {
         if(clazz.equals(RegularProperty.class)) {
             return (BasicQueryStrategy<P>) regularRepository;
         }

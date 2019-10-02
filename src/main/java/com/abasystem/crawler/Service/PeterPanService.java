@@ -2,8 +2,12 @@ package com.abasystem.crawler.Service;
 
 import com.abasystem.crawler.Factory.ServiceFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
+import com.abasystem.crawler.Service.Converter.ModelConverter;
+import com.abasystem.crawler.Service.Writer.CustomOpenCsv;
+import com.abasystem.crawler.Strategy.CsvWriteStrategy;
 import com.abasystem.crawler.Strategy.InitStrategy;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
+import com.google.gson.JsonObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,8 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Init 메소드는 Util 성에 성격이 가까워보인다.
+ */
 @Service
-public class PeterPanService implements InitStrategy {
+public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv implements InitStrategy {
     public final String postfix = "&search.sortBy=date";
     public final String prefix = "https://cafe.naver.com";
 
@@ -29,14 +36,28 @@ public class PeterPanService implements InitStrategy {
 
     private Elements elements;
     private Document document;
-
     private List<ModelMapper> properties;
-
     private String pageUrl;
     private String url;
     private String title;
 
-    public PeterPanService() {}
+    public PeterPanService() throws Exception {
+        super();
+    }
+
+    public boolean writeAll(List<P> properties) {
+        cw.writeNext(new String[] {"번호", "제목", "링크", "날짜", "설명"});
+
+        int index = 1;
+        for(P property : properties) {
+            CsvWriteStrategy csvWriteStrategy = factory.writerCreator(property.getClass());
+            JsonObject object = ModelConverter.convertModelToJsonObject(property);
+            csvWriteStrategy.doWrite(object, cw, index);
+            index++;
+        }
+
+        return cw.checkError();
+    }
 
     public List<ModelMapper> parseAll(Elements elements, Map<String, String> cookies) throws IOException {
         properties = new ArrayList<>();
@@ -49,14 +70,13 @@ public class PeterPanService implements InitStrategy {
                     .cookies(cookies)
                     .get();
 
-//            if (validator.isInvalidPost(document.select(".tit-box div table tbody tr td a"))) {
             if (validationStrategy.postValidate(document.select(".inbox"))) {
                 continue;
             }
 
             boolean flag = validationStrategy.isRegularPost(document.select("#tbody"));
 
-            properties.add(factory.getTypeServiceCreator(flag).parse(document, url, title));
+            properties.add(factory.parserCreator(flag).parse(document, url, title));
         }
 
         return properties;
