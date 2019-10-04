@@ -5,11 +5,11 @@ import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Factory.ServiceFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
+import com.abasystem.crawler.Scheduler.PropertyCrawler;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.PeterPanService;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
 import com.google.gson.JsonObject;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,48 +40,52 @@ public class CsvWriterTest {
     @Autowired
     private PeterPanService service;
 
+    @Autowired
+    private PropertyCrawler crawler;
+
     private List<ModelMapper> properties;
-    private OutputStream stream;
-    private Writer writer;
-    private CSVWriter cw;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         properties = new ArrayList<>();
-        stream = new FileOutputStream("C:\\Users\\ABA_System_WC\\Desktop\\test-property.csv");
-        writer = new OutputStreamWriter(stream, "EUC-KR");
-        cw = new CSVWriter(writer, ',', '"');
     }
 
-    @After
-    public void after() throws Exception {
+    @Test
+    public void csvWrite() throws Exception {
+        OutputStream stream = new FileOutputStream("C:\\Users\\ABA_System_WC\\Desktop\\test-property.csv");
+        Writer writer = new OutputStreamWriter(stream, "EUC-KR");
+        CSVWriter cw = new CSVWriter(writer, ',', '"');
+
+        for (int i = 1; i < 11; i++) {
+            properties.add(new RegularPostBuilder(("TITLE" + i), ("URL" + i), ("DATE" + i), ("DESC" + i)).build());
+        }
+
+        cw.writeNext(new String[]{"번호", "제목", "링크", "날짜", "설명2"});
+        int index = 1;
+        for (ModelMapper property : properties) {
+            JsonObject object = ModelConverter.convertModelToJsonObject(property);
+            CsvWriteStrategy csvWriteStrategy = factory.writerCreator(property.getClass());
+            csvWriteStrategy.doWrite(object, cw, index++);
+        }
+
+        assertFalse(cw.checkError());
+
         cw.close();
         cw.flush();
     }
 
     @Test
-    public void csvWrite() {
-        for(int i = 1; i < 11; i++) {
-            properties.add(new RegularPostBuilder(("TITLE" + i), ("URL" + i), ("DATE" + i), ("DESC" + i)).build());
-        }
-
-        cw.writeNext(new String[] {"번호", "제목", "링크", "날짜", "설명2"});
-        int index = 1;
-        for(ModelMapper property : properties) {
-            JsonObject object = ModelConverter.convertModelToJsonObject(property);
-            CsvWriteStrategy csvWriteStrategy = factory.writerCreator(property.getClass());
-            csvWriteStrategy.doWrite(object, cw, index++);
-        }
-        assertFalse(cw.checkError());
-    }
-
-    @Test
     public void csvAllWrite() {
-        for(int i = 1; i < 11; i++) {
+        for (int i = 1; i < 11; i++) {
             properties.add(new RegularPostBuilder(("TITLE" + i), ("URL" + i), ("DATE" + i), ("DESC" + i)).build());
             properties.add(new IrregularProperty("TITLE" + i, "DESCRIPTION" + i, "DATE" + i, "URL" + i));
         }
 
         assertTrue(service.writeAll(properties));
     }
+
+//    @Test
+//    public void crawling() throws Exception {
+//        crawler.crawling();
+//    }
 }
