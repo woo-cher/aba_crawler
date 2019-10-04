@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +45,6 @@ public class PropertyCrawler {
     private WebClient webClient;
 
     @Transactional
-    @PostConstruct
     public void crawling() throws Exception {
         // 1) 네이버 로그인 및 쿠키값 저장
         loginService.doLogin(webClient, Naver.ID, Naver.PASSWORD);
