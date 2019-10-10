@@ -55,7 +55,7 @@ public class Main {
 
     public Elements getElements() throws Exception {
         // "진주"로 검색한 전체 게시글 목록을 가져온다.
-        String url = CommonsUtils.getPostsUrlWithKeyword("진주", webClient);
+        String url = CommonsUtils.getPostsUrlWithKeyword("진주");
         Document doc = getDocumentAfterLogin(url);
 
         // OUT

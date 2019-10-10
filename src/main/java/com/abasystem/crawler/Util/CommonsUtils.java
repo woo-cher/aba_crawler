@@ -19,7 +19,8 @@ import java.io.IOException;
 public class CommonsUtils {
     private static final Logger logger = LoggerFactory.getLogger(CommonsUtils.class);
 
-    public static String getPostsUrlWithKeyword(String key, WebClient webClient) throws IOException {
+    public static String getPostsUrlWithKeyword(String key) throws IOException {
+        WebClient webClient = new WebClient();
 
         // Get Page
         HtmlPage currPage = webClient.getPage(Naver.APT_DIRECT_PROVINCES_URL);

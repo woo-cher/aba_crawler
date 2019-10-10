@@ -42,25 +42,30 @@ public class PropertyCrawler {
     private BasicQueryStrategy queryStrategy;
 
     @Transactional
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(cron = "30 * * * * *")
     public void crawling() throws Exception {
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+
         // 1) 로그인
         boolean pass = loginService.doLogin(webClient, Naver.ID, Naver.PASSWORD);
-        logger.error("로그인? : " + pass);
+        logger.info("로그인 결과 : " + pass);
 
         cookies = loginService.getLoginCookie(webClient);
 
         // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
-        String searchUrl = CommonsUtils.getPostsUrlWithKeyword("진주", webClient);
-
+        String searchUrl = CommonsUtils.getPostsUrlWithKeyword("진주");
+        logger.info("키워드로 검색한 URL 획득 성공");
         Document document = Jsoup.connect(searchUrl).cookies(cookies).get();
+        logger.info("Document 획득!");
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
         Elements elements = service.initPosts(document, 1);
+        logger.info("Elements 획득!");
 
         // 4) Service 클래스의 parseAll() 메소드 call
         properties = service.parseAll(elements, cookies);
-        logger.info("Parsing Result: {}", properties);
+        logger.info("Parsing Success ...");
 
         // 5) Parsing 한 모든 게시글만큼 Loop -> DB 저장
         int row = 0;
@@ -72,8 +77,10 @@ public class PropertyCrawler {
 
         // 6) 해당 객체를 csv 파일화
         service.writeAll(properties);
-        logger.info("피터팬 크롤링 실행 완료");
+        logger.info("Crawling Success!");
 
         properties.clear();
+        cookies.clear();
+        webClient.close();
     }
 }
