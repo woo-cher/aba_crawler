@@ -54,6 +54,7 @@ public class PeterPanValidator implements ValidationStrategy {
 
     private void parameterHandler(Object object) {
         if (object == null || ObjectUtils.isEmpty(object)) {
+            logger.info("Null Object {}", object);
             throw new NullPointerException("Elements is null");
         }
     }

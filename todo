@@ -6,7 +6,5 @@ Todo)
   4. 스케줄 메소드 실행 시키고, 파일이 잘 저장되는지 확인한다
   5. 스케줄 어노테이션 적용하고 주기 설정한다
   6. 마무리
- # Exception Handler
- # 서버를 돌리면서 쿠키를 유지할 수 있는 방법 찾아야한다
  # LoginTest 와 PeterPanParseTest 를 합쳐야할 것 같다
   - 전체 테스트 실행 시, 쿠키가 없어 Elements 가 Null 인 현상이 발생한다

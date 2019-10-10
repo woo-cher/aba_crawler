@@ -104,6 +104,7 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
             );
         }
 
+        logger.info("init posts successfully: {}", elements);
         return elements;
     }
 

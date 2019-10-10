@@ -10,7 +10,7 @@ public class Naver {
     /**
      * URL
      */
-    public static final String LOGIN_URL = "https://nid.naver.com/nidlogin.login";
+    public static final String LOGIN_URL = "http://nid.naver.com/nidlogin.login";
     public static final String APT_DIRECT_PROVINCES_URL = "https://cafe.naver.com/ArticleList.nhn?search.clubid=10322296&search.menuid=1115&search.boardtype=L";
 
     /**

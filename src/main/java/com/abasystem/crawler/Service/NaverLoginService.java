@@ -31,6 +31,8 @@ public class NaverLoginService implements LoginStrategy {
     public Map<String, String> getLoginCookie(WebClient webClient) {
         Map<String, String> cookies = new HashMap<>();
         CookieManager cookieManager = webClient.getCookieManager();
+        logger.info("CookieManager : {}", cookieManager);
+        logger.info("WebClient : {}", webClient);
 
         Set<Cookie> cookieSet = cookieManager.getCookies();
 
@@ -38,6 +40,7 @@ public class NaverLoginService implements LoginStrategy {
             cookies.put(c.getName(), c.getValue());
         }
 
+        logger.info("Get Cookies !! {}", cookies);
         return cookies;
     }
 
