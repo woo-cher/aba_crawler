@@ -2,6 +2,7 @@ package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
+import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.PeterPanService;
 import com.abasystem.crawler.Storage.Naver;
@@ -36,6 +37,9 @@ public class PropertyCrawler {
 
     @Autowired
     private WebClient webClient;
+
+    @Autowired
+    private SchedulerRepository repository;
 
     private Map<String, String> cookies;
     private List<ModelMapper> properties;
@@ -78,6 +82,10 @@ public class PropertyCrawler {
         // 6) 해당 객체를 csv 파일화
         service.writeAll(properties);
         logger.info("Crawling Success!");
+
+        // 7) 스케줄링 로그 저장
+        repository.insertLog(row);
+        logger.info("Save log");
 
         properties.clear();
         cookies.clear();

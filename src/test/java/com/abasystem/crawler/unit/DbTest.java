@@ -4,6 +4,7 @@ import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
 import com.abasystem.crawler.Model.PeterPan.RegularProperty;
+import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +37,9 @@ public class DbTest {
 
     @Autowired
     private RepositoryFactory factory;
+
+    @Autowired
+    private SchedulerRepository schedulerRepository;
 
     @Test
     public void dataSource() throws SQLException {
@@ -93,8 +97,14 @@ public class DbTest {
     }
 
     @Test
+    public void schedulerLog() {
+        logger.debug("id : " + schedulerRepository.getNextId());
+    }
+
+    @Test
     public void test() {
         BasicQueryStrategy repository = factory.getTypeRepositoryCreator(RegularProperty.class);
         logger.debug("repository {}", repository);
     }
+
 }
