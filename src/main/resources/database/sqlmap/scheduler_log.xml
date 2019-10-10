@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.abasystem.crawler.Model.Log">
     <insert id="insertLog" parameterType="int">
-        INSERT INTO schedular_logs (created_at, property_count) VALUES (current_date, #{row})
+        INSERT INTO schedular_logs (created_at, property_count) VALUES (current_timestamp, #{row})
     </insert>
 
     <select id="selectRowCount" resultType="int">

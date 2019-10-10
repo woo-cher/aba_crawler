@@ -21,7 +21,7 @@
         )
         VALUES
         (
-            #{title}, #{url}, #{description}, #{date}, current_date, #{phone}, #{address}, #{price}, #{managementPrice},
+            #{title}, #{url}, #{description}, #{date}, current_timestamp, #{phone}, #{address}, #{price}, #{managementPrice},
             #{propertyType}, #{roomCount}, #{floor}, #{managementCategory}, #{heatingType}, #{options}, #{movePossibleDate}
         )
     </insert>

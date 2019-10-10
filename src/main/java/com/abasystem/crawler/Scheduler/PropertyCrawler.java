@@ -46,7 +46,7 @@ public class PropertyCrawler {
     private BasicQueryStrategy queryStrategy;
 
     @Transactional
-    @Scheduled(cron = "30 * * * * *")
+    @Scheduled(cron = "0 0 21 ? * 5")
     public void crawling() throws Exception {
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
@@ -90,5 +90,10 @@ public class PropertyCrawler {
         properties.clear();
         cookies.clear();
         webClient.close();
+    }
+
+    @Scheduled(fixedRate = 5000)
+    public void sub() {
+        logger.info("gg");
     }
 }

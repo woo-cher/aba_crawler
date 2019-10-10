@@ -17,8 +17,8 @@ public class CustomOpenCsv {
     public CSVWriter cw;
 
     public CustomOpenCsv() throws Exception {
-        this.stream = new FileOutputStream("property" + getDate() + ".csv");
-        writer = new OutputStreamWriter(stream, "UTF-8");
+        this.stream = new FileOutputStream(getDate() + ".csv");
+        writer = new OutputStreamWriter(stream, "EUC-KR");
         cw = new CSVWriter(writer, ',', '"');
     }
 
