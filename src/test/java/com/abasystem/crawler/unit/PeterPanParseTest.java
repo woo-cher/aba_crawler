@@ -140,7 +140,7 @@ public class PeterPanParseTest {
     public void parsePosts() throws IOException {
         String MOCK_URL = "https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=10322296&search.searchBy=0&search.query=%C1%F8%C1%D6";
         Document doc = Jsoup.connect(MOCK_URL).get();
-        elements = pService.initPosts(doc, 3);
+        elements = pService.initPosts(doc, 1);
 
         logger.debug("el ? {}", elements.text());
         logger.debug("크롤링 결과 : {}", pService.parseAll(elements, cookies));

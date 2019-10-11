@@ -4,16 +4,10 @@ import com.abasystem.crawler.Mapper.ModelMapper;
 import lombok.*;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
 @Getter
 @Setter
-public class IrregularProperty implements ModelMapper {
-    private int id;
-    private String title;
-    private String description;
-    private String date;
-    private String url;
+public class IrregularProperty extends ModelMapper {
 
     public IrregularProperty(String title, String description, String date, String url) {
         this.title = title;

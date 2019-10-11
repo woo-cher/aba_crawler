@@ -14,4 +14,37 @@ public class Basic {
 
         System.out.println("format ? " + sd.format(date));
     }
+
+    @Test
+    public void testCase2() {
+        A a = new A();
+        B b = new B();
+
+        a.a = 1;
+        a.b = 2;
+        b.a = 3;
+        b.b = 4;
+
+        System.out.println("a.a : " + a.a);
+        System.out.println("a.a : " + a.b);
+        System.out.println("b.a : " + b.a);
+        System.out.println("b.a : " + b.b);
+    }
+}
+
+class Super {
+    public int a;
+    public int b;
+}
+
+class A extends Super {
+    A() {
+        super();
+    }
+}
+
+class B extends Super {
+    B() {
+        super();
+    }
 }

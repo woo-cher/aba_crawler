@@ -9,11 +9,7 @@ import lombok.*;
 @EqualsAndHashCode
 @Getter
 @Setter
-public class RegularProperty implements ModelMapper {
-    private int id;
-    private String title;
-    private String url;
-    private String date;
+public class RegularProperty extends ModelMapper {
     private String phone;
     private String address;
     private String price;
@@ -24,7 +20,6 @@ public class RegularProperty implements ModelMapper {
     private String managementCategory;
     private String heatingType;
     private String options;
-    private String description;
     private String movePossibleDate;
 
     public RegularProperty(RegularPostBuilder builder) {
