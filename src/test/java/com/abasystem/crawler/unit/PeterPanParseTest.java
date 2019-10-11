@@ -76,7 +76,8 @@ public class PeterPanParseTest {
 
         logger.debug(elements.text());
 
-        assertFalse(validationStrategy.postValidate(elements));
+        assertTrue(validationStrategy.isPropertyPost(elements));
+        assertFalse(validationStrategy.isInvalidPost(elements));
     }
 
     @Test

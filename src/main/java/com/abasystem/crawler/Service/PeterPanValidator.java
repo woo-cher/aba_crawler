@@ -16,7 +16,20 @@ public class PeterPanValidator implements ValidationStrategy {
     private static final Logger logger = LoggerFactory.getLogger(PeterPanValidator.class);
 
     @Override
-    public boolean postValidate(Elements elements) {
+    public boolean isPropertyPost(Elements elements) {
+        parameterHandler(elements);
+
+        for (ValidKeyword keyword : ValidKeyword.values()) {
+            if (elements.select(Naver.POST_MINI_TITLE).text().equals(keyword.getName())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isInvalidPost(Elements elements) {
         parameterHandler(elements);
 
         for (InvalidKeyWord keyWord : InvalidKeyWord.values()) {
@@ -25,13 +38,7 @@ public class PeterPanValidator implements ValidationStrategy {
             }
         }
 
-        for (ValidKeyword keyword : ValidKeyword.values()) {
-            if (elements.select(Naver.POST_MINI_TITLE).text().equals(keyword.getName())) {
-                return false;
-            }
-        }
-
-        return true;
+        return false;
     }
 
     @Override

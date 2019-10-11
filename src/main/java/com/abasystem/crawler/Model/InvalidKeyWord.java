@@ -8,7 +8,9 @@ public enum InvalidKeyWord implements TypeMapper {
     KEY1("구해요"),
     KEY2("머무를"),
     KEY3("머물"),
-    KEY4("머무를");
+    KEY4("머무를"),
+    KEY5("구합니다"),
+    KEY6("찾아요");
 
     private String name;
 

@@ -81,7 +81,8 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
                     .cookies(cookies)
                     .get();
 
-            if (validationStrategy.postValidate(document.select(".inbox"))) {
+            Elements els = document.select(".inbox");
+            if ( ! validationStrategy.isPropertyPost(els) && validationStrategy.isInvalidPost(els)) {
                 continue;
             }
 

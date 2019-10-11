@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface ValidationStrategy {
-    boolean postValidate(Elements elements);
+    boolean isPropertyPost(Elements elements);
+    boolean isInvalidPost(Elements elements);
     boolean isRegularPost(Elements elements);
 }
