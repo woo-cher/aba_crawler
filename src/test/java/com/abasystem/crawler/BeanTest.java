@@ -1,5 +1,8 @@
 package com.abasystem.crawler;
 
+import com.abasystem.crawler.Service.Operator.JinjuMomOperator;
+import com.abasystem.crawler.Service.Operator.ParseTemplate;
+import com.abasystem.crawler.Strategy.ValidationStrategy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ public class BeanTest {
 
     @Autowired
     private Map<String, String> cookies;
+
+    @Autowired
+    private ValidationStrategy validationStrategy;
 
     @Test
     public void getBean() {

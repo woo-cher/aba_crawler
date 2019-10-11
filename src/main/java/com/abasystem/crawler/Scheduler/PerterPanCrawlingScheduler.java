@@ -3,8 +3,9 @@ package com.abasystem.crawler.Scheduler;
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Repository.SchedulerRepository;
-import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.CrawlerService;
+import com.abasystem.crawler.Service.NaverLoginService;
+import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
@@ -16,6 +17,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,12 +47,17 @@ public class PerterPanCrawlingScheduler {
     @Autowired
     private PostInitializer initializer;
 
+    @Autowired
+    @Qualifier("peterOperator")
+    private ParseTemplate parseTemplate;
+
     private Map<String, String> cookies;
-    private List<ModelMapper> properties;
+    private List<? extends ModelMapper> properties;
     private BasicQueryStrategy queryStrategy;
 
     @Transactional
-    @Scheduled(cron = "0 0 21 ? * 5")
+//    @Scheduled(cron = "0 0 21 ? * 5")
+    @Scheduled(fixedRate = 15000)
     public void crawling() throws Exception {
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
@@ -72,7 +79,7 @@ public class PerterPanCrawlingScheduler {
         logger.info("Elements 획득!");
 
         // 4) Service 클래스의 parseAll() 메소드 call
-        properties = service.parseAll(elements, cookies);
+        properties = parseTemplate.parseAll(elements, cookies);
         logger.info("Parsing Success ...");
 
         // 5) Parsing 한 모든 게시글만큼 Loop -> DB 저장

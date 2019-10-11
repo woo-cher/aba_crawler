@@ -8,10 +8,12 @@ import com.abasystem.crawler.Strategy.ValidationStrategy;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 @Service
+@Qualifier("customValidator")
 public class CustomValidator implements ValidationStrategy {
     private static final Logger logger = LoggerFactory.getLogger(CustomValidator.class);
 

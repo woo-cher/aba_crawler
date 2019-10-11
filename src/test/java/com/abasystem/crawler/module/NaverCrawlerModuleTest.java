@@ -2,8 +2,9 @@ package com.abasystem.crawler.module;
 
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
-import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.CrawlerService;
+import com.abasystem.crawler.Service.NaverLoginService;
+import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
@@ -17,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.not;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -50,9 +52,14 @@ public class NaverCrawlerModuleTest {
 
     @Autowired
     private WebClient webClient;
+
+    @Autowired
+    @Qualifier("peterOperator")
+    private ParseTemplate parseTemplate;
+
     private Document document;
     private Elements elements;
-    private List<ModelMapper> properties;
+    private List<? extends ModelMapper> properties;
     private BasicQueryStrategy queryStrategy;
 
     @Test
@@ -80,7 +87,7 @@ public class NaverCrawlerModuleTest {
         assertThat(elements.size(), is(45));
 
         // 4) Service 클래스의 parseAll() 메소드 call
-        properties = service.parseAll(elements, cookies);
+        properties = parseTemplate.parseAll(elements, cookies);
         logger.debug("Parsing Result: {}", properties);
         assertFalse(properties.isEmpty());
 

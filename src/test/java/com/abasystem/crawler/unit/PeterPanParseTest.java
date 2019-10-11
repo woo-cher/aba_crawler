@@ -5,7 +5,7 @@ import com.abasystem.crawler.Model.Property.IrregularProperty;
 import com.abasystem.crawler.Model.Property.RegularProperty;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.NaverLoginService;
-import com.abasystem.crawler.Service.CrawlerService;
+import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -51,10 +52,11 @@ public class PeterPanParseTest {
     private ValidationStrategy validationStrategy;
 
     @Autowired
-    private CrawlerService pService;
+    private PostInitializer initializer;
 
     @Autowired
-    private PostInitializer initializer;
+    @Qualifier("peterOperator")
+    private ParseTemplate parseTemplate;
 
     private Elements elements;
 
@@ -147,7 +149,7 @@ public class PeterPanParseTest {
         elements = initializer.initPosts(doc, 1);
 
         logger.debug("el ? {}", elements.text());
-        logger.debug("크롤링 결과 : {}", pService.parseAll(elements, cookies));
+        logger.debug("크롤링 결과 : {}", parseTemplate.parseAll(elements, cookies));
     }
 
     @Test

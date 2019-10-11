@@ -4,7 +4,7 @@ import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.Property.IrregularProperty;
 import com.abasystem.crawler.Model.Property.RegularProperty;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
-import com.abasystem.crawler.Strategy.ParseStrategy;
+import com.abasystem.crawler.Strategy.ReadStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ public class ServiceFactory<P extends ModelMapper> {
     private static final Logger logger = LoggerFactory.getLogger(ServiceFactory.class);
 
     @Autowired
-    private ParseStrategy<RegularProperty> regularParser;
+    private ReadStrategy<RegularProperty> regularParser;
 
     @Autowired
-    private ParseStrategy<IrregularProperty> irregularParser;
+    private ReadStrategy<IrregularProperty> irregularParser;
 
     @Autowired
     private CsvWriteStrategy<RegularProperty> regularWriter;
@@ -26,11 +26,11 @@ public class ServiceFactory<P extends ModelMapper> {
     @Autowired
     private CsvWriteStrategy<IrregularProperty> irregularWriter;
 
-    public ParseStrategy<P> parserCreator(boolean isRegular) {
+    public ReadStrategy<P> parserCreator(boolean isRegular) {
         if (isRegular) {
-            return (ParseStrategy<P>) regularParser;
+            return (ReadStrategy<P>) regularParser;
         } else {
-            return (ParseStrategy<P>) irregularParser;
+            return (ReadStrategy<P>) irregularParser;
         }
     }
 

@@ -1,16 +1,16 @@
-package com.abasystem.crawler.Service.Parser;
+package com.abasystem.crawler.Service.Reader;
 
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Model.Property.RegularProperty;
-import com.abasystem.crawler.Strategy.ParseStrategy;
+import com.abasystem.crawler.Strategy.ReadStrategy;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegularParser implements ParseStrategy<RegularProperty> {
-    private static final Logger logger = LoggerFactory.getLogger(RegularParser.class);
+public class RegularReader implements ReadStrategy<RegularProperty> {
+    private static final Logger logger = LoggerFactory.getLogger(RegularReader.class);
 
     private String date;
 

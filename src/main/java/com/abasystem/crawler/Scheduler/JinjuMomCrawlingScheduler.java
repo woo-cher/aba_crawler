@@ -10,7 +10,6 @@ import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +51,5 @@ public class JinjuMomCrawlingScheduler {
 
         cookies = loginService.getLoginCookie(webClient);
         Document document = Jsoup.connect(Naver.MOM_DIRECT_URL).cookies(cookies).get();
-
-        // 2) 원하는 PAGE 입력 받아 게시글 initializing
-        Elements elements = service.initPosts(document, 4);
-        logger.info("Elements 획득!");
     }
 }

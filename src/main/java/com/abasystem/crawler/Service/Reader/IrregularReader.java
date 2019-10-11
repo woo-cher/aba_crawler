@@ -1,15 +1,15 @@
-package com.abasystem.crawler.Service.Parser;
+package com.abasystem.crawler.Service.Reader;
 
 import com.abasystem.crawler.Model.Property.IrregularProperty;
-import com.abasystem.crawler.Strategy.ParseStrategy;
+import com.abasystem.crawler.Strategy.ReadStrategy;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IrregularParser implements ParseStrategy<IrregularProperty> {
-    private static final Logger logger = LoggerFactory.getLogger(IrregularParser.class);
+public class IrregularReader implements ReadStrategy<IrregularProperty> {
+    private static final Logger logger = LoggerFactory.getLogger(IrregularReader.class);
 
     @Override
     public IrregularProperty parse(Document document, String url, String title) {
