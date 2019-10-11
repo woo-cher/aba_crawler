@@ -7,7 +7,7 @@ import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
 import com.abasystem.crawler.Scheduler.PropertyCrawler;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
-import com.abasystem.crawler.Service.PeterPanService;
+import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
 import com.google.gson.JsonObject;
 import org.junit.Before;
@@ -38,7 +38,7 @@ public class CsvWriterTest {
     private ServiceFactory factory;
 
     @Autowired
-    private PeterPanService service;
+    private CrawlerService service;
 
     @Autowired
     private PropertyCrawler crawler;

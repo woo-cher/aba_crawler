@@ -4,7 +4,7 @@ import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Service.NaverLoginService;
-import com.abasystem.crawler.Service.PeterPanService;
+import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
@@ -27,7 +27,7 @@ public class PropertyCrawler {
     private static final Logger logger = LoggerFactory.getLogger(PropertyCrawler.class);
 
     @Autowired
-    private PeterPanService service;
+    private CrawlerService service;
 
     @Autowired
     private NaverLoginService loginService;

@@ -5,7 +5,7 @@ import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
 import com.abasystem.crawler.Model.PeterPan.RegularProperty;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.NaverLoginService;
-import com.abasystem.crawler.Service.PeterPanService;
+import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -50,7 +50,7 @@ public class PeterPanParseTest {
     private ValidationStrategy validationStrategy;
 
     @Autowired
-    private PeterPanService pService;
+    private CrawlerService pService;
 
     private Elements elements;
 

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 @Service
-public class PeterPanValidator implements ValidationStrategy {
-    private static final Logger logger = LoggerFactory.getLogger(PeterPanValidator.class);
+public class CustomValidator implements ValidationStrategy {
+    private static final Logger logger = LoggerFactory.getLogger(CustomValidator.class);
 
     @Override
     public boolean isPropertyPost(Elements elements) {

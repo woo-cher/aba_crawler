@@ -27,8 +27,8 @@ import java.util.Map;
  * Init 메소드는 Util 성에 성격이 가까워보인다.
  */
 @Service
-public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv implements InitStrategy {
-    private static final Logger logger = LoggerFactory.getLogger(PeterPanService.class);
+public class CrawlerService<P extends ModelMapper> extends CustomOpenCsv implements InitStrategy {
+    private static final Logger logger = LoggerFactory.getLogger(CrawlerService.class);
 
     private static final String[] TABLE_ROW = {
             "번호", "제목", "링크", "설명", "등록일", "주소", "타입", "연락처", "가격", "관리비", "옵션", "이사가능일",
@@ -48,7 +48,7 @@ public class PeterPanService <P extends ModelMapper> extends CustomOpenCsv imple
     private String url;
     private String title;
 
-    public PeterPanService() throws Exception {
+    public CrawlerService() throws Exception {
         super();
     }
 
