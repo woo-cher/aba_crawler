@@ -1,4 +1,4 @@
-package com.abasystem.crawler.Model.PeterPan;
+package com.abasystem.crawler.Model.Property;
 
 import com.abasystem.crawler.Mapper.ModelMapper;
 import lombok.*;

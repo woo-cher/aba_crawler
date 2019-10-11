@@ -1,6 +1,6 @@
 package com.abasystem.crawler.Service.Parser;
 
-import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
+import com.abasystem.crawler.Model.Property.IrregularProperty;
 import com.abasystem.crawler.Strategy.ParseStrategy;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;

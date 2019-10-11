@@ -1,8 +1,8 @@
 package com.abasystem.crawler.Factory;
 
 import com.abasystem.crawler.Mapper.ModelMapper;
-import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
-import com.abasystem.crawler.Model.PeterPan.RegularProperty;
+import com.abasystem.crawler.Model.Property.IrregularProperty;
+import com.abasystem.crawler.Model.Property.RegularProperty;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

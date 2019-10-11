@@ -1,8 +1,8 @@
 package com.abasystem.crawler.unit;
 
 import com.abasystem.crawler.Builder.RegularPostBuilder;
-import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
-import com.abasystem.crawler.Model.PeterPan.RegularProperty;
+import com.abasystem.crawler.Model.Property.IrregularProperty;
+import com.abasystem.crawler.Model.Property.RegularProperty;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.CrawlerService;

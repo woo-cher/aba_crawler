@@ -2,8 +2,8 @@ package com.abasystem.crawler.unit;
 
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Factory.RepositoryFactory;
-import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
-import com.abasystem.crawler.Model.PeterPan.RegularProperty;
+import com.abasystem.crawler.Model.Property.IrregularProperty;
+import com.abasystem.crawler.Model.Property.RegularProperty;
 import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import org.junit.Test;

@@ -4,7 +4,7 @@ import au.com.bytecode.opencsv.CSVWriter;
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Factory.ServiceFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
-import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
+import com.abasystem.crawler.Model.Property.IrregularProperty;
 import com.abasystem.crawler.Scheduler.PropertyCrawler;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.CrawlerService;

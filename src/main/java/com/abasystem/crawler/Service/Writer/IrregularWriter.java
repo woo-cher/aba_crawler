@@ -1,7 +1,7 @@
 package com.abasystem.crawler.Service.Writer;
 
 import au.com.bytecode.opencsv.CSVWriter;
-import com.abasystem.crawler.Model.PeterPan.IrregularProperty;
+import com.abasystem.crawler.Model.Property.IrregularProperty;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
 import com.google.gson.JsonObject;
 import org.slf4j.Logger;

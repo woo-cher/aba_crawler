@@ -1,6 +1,6 @@
 package com.abasystem.crawler.Builder;
 
-import com.abasystem.crawler.Model.PeterPan.RegularProperty;
+import com.abasystem.crawler.Model.Property.RegularProperty;
 import lombok.Getter;
 import lombok.Setter;
 
