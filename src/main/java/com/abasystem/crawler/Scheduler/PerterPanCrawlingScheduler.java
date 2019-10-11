@@ -5,6 +5,7 @@ import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.CrawlerService;
+import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
@@ -23,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class PropertyCrawler {
-    private static final Logger logger = LoggerFactory.getLogger(PropertyCrawler.class);
+public class PerterPanCrawlingScheduler {
+    private static final Logger logger = LoggerFactory.getLogger(PerterPanCrawlingScheduler.class);
 
     @Autowired
     private CrawlerService service;
@@ -40,6 +41,9 @@ public class PropertyCrawler {
 
     @Autowired
     private SchedulerRepository repository;
+
+    @Autowired
+    private PostInitializer initializer;
 
     private Map<String, String> cookies;
     private List<ModelMapper> properties;
@@ -64,7 +68,7 @@ public class PropertyCrawler {
         logger.info("Document 획득!");
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        Elements elements = service.initPosts(document, 1);
+        Elements elements = initializer.initPosts(document, 1);
         logger.info("Elements 획득!");
 
         // 4) Service 클래스의 parseAll() 메소드 call
@@ -90,10 +94,5 @@ public class PropertyCrawler {
         properties.clear();
         cookies.clear();
         webClient.close();
-    }
-
-    @Scheduled(fixedRate = 5000)
-    public void sub() {
-        logger.info("gg");
     }
 }

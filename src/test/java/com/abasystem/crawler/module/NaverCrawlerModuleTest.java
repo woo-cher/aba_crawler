@@ -4,6 +4,7 @@ import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.CrawlerService;
+import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
@@ -45,6 +46,9 @@ public class NaverCrawlerModuleTest {
     private Map<String, String> cookies;
 
     @Autowired
+    private PostInitializer initializer;
+
+    @Autowired
     private WebClient webClient;
     private Document document;
     private Elements elements;
@@ -71,7 +75,7 @@ public class NaverCrawlerModuleTest {
         assertNotNull(document);
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        elements = service.initPosts(document, 3);
+        elements = initializer.initPosts(document, 3);
         assertNotNull(elements);
         assertThat(elements.size(), is(45));
 

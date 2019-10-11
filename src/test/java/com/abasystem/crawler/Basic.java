@@ -29,6 +29,14 @@ public class Basic {
         System.out.println("a.a : " + a.b);
         System.out.println("b.a : " + b.a);
         System.out.println("b.a : " + b.b);
+
+        System.out.println("" + a.sub(new I() {
+                @Override
+                public boolean m() {
+                    return false;
+                }
+            })
+        );
     }
 }
 
@@ -41,10 +49,19 @@ class A extends Super {
     A() {
         super();
     }
+
+    boolean sub(I i) {
+        return i.m();
+    }
+
 }
 
 class B extends Super {
     B() {
         super();
     }
+}
+
+interface I {
+    boolean m();
 }

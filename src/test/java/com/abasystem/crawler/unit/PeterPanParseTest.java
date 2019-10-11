@@ -6,6 +6,7 @@ import com.abasystem.crawler.Model.Property.RegularProperty;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.CrawlerService;
+import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -51,6 +52,9 @@ public class PeterPanParseTest {
 
     @Autowired
     private CrawlerService pService;
+
+    @Autowired
+    private PostInitializer initializer;
 
     private Elements elements;
 
@@ -127,7 +131,7 @@ public class PeterPanParseTest {
     public void initPosts() throws IOException {
         String MOCK_URL = "https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=10322296&search.searchBy=0&search.query=%C1%F8%C1%D6";
         Document doc = Jsoup.connect(MOCK_URL).get();
-        elements = pService.initPosts(doc, 3);
+        elements = initializer.initPosts(doc, 3);
 
         for (Element el : elements) {
             logger.debug(el.toString());
@@ -140,7 +144,7 @@ public class PeterPanParseTest {
     public void parsePosts() throws IOException {
         String MOCK_URL = "https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=10322296&search.searchBy=0&search.query=%C1%F8%C1%D6";
         Document doc = Jsoup.connect(MOCK_URL).get();
-        elements = pService.initPosts(doc, 1);
+        elements = initializer.initPosts(doc, 1);
 
         logger.debug("el ? {}", elements.text());
         logger.debug("크롤링 결과 : {}", pService.parseAll(elements, cookies));
