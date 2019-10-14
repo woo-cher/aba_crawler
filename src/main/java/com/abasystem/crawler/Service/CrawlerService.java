@@ -33,28 +33,24 @@ public class CrawlerService<P extends ModelMapper> extends CustomOpenCsv {
     @Autowired
     private ServiceFactory factory;
 
-    private Document document;
-    private List<ModelMapper> properties;
-    private String url;
-    private String title;
-
-    public CrawlerService() throws Exception {
+    public CrawlerService() {
         super();
     }
 
-    public boolean writeAll(List<P> properties) {
+    public boolean writeAll(List<P> properties, String name) throws Exception {
+        this.cw = getCSVWriter(name);
         cw.writeNext(TABLE_ROW);
 
         int index = 1;
 
-        for(P property : properties) {
+        for (P property : properties) {
             CsvWriteStrategy csvWriteStrategy = factory.writerCreator(property.getClass());
             JsonObject object = ModelConverter.convertModelToJsonObject(property);
             csvWriteStrategy.doWrite(object, cw, index);
             index++;
         }
 
-        if(cw.checkError() == true) {
+        if (cw.checkError() == true) {
             return false;
         }
 

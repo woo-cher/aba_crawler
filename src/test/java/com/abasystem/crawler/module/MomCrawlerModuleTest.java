@@ -58,8 +58,6 @@ public class MomCrawlerModuleTest {
 
     private static WebClient webClient;
 
-    private Document document;
-    private Elements elements;
     private List<? extends ModelMapper> properties;
     private BasicQueryStrategy queryStrategy;
 
@@ -88,7 +86,7 @@ public class MomCrawlerModuleTest {
         Document document = Jsoup.connect(Naver.MOM_DIRECT_URL).cookies(cookies).get();
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        Elements elements = initializer.initPosts(document, 1);
+        Elements elements = initializer.initPosts(document, 3);
         logger.info("Elements 획득! {}", elements);
 
         // 4) Service 클래스의 parseAll() 메소드 call
@@ -107,6 +105,6 @@ public class MomCrawlerModuleTest {
         assertThat(row, is(properties.size()));
 
         // 6) 해당 객체를 csv 파일화
-        assertTrue(service.writeAll(properties));
+        assertTrue(service.writeAll(properties, "진주아지매"));
     }
 }

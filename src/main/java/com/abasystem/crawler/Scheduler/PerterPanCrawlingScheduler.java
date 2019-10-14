@@ -58,7 +58,7 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
         logger.info("INSERT ROW COUNT : {}", row);
 
         // 6) 해당 객체를 csv 파일화
-        service.writeAll(properties);
+        service.writeAll(properties, "피터팬");
         logger.info("Crawling Success!");
 
         // 7) 스케줄링 로그 저장

@@ -52,6 +52,6 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
         logger.debug("INSERT ROW COUNT : {}", row);
 
         // 6) 해당 객체를 csv 파일화
-        service.writeAll(properties);
+        service.writeAll(properties, "진주아지매");
     }
 }

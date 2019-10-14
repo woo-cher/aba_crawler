@@ -12,14 +12,12 @@ import java.util.Date;
 
 @Service
 public class CustomOpenCsv {
-    public OutputStream stream;
-    public Writer writer;
     public CSVWriter cw;
 
-    public CustomOpenCsv() throws Exception {
-        this.stream = new FileOutputStream(getDate() + ".csv");
-        writer = new OutputStreamWriter(stream, "EUC-KR");
-        cw = new CSVWriter(writer, ',', '"');
+    public CSVWriter getCSVWriter(String name) throws Exception {
+        OutputStream stream = new FileOutputStream(name + "_" + getDate() + ".csv");
+        Writer writer = new OutputStreamWriter(stream, "EUC-KR");
+        return new CSVWriter(writer, ',', '"');
     }
 
     private String getDate() {

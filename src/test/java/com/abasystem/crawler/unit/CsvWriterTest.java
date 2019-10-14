@@ -75,13 +75,13 @@ public class CsvWriterTest {
     }
 
     @Test
-    public void csvAllWrite() {
+    public void csvAllWrite() throws Exception {
         for (int i = 1; i < 11; i++) {
             properties.add(new RegularPostBuilder(("TITLE" + i), ("URL" + i), ("DATE" + i), ("DESC" + i)).build());
             properties.add(new IrregularProperty("TITLE" + i, "DESCRIPTION" + i, "DATE" + i, "URL" + i));
         }
 
-        assertTrue(service.writeAll(properties));
+        assertTrue(service.writeAll(properties, "TestCSV"));
     }
 
     @Test
