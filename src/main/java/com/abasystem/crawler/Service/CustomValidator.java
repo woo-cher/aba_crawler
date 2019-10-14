@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 @Service
 @Qualifier("customValidator")
@@ -61,10 +60,10 @@ public class CustomValidator implements ValidationStrategy {
         return true;
     }
 
-    private void parameterHandler(Object object) {
-        if (object == null || ObjectUtils.isEmpty(object)) {
-            logger.info("Null Object {}", object);
-            throw new NullPointerException("Elements is null");
+    private void parameterHandler(Elements elements) {
+        if (elements.isEmpty()) {
+            logger.info("Null Elements {}", elements);
+            throw new NullPointerException("쿼리 선택자가 잘못됬거나 카페 사용자 권한이 없습니다.");
         }
     }
 }

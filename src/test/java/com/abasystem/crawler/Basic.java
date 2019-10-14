@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static org.junit.Assert.assertTrue;
+
 public class Basic {
 
     @Test
@@ -37,6 +39,13 @@ public class Basic {
                 }
             })
         );
+    }
+
+    @Test
+    public void testCase3() {
+        String str = "공지 (필독) 진아카페가입시 회칙 확인후 활동부탁드립니다. | 진아카페회칙(필독) 2014.10.29. 16:13 말머리없음 매니저 단이네79(bavo****) 카페매니저";
+
+        assertTrue(str.contains("공지"));
     }
 }
 

@@ -45,6 +45,7 @@ public abstract class ParseTemplate {
         for (Element post : elements) {
             url = Naver.CAFE_PREFIX.concat(post.select("a").attr("href"));
             title = post.select("a").text();
+            logger.info("title : {}", title);
 
             document = Jsoup.connect(url)
                     .cookies(cookies)

@@ -1,16 +1,9 @@
 package com.abasystem.crawler.Scheduler;
 
-import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
-import com.abasystem.crawler.Repository.SchedulerRepository;
-import com.abasystem.crawler.Service.CrawlerService;
-import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
-import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
-import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -18,47 +11,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Map;
-
 @Component
-public class PerterPanCrawlingScheduler {
+public class PerterPanCrawlingScheduler extends CustomScheduler {
     private static final Logger logger = LoggerFactory.getLogger(PerterPanCrawlingScheduler.class);
-
-    @Autowired
-    private CrawlerService service;
-
-    @Autowired
-    private NaverLoginService loginService;
-
-    @Autowired
-    private RepositoryFactory factory;
-
-    @Autowired
-    private WebClient webClient;
-
-    @Autowired
-    private SchedulerRepository repository;
-
-    @Autowired
-    private PostInitializer initializer;
 
     @Autowired
     @Qualifier("peterOperator")
     private ParseTemplate parseTemplate;
 
-    private Map<String, String> cookies;
-    private List<? extends ModelMapper> properties;
-    private BasicQueryStrategy queryStrategy;
-
     @Transactional
 //    @Scheduled(cron = "0 0 21 ? * 5")
-    @Scheduled(fixedRate = 15000)
-    public void crawling() throws Exception {
+//    @Scheduled(fixedRate = 15000)
+    public void crawler() throws Exception {
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 

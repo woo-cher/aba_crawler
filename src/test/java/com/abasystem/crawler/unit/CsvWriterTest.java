@@ -86,6 +86,6 @@ public class CsvWriterTest {
 
     @Test
     public void crawling() throws Exception {
-        crawler.crawling();
+        crawler.crawler();
     }
 }
