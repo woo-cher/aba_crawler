@@ -33,4 +33,5 @@ build/
 # Project exclude paths
 /.mvn/
 /logs/
+/property/
 *.csv

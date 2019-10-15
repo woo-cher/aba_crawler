@@ -15,7 +15,7 @@ public class CustomOpenCsv {
     public CSVWriter cw;
 
     public CSVWriter getCSVWriter(String name) throws Exception {
-        OutputStream stream = new FileOutputStream(name + "_" + getDate() + ".csv");
+        OutputStream stream = new FileOutputStream("./property/" + name + "_" + getDate() + ".csv");
         Writer writer = new OutputStreamWriter(stream, "EUC-KR");
         return new CSVWriter(writer, ',', '"');
     }
