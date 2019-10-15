@@ -37,7 +37,7 @@ public abstract class ParseTemplate {
 
     public abstract <P extends ModelMapper> P getModelAfterParse(Elements elements, Document doc, String url, String title);
 
-    public abstract boolean getValidationResult(Elements elements);
+    public abstract boolean isProperty(Elements elements);
 
     public List<? extends ModelMapper> parseAll(Elements elements, Map<String, String> cookies) throws IOException {
         properties = new ArrayList<>();
@@ -57,7 +57,12 @@ public abstract class ParseTemplate {
                 continue;
             }
 
-            if (!getValidationResult(els)) {
+            if (!isProperty(els)) {
+                continue;
+            }
+
+            if (!validationStrategy.isExistPhoneNumber(els)) {
+                logger.error("\t---------- 연락처가 없는 친구 ---------------\n");
                 continue;
             }
 

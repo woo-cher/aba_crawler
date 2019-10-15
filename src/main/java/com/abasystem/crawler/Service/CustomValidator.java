@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
 @Qualifier("customValidator")
 public class CustomValidator implements ValidationStrategy {
@@ -58,6 +61,20 @@ public class CustomValidator implements ValidationStrategy {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean isExistPhoneNumber(Elements elements) {
+        String regex = "[0일|01|영일|영1]{2}[0|영][-?|.?| ?].{4}[-?|.?].{4}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(elements.text());
+        logger.info("Els.text()? {}", elements.text());
+
+        if(matcher.find()) {
+            return true;
+        }
+
+        return false;
     }
 
     private void parameterHandler(Elements elements) {

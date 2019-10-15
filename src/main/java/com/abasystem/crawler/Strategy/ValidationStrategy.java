@@ -8,4 +8,5 @@ public interface ValidationStrategy {
     boolean isPropertyPost(Elements elements);
     boolean isInvalidPost(Elements elements);
     boolean isRegularPost(Elements elements);
+    boolean isExistPhoneNumber(Elements elements);
 }

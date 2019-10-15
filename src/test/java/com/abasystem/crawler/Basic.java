@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertTrue;
 
@@ -46,6 +48,46 @@ public class Basic {
         String str = "공지 (필독) 진아카페가입시 회칙 확인후 활동부탁드립니다. | 진아카페회칙(필독) 2014.10.29. 16:13 말머리없음 매니저 단이네79(bavo****) 카페매니저";
 
         assertTrue(str.contains("공지"));
+    }
+
+    @Test
+    public void phoneValidation() {
+        Pattern pattern;
+        Matcher matcher;
+
+        String p1 = "##ㅁㄴ# 0일0.12오사-4이2팔 123123";
+        String p2 = "010-12오사-4이2팔";
+        String p3 = "영일0-12오사-4이2팔";
+        String p4 = "영10-12오사-4이2팔";
+        String p5 = "영일영-12오사-4이2팔";
+
+        pattern = Pattern.compile("[0일|01|영일|영1]{2}[0|영][-?|.?].{4}[-?|.?].{4}");
+
+        matcher = pattern.matcher(p1);
+
+        if(matcher.find()) {
+            System.out.println(matcher.group());
+        }
+
+        matcher = pattern.matcher(p2);
+        if(matcher.find()) {
+            System.out.println(matcher.group());
+        }
+
+        matcher = pattern.matcher(p3);
+        if(matcher.find()) {
+            System.out.println(matcher.group());
+        }
+
+        matcher = pattern.matcher(p4);
+        if(matcher.find()) {
+            System.out.println(matcher.group());
+        }
+
+        matcher = pattern.matcher(p5);
+        if(matcher.find()) {
+            System.out.println(matcher.group());
+        }
     }
 }
 

@@ -20,7 +20,7 @@ public class JinjuMomParseOperator extends ParseTemplate {
     }
 
     @Override
-    public boolean getValidationResult(Elements elements) {
+    public boolean isProperty(Elements elements) {
         return true;
     }
 }

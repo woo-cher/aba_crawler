@@ -3,18 +3,17 @@ package com.abasystem.crawler.unit;
 import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Model.Property.IrregularProperty;
 import com.abasystem.crawler.Model.Property.RegularProperty;
-import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.google.gson.JsonObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,8 +30,7 @@ import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -72,6 +70,11 @@ public class PeterPanParseTest {
         service.doLogin(webClient, Naver.ID, Naver.PASSWORD);
     }
 
+    @AfterClass
+    public static void destroy() {
+        webClient.close();
+    }
+
     @Test
     public void postValidator() throws IOException {
         Document doc = Jsoup.connect(REGULAR_POST)
@@ -84,6 +87,23 @@ public class PeterPanParseTest {
 
         assertTrue(validationStrategy.isPropertyPost(elements));
         assertFalse(validationStrategy.isInvalidPost(elements));
+    }
+
+    @Test
+    public void isInContactPostValidation() throws IOException {
+        elements = Jsoup.connect("https://cafe.naver.com/ArticleRead.nhn?clubid=10322296&page=1&inCafeSearch=true&searchBy=1&query=%C1%F8%C1%D6&includeAll=&exclude=&include=&exact=&searchdate=all&media=0&sortBy=date&articleid=13049652&referrerAllArticles=true")
+                .cookies(cookies)
+                .get()
+                .select("#tbody");
+
+        assertTrue(validationStrategy.isExistPhoneNumber(elements));
+
+        elements = Jsoup.connect(IRREGULAR_POST)
+                .cookies(cookies)
+                .get()
+                .select("#tbody");
+
+        assertFalse(validationStrategy.isExistPhoneNumber(elements));
     }
 
     @Test
@@ -124,9 +144,7 @@ public class PeterPanParseTest {
                 .build();
 
         logger.debug("Parsed post : {}", post);
-
-        JsonObject object = ModelConverter.convertModelToJsonObject(post);
-        logger.debug("Result : " + object.get("제목"));
+        assertNotNull(post);
     }
 
     @Test
