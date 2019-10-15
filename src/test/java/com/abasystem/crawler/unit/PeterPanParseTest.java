@@ -179,7 +179,7 @@ public class PeterPanParseTest {
                 .get()
                 .select("#tbody");
 
-        post = new IrregularProperty("TITLE", elements.select("#tbody").text(), "DATE", "URL");
+        post = new IrregularProperty("TITLE", elements.select("#tbody").text(), "DATE", "URL", "PHONE");
         logger.debug("Post? {}", post);
     }
 }

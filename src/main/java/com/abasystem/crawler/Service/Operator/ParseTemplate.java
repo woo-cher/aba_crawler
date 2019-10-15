@@ -45,7 +45,8 @@ public abstract class ParseTemplate {
         for (Element post : elements) {
             url = Naver.CAFE_PREFIX.concat(post.select("a").attr("href"));
             title = post.select("a").text();
-            logger.info("title : {}", title);
+            logger.info("TITLE : {}", title);
+            logger.info("URL : {}", url);
 
             document = Jsoup.connect(url)
                     .cookies(cookies)
@@ -54,15 +55,17 @@ public abstract class ParseTemplate {
             Elements els = document.select(".inbox");
 
             if (validationStrategy.isInvalidPost(els)) {
+                logger.error("\t---------- Is not a post for sail property ---------------\n");
                 continue;
             }
 
             if (!isProperty(els)) {
+                logger.error("\t---------- Is invalid post ---------------\n");
                 continue;
             }
 
             if (!validationStrategy.isExistPhoneNumber(els)) {
-                logger.error("\t---------- 연락처가 없는 친구 ---------------\n");
+                logger.error("\t---------- Don't exist phone number at post ---------------\n");
                 continue;
             }
 

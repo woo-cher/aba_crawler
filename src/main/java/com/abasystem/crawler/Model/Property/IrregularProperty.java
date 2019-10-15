@@ -9,11 +9,12 @@ import lombok.*;
 @Setter
 public class IrregularProperty extends ModelMapper {
 
-    public IrregularProperty(String title, String description, String date, String url) {
+    public IrregularProperty(String title, String description, String date, String url, String phone) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.url = url;
+        this.phone = phone;
     }
 
     @Override
@@ -23,6 +24,7 @@ public class IrregularProperty extends ModelMapper {
                 ",\n\t description='" + description + '\'' +
                 ",\n\t date='" + date + '\'' +
                 ",\n\t url='" + url + '\'' +
+                ",\n\t phone ='" + phone + '\'' +
                 '}';
     }
 }

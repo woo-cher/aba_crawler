@@ -113,6 +113,6 @@ public class NaverCrawlerModuleTest {
         assertThat(row, is(properties.size()));
 
         // 6) 해당 객체를 csv 파일화
-        assertTrue(service.writeAll(properties, "피터팬"));
+        assertTrue(service.writeAll(properties, "피터팬(TEST)"));
     }
 }

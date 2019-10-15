@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 public class RegularProperty extends ModelMapper {
-    private String phone;
+
     private String address;
     private String price;
     private String managementPrice;

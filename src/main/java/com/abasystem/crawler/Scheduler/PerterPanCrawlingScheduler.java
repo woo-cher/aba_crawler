@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,7 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
     private ParseTemplate parseTemplate;
 
     @Transactional
-//    @Scheduled(cron = "0 0 21 ? * 5")
+    @Scheduled(cron = "0 0 21 ? * 3")
 //    @Scheduled(fixedRate = 15000)
     public void crawler() throws Exception {
         webClient.getOptions().setThrowExceptionOnScriptError(false);
@@ -42,7 +43,7 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
         logger.info("Document 획득!");
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        Elements elements = initializer.initPosts(document, 1);
+        Elements elements = initializer.initPosts(document, 2);
         logger.info("Elements 획득!");
 
         // 4) Service 클래스의 parseAll() 메소드 call

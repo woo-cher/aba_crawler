@@ -19,6 +19,9 @@ import java.util.regex.Pattern;
 public class CustomValidator implements ValidationStrategy {
     private static final Logger logger = LoggerFactory.getLogger(CustomValidator.class);
 
+    public static final String PHONE_REGEX =
+            "(0일|영1|01|영일|공일|공1)(0|영|공)(\\.|-| )?[0-9|영|공|일|이|둘|삼|셋|사|넷|오|육|칠|팔|구]{4}(\\.|-| )?[0-9|영|공|일|이|둘|삼|셋|사|넷|오|육|칠|팔|구]{4}";
+
     @Override
     public boolean isPropertyPost(Elements elements) {
         parameterHandler(elements);
@@ -65,8 +68,7 @@ public class CustomValidator implements ValidationStrategy {
 
     @Override
     public boolean isExistPhoneNumber(Elements elements) {
-        String regex = "[0일|01|영일|영1]{2}[0|영][-?|.?| ?].{4}[-?|.?].{4}";
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern = Pattern.compile(PHONE_REGEX);
         Matcher matcher = pattern.matcher(elements.text());
         logger.info("Els.text()? {}", elements.text());
 

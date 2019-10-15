@@ -14,7 +14,7 @@
     </select>
 
     <insert id="insertIrregularProp" useGeneratedKeys="true" keyProperty="id" parameterType="IrregularProperty">
-        INSERT INTO irregular_properties (title, url, description, date, created_at) VALUES (#{title}, #{url}, #{description}, #{date}, current_timestamp)
+        INSERT INTO irregular_properties (title, url, description, date, phone, created_at) VALUES (#{title}, #{url}, #{description}, #{date}, #{phone}, current_timestamp)
     </insert>
 
     <update id="updateIrregularProp" parameterType="IrregularProperty">

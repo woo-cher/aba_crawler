@@ -28,7 +28,7 @@ public class DbTest {
     private static final Logger logger = LoggerFactory.getLogger(DbTest.class);
 
     private static final RegularProperty R_MOCK = new RegularPostBuilder("R_TITLE", "R_URL", "R_2018.09.20", "R_DESC").build();
-    private static final IrregularProperty I_MOCK = new IrregularProperty("I_TITLE", "I_URL", "I_2020.12.12", "I_DESC");
+    private static final IrregularProperty I_MOCK = new IrregularProperty("I_TITLE", "I_URL", "I_2020.12.12", "I_DESC", "I_PHONE");
 
     private BasicQueryStrategy repository;
 

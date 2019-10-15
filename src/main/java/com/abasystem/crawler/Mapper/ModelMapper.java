@@ -11,4 +11,5 @@ public class ModelMapper {
     public String url;
     public String date;
     public String description;
+    public String phone;
 }

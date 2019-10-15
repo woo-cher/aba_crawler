@@ -105,6 +105,6 @@ public class MomCrawlerModuleTest {
         assertThat(row, is(properties.size()));
 
         // 6) 해당 객체를 csv 파일화
-        assertTrue(service.writeAll(properties, "진주아지매"));
+        assertTrue(service.writeAll(properties, "진주아지매(TEST)"));
     }
 }
