@@ -63,6 +63,5 @@ public class HappyHouseCrawlingScheduler extends CustomScheduler {
 
         properties.clear();
         cookies.clear();
-        webClient.close();
     }
 }

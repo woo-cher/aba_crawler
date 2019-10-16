@@ -24,11 +24,9 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
     private ParseTemplate parseTemplate;
 
     @Transactional
-    @Scheduled(cron = "0 0 21 ? * 3")
+    @Scheduled(cron = "0 30 20 ? * 3")
 //    @Scheduled(fixedRate = 15000)
     public void crawler() throws Exception {
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
         // 1) 로그인
         boolean pass = loginService.doLogin(Naver.ID, Naver.PASSWORD);
@@ -68,6 +66,5 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
 
         properties.clear();
         cookies.clear();
-        webClient.close();
     }
 }

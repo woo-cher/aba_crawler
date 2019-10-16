@@ -27,9 +27,6 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
     protected void crawler() throws Exception {
         logger.warn("설마 쿠키 .. 너 : {}", cookies);
 
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-
         // 1) 로그인
         boolean pass = loginService.doLogin(Naver.MOM_ID, Naver.MOM_PW);
         logger.info("로그인 결과 : " + pass);
@@ -63,6 +60,5 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
 
         properties.clear();
         cookies.clear();
-        webClient.close();
     }
 }

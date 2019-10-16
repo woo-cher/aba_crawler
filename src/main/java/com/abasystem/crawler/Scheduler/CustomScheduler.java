@@ -30,9 +30,6 @@ public class CustomScheduler {
     protected RepositoryFactory factory;
 
     @Autowired
-    protected WebClient webClient;
-
-    @Autowired
     protected SchedulerRepository repository;
 
     @Autowired
