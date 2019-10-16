@@ -37,7 +37,7 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
         cookies = loginService.getLoginCookie(webClient);
 
         // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
-        String searchUrl = CommonsUtils.getPostsUrlWithKeyword("진주");
+        String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
         logger.info("키워드로 검색한 URL 획득 성공");
         Document document = Jsoup.connect(searchUrl).cookies(cookies).get();
         logger.info("Document 획득!");

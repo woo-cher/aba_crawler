@@ -42,4 +42,21 @@ public class PostInitializer implements InitStrategy {
 
         return str.concat(Naver.CAFE_POSTFIX);
     }
+
+    @Override
+    public Elements initMultiplePosts(int maxPage, Document... documents) throws IOException {
+        Elements multiplePosts = new Elements();
+
+        for(Document document : documents) {
+            if(!multiplePosts.addAll(initPosts(document, maxPage))) {
+                throw new NullPointerException("addAll() run fail");
+            }
+        }
+
+        if(multiplePosts.isEmpty()) {
+            throw new NullPointerException("InitMultiplePosts Error");
+        }
+
+        return multiplePosts;
+    }
 }

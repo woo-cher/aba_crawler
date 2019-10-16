@@ -26,13 +26,15 @@ public class IrregularReader implements ReadStrategy<IrregularProperty> {
     }
 
     private String getPhoneNumber(Elements elements) {
+        String str = elements.text().replaceAll(" ", "");
+
         Pattern pattern = Pattern.compile(CustomValidator.PHONE_REGEX);
-        Matcher matcher = pattern.matcher(elements.text());
+        Matcher matcher = pattern.matcher(str);
 
         if(matcher.find()) {
             return matcher.group();
         }
 
-        throw new NullPointerException("ERROR : 연락처가 존재하지 않는 게시글입니다.");
+        throw new NullPointerException("ERROR : Phone Number Not Find");
     }
 }

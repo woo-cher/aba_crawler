@@ -21,7 +21,7 @@ public class PeterPanParseOperator extends ParseTemplate {
     }
 
     @Override
-    public boolean isProperty(Elements elements) {
+    public boolean isContainModerateKeyword(Elements elements) {
         return validationStrategy.isPropertyPost(elements);
     }
 }

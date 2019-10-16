@@ -29,13 +29,13 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.Is.*;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class NaverCrawlerModuleTest {
-    private static final Logger logger = LoggerFactory.getLogger(NaverCrawlerModuleTest.class);
+public class HappyHouseModuleTest {
+    private static final Logger logger = LoggerFactory.getLogger(HappyHouseModuleTest.class);
 
     @Autowired
     private CrawlerService service;
@@ -53,7 +53,7 @@ public class NaverCrawlerModuleTest {
     private PostInitializer initializer;
 
     @Autowired
-    @Qualifier("peterOperator")
+    @Qualifier("happyOperator")
     private ParseTemplate parseTemplate;
 
     private static WebClient webClient;
@@ -76,26 +76,26 @@ public class NaverCrawlerModuleTest {
     @Test
     @Transactional
     public void doCrawling() throws Exception {
-        // 1) 네이버 로그인 및 쿠키값 저장
-        loginService.doLogin(webClient, Naver.ID, Naver.PASSWORD);
-        assertTrue(loginService.isLogin());
+        // 1) 로그인
+        boolean pass = loginService.doLogin(webClient, Naver.MOM_ID, Naver.MOM_PW);
+        logger.info("로그인 결과 : " + pass);
 
         cookies = loginService.getLoginCookie(webClient);
         assertTrue(cookies.containsKey("NID_AUT"));
         assertTrue(cookies.containsKey("NID_SES"));
         assertTrue(cookies.containsKey("NID_JKL"));
 
-        // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
-        String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
+        // 2) 행가집 카페에 KEYWORD 검색된 URL GET
+        String searchUrl = CommonsUtils.getPostUrlWithSearch("직거래", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
         assertNotNull(searchUrl);
 
         document = Jsoup.connect(searchUrl).cookies(cookies).get();
         assertNotNull(document);
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        elements = initializer.initPosts(document, 3);
+        elements = initializer.initPosts(document, 1);
         assertNotNull(elements);
-        assertThat(elements.size(), is(45));
+        assertThat(elements.size(), is(15));
 
         // 4) Service 클래스의 parseAll() 메소드 call
         properties = parseTemplate.parseAll(elements, cookies);
@@ -113,6 +113,6 @@ public class NaverCrawlerModuleTest {
         assertThat(row, is(properties.size()));
 
         // 6) 해당 객체를 csv 파일화
-        assertTrue(service.writeAll(properties, "피터팬(TEST)"));
+        assertTrue(service.writeAll(properties, "행가집(TEST)"));
     }
 }

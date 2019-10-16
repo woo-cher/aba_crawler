@@ -23,6 +23,8 @@ public class Naver {
 
     public static final String MOM_DIRECT_URL = "https://cafe.naver.com/ArticleList.nhn?search.clubid=24207408&search.menuid=98&search.boardtype=L";
 
+    public static final String HAPPY_CAFE_URL = "https://cafe.naver.com/ArticleList.nhn?search.clubid=19167452&search.menuid=857&search.boardtype=L";
+
     /**
      *  --------------------------------------------------
      *  \\                   X-PATH                     \\
@@ -31,7 +33,8 @@ public class Naver {
     public static final String ID_XPATH = "//*[@id=\"id\"]";
     public static final String PW_XPATH = "//*[@id=\"pw\"]";
     public static final String SUBMIT_XPATH = "//*[@id=\"frmNIDLogin\"]/fieldset/input";
-    public static final String ALL_SEARCH_BUTTON_XPATH = "//*[@id=\"info-search\"]/form/button";
+    public static final String PETER_SEARCH_BUTTON_XPATH = "//*[@id=\"info-search\"]/form/button";
+    public static final String HAPPY_SEARCH_BUTTON_XPATH = "//*[@id=\"cafe-search\"]/form/button";
 
     /**
      *  --------------------------------------------------

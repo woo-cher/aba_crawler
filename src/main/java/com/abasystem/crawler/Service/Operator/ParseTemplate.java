@@ -37,7 +37,7 @@ public abstract class ParseTemplate {
 
     public abstract <P extends ModelMapper> P getModelAfterParse(Elements elements, Document doc, String url, String title);
 
-    public abstract boolean isProperty(Elements elements);
+    public abstract boolean isContainModerateKeyword(Elements elements);
 
     public List<? extends ModelMapper> parseAll(Elements elements, Map<String, String> cookies) throws IOException {
         properties = new ArrayList<>();
@@ -59,8 +59,8 @@ public abstract class ParseTemplate {
                 continue;
             }
 
-            if (!isProperty(els)) {
-                logger.error("\t---------- Is invalid post ---------------\n");
+            if (!isContainModerateKeyword(els)) {
+                logger.error("\t---------- The post is invalid ---------------\n");
                 continue;
             }
 

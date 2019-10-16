@@ -1,6 +1,7 @@
 package com.abasystem.crawler;
 
 import com.abasystem.crawler.Service.NaverLoginService;
+import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.LoginStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -55,7 +56,7 @@ public class Main {
 
     public Elements getElements() throws Exception {
         // "진주"로 검색한 전체 게시글 목록을 가져온다.
-        String url = CommonsUtils.getPostsUrlWithKeyword("진주");
+        String url = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
         Document doc = getDocumentAfterLogin(url);
 
         // OUT

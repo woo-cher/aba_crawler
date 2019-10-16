@@ -11,7 +11,11 @@ public enum InvalidKeyWord implements TypeMapper {
     KEY4("머무를"),
     KEY5("구합니다"),
     KEY6("찾아요"),
-    KEY7("공지");
+    KEY7("공지"),
+    KEY8("공인중개사"),
+    KEY9("소장"),
+
+    SPECIFIC1("장갑");
 
     private String name;
 

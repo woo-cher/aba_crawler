@@ -1,7 +1,9 @@
 package com.abasystem.crawler.Service;
 
 import com.abasystem.crawler.Model.InvalidKeyWord;
+import com.abasystem.crawler.Model.Type.PropertyType;
 import com.abasystem.crawler.Model.Type.RegularType;
+import com.abasystem.crawler.Model.Type.TradeType;
 import com.abasystem.crawler.Model.ValidKeyword;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
@@ -68,12 +70,33 @@ public class CustomValidator implements ValidationStrategy {
 
     @Override
     public boolean isExistPhoneNumber(Elements elements) {
+        String str = elements.text().replaceAll(" ", "");
+
         Pattern pattern = Pattern.compile(PHONE_REGEX);
-        Matcher matcher = pattern.matcher(elements.text());
-        logger.info("Els.text()? {}", elements.text());
+        Matcher matcher = pattern.matcher(str);
+        logger.info("Str {}", str);
 
         if(matcher.find()) {
             return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isContainPropertyType(Elements elements) {
+        parameterHandler(elements);
+
+        for (TradeType type : TradeType.values()) {
+            if (elements.text().contains(type.getName())) {
+                return true;
+            }
+        }
+
+        for (PropertyType type : PropertyType.values()) {
+            if (elements.text().contains(type.getName())) {
+                return true;
+            }
         }
 
         return false;

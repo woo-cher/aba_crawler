@@ -3,6 +3,7 @@ package com.abasystem.crawler.Scheduler;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
+import com.abasystem.crawler.Util.CommonsUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -15,8 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class JinjuMomCrawlingScheduler extends CustomScheduler {
-    private static final Logger logger = LoggerFactory.getLogger(JinjuMomCrawlingScheduler.class);
+public class HappyHouseCrawlingScheduler extends CustomScheduler {
+    private static final Logger logger = LoggerFactory.getLogger(HappyHouseCrawlingScheduler.class);
 
     @Autowired
     @Qualifier("momOperator")
@@ -25,25 +26,25 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
     @Transactional
     @Scheduled(cron = "0 0 21 ? * 3")
     protected void crawler() throws Exception {
-        logger.warn("설마 쿠키 .. 너 : {}", cookies);
-
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-
-        // 1) 로그인
-        boolean pass = loginService.doLogin(webClient, Naver.MOM_ID, Naver.MOM_PW);
-        logger.info("로그인 결과 : " + pass);
+        // 1) 네이버 로그인 및 쿠키값 저장
+        loginService.doLogin(webClient, Naver.ID, Naver.PASSWORD);
+        loginService.isLogin();
 
         cookies = loginService.getLoginCookie(webClient);
-        Document document = Jsoup.connect(Naver.MOM_DIRECT_URL).cookies(cookies).get();
+
+        // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
+        String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
+        logger.info("키워드로 검색한 URL 획득 성공");
+        Document document = Jsoup.connect(searchUrl).cookies(cookies).get();
+        logger.info("Document 획득!");
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        Elements elements = initializer.initPosts(document, 4);
-        logger.info("Elements 획득! {}", elements);
+        Elements elements = initializer.initPosts(document, 3);
+        logger.info("Elements 획득!");
 
         // 4) Service 클래스의 parseAll() 메소드 call
         properties = parseTemplate.parseAll(elements, cookies);
-        logger.info("Parsing Success ... {}", properties);
+        logger.info("Parsing Success ...");
 
         // 5) Parsing 한 모든 게시글만큼 Loop -> DB 저장
         int row = 0;
@@ -51,11 +52,11 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
             queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
             row += queryStrategy.createProp(property);
         }
-
-        logger.debug("INSERT ROW COUNT : {}", row);
+        logger.info("INSERT ROW COUNT : {}", row);
 
         // 6) 해당 객체를 csv 파일화
-        service.writeAll(properties, "진주아지매");
+        service.writeAll(properties, "행가집");
+        logger.info("Crawling Success!");
 
         // 7) 스케줄링 로그 저장
         repository.insertLog(row);

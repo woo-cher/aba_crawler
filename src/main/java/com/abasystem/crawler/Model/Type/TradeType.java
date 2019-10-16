@@ -9,8 +9,10 @@ public enum TradeType implements TypeMapper {
      * 매물 거래 유형
      */
     MONTHLY("월세"),
-    JEONSE("전세"),
+    CHARTER("전세"),
     SALE("매매"),
+    OWNER_DIRECT("주인직거래"),
+    OWNER_DIRECT2("주인직"),
     UNKNOWN("Mismatch TradeType Type");
 
     private String name;
