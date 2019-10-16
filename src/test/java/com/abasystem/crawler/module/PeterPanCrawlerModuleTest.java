@@ -9,12 +9,9 @@ import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -28,14 +25,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.Is.*;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class NaverCrawlerModuleTest {
-    private static final Logger logger = LoggerFactory.getLogger(NaverCrawlerModuleTest.class);
+public class PeterPanCrawlerModuleTest {
+    private static final Logger logger = LoggerFactory.getLogger(PeterPanCrawlerModuleTest.class);
 
     @Autowired
     private CrawlerService service;
@@ -47,40 +45,29 @@ public class NaverCrawlerModuleTest {
     private RepositoryFactory factory;
 
     @Autowired
-    private Map<String, String> cookies;
-
-    @Autowired
     private PostInitializer initializer;
 
     @Autowired
     @Qualifier("peterOperator")
     private ParseTemplate parseTemplate;
 
-    private static WebClient webClient;
+    @Autowired
+    private Map<String, String> cookies;
 
     private Document document;
     private Elements elements;
     private List<? extends ModelMapper> properties;
     private BasicQueryStrategy queryStrategy;
 
-    @BeforeClass
-    public static void before() {
-        webClient = new WebClient();
-    }
-
-    @AfterClass
-    public static void after() {
-        webClient.close();
-    }
-
     @Test
     @Transactional
     public void doCrawling() throws Exception {
-        // 1) 네이버 로그인 및 쿠키값 저장
-        loginService.doLogin(webClient, Naver.ID, Naver.PASSWORD);
-        assertTrue(loginService.isLogin());
+        logger.warn("설마 쿠키 .. 너 : {}", cookies);
 
-        cookies = loginService.getLoginCookie(webClient);
+        // 1) 네이버 로그인 및 쿠키값 저장
+        loginService.doLogin(Naver.ID, Naver.PASSWORD);
+
+        cookies = loginService.getLoginCookie();
         assertTrue(cookies.containsKey("NID_AUT"));
         assertTrue(cookies.containsKey("NID_SES"));
         assertTrue(cookies.containsKey("NID_JKL"));
@@ -93,9 +80,9 @@ public class NaverCrawlerModuleTest {
         assertNotNull(document);
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        elements = initializer.initPosts(document, 3);
+        elements = initializer.initPosts(document, 1);
         assertNotNull(elements);
-        assertThat(elements.size(), is(45));
+        assertThat(elements.size(), is(15));
 
         // 4) Service 클래스의 parseAll() 메소드 call
         properties = parseTemplate.parseAll(elements, cookies);

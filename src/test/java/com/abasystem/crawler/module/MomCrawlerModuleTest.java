@@ -8,12 +8,10 @@ import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -27,9 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
@@ -47,46 +45,36 @@ public class MomCrawlerModuleTest {
     private RepositoryFactory factory;
 
     @Autowired
-    private Map<String, String> cookies;
-
-    @Autowired
     private PostInitializer initializer;
 
     @Autowired
     @Qualifier("momOperator")
     private ParseTemplate parseTemplate;
 
-    private static WebClient webClient;
+    @Autowired
+    private Map<String, String> cookies;
 
     private List<? extends ModelMapper> properties;
     private BasicQueryStrategy queryStrategy;
-
-    @BeforeClass
-    public static void before() {
-        webClient = new WebClient();
-    }
-
-    @AfterClass
-    public static void after() {
-        webClient.close();
-    }
 
     @Test
     @Transactional
     public void doCrawling() throws Exception {
         logger.warn("설마 쿠키 .. 너 : {}", cookies);
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
         // 1) 로그인
-        boolean pass = loginService.doLogin(webClient, Naver.MOM_ID, Naver.MOM_PW);
+        boolean pass = loginService.doLogin(Naver.MOM_ID, Naver.MOM_PW);
         logger.info("로그인 결과 : " + pass);
 
-        cookies = loginService.getLoginCookie(webClient);
+        cookies = loginService.getLoginCookie();
+        assertTrue(cookies.containsKey("NID_AUT"));
+        assertTrue(cookies.containsKey("NID_SES"));
+        assertTrue(cookies.containsKey("NID_JKL"));
+
         Document document = Jsoup.connect(Naver.MOM_DIRECT_URL).cookies(cookies).get();
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        Elements elements = initializer.initPosts(document, 3);
+        Elements elements = initializer.initPosts(document, 1);
         logger.info("Elements 획득! {}", elements);
 
         // 4) Service 클래스의 parseAll() 메소드 call

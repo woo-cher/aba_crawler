@@ -31,10 +31,10 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
         // 1) 로그인
-        boolean pass = loginService.doLogin(webClient, Naver.MOM_ID, Naver.MOM_PW);
+        boolean pass = loginService.doLogin(Naver.MOM_ID, Naver.MOM_PW);
         logger.info("로그인 결과 : " + pass);
 
-        cookies = loginService.getLoginCookie(webClient);
+        cookies = loginService.getLoginCookie();
         Document document = Jsoup.connect(Naver.MOM_DIRECT_URL).cookies(cookies).get();
 
         // 3) 원하는 PAGE 입력 받아 게시글 initializing

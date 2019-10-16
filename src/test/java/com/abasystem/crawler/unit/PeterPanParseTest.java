@@ -13,7 +13,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -41,7 +40,6 @@ public class PeterPanParseTest {
     private static final String IRREGULAR_POST = "https://cafe.naver.com/ArticleRead.nhn?clubid=10322296&page=2&inCafeSearch=true&searchBy=1&query=%C1%F8%C1%D6&includeAll=&exclude=&include=&exact=&searchdate=all&media=0&sortBy=date&articleid=12885000&referrerAllArticles=true";
 
     private static NaverLoginService service;
-    private static WebClient webClient;
 
     @Autowired
     private Map<String, String> cookies;
@@ -60,19 +58,14 @@ public class PeterPanParseTest {
 
     @Before
     public void setup() {
-        cookies = service.getLoginCookie(webClient);
+        cookies = service.getLoginCookie();
     }
 
     @BeforeClass
     public static void initialize() throws Exception{
-        webClient = new WebClient();
         service = new NaverLoginService();
-        service.doLogin(webClient, Naver.ID, Naver.PASSWORD);
-    }
-
-    @AfterClass
-    public static void destroy() {
-        webClient.close();
+        service.webClient = new WebClient();
+        service.doLogin(Naver.ID, Naver.PASSWORD);
     }
 
     @Test

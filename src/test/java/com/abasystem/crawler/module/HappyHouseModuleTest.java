@@ -9,12 +9,9 @@ import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -28,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -47,40 +45,30 @@ public class HappyHouseModuleTest {
     private RepositoryFactory factory;
 
     @Autowired
-    private Map<String, String> cookies;
-
-    @Autowired
     private PostInitializer initializer;
 
     @Autowired
     @Qualifier("happyOperator")
     private ParseTemplate parseTemplate;
 
-    private static WebClient webClient;
+    @Autowired
+    private Map<String, String> cookies;
 
     private Document document;
     private Elements elements;
     private List<? extends ModelMapper> properties;
     private BasicQueryStrategy queryStrategy;
 
-    @BeforeClass
-    public static void before() {
-        webClient = new WebClient();
-    }
-
-    @AfterClass
-    public static void after() {
-        webClient.close();
-    }
-
     @Test
     @Transactional
     public void doCrawling() throws Exception {
+        logger.warn("설마 쿠키 .. 너 : {}", cookies);
+
         // 1) 로그인
-        boolean pass = loginService.doLogin(webClient, Naver.MOM_ID, Naver.MOM_PW);
+        boolean pass = loginService.doLogin(Naver.MOM_ID, Naver.MOM_PW);
         logger.info("로그인 결과 : " + pass);
 
-        cookies = loginService.getLoginCookie(webClient);
+        cookies = loginService.getLoginCookie();
         assertTrue(cookies.containsKey("NID_AUT"));
         assertTrue(cookies.containsKey("NID_SES"));
         assertTrue(cookies.containsKey("NID_JKL"));

@@ -79,9 +79,9 @@ public class Main {
         Document doc = null;
 
         if (!loginService.isLogin()) {
-            boolean flag = loginService.doLogin(webClient, id, pw);
+            boolean flag = loginService.doLogin(id, pw);
             if (flag) {
-                cookies = loginService.getLoginCookie(webClient);
+                cookies = loginService.getLoginCookie();
             }
         }
 

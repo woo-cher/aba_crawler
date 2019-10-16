@@ -31,10 +31,10 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
         // 1) 로그인
-        boolean pass = loginService.doLogin(webClient, Naver.ID, Naver.PASSWORD);
+        boolean pass = loginService.doLogin(Naver.ID, Naver.PASSWORD);
         logger.info("로그인 결과 : " + pass);
 
-        cookies = loginService.getLoginCookie(webClient);
+        cookies = loginService.getLoginCookie();
 
         // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
         String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);

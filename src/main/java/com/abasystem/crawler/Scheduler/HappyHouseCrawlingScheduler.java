@@ -27,10 +27,9 @@ public class HappyHouseCrawlingScheduler extends CustomScheduler {
     @Scheduled(cron = "0 0 21 ? * 3")
     protected void crawler() throws Exception {
         // 1) 네이버 로그인 및 쿠키값 저장
-        loginService.doLogin(webClient, Naver.ID, Naver.PASSWORD);
-        loginService.isLogin();
+        loginService.doLogin(Naver.ID, Naver.PASSWORD);
 
-        cookies = loginService.getLoginCookie(webClient);
+        cookies = loginService.getLoginCookie();
 
         // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
         String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
