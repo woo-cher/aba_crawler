@@ -23,9 +23,10 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
     private ParseTemplate parseTemplate;
 
     @Transactional
-    @Scheduled(cron = "0 0 21 ? * 3")
+    @Scheduled(cron = "0 54 13 ? * *")
     protected void crawler() throws Exception {
-        logger.warn("설마 쿠키 .. 너 : {}", cookies);
+        try {
+        logger.info("=================== 맘카페 크롤러 실행 ========================");
 
         // 1) 로그인
         boolean pass = loginService.doLogin(Naver.MOM_ID, Naver.MOM_PW);
@@ -57,8 +58,10 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
         // 7) 스케줄링 로그 저장
         repository.insertLog(row);
         logger.info("Save log");
-
-        properties.clear();
-        cookies.clear();
+        } catch (Exception e) {
+            logger.error("에러 발생ㅠㅠ {}", e);
+        } finally {
+            properties.clear();
+        }
     }
 }

@@ -24,47 +24,51 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
     private ParseTemplate parseTemplate;
 
     @Transactional
-    @Scheduled(cron = "0 30 20 ? * 3")
+    @Scheduled(cron = "0 48 13 ? * *")
 //    @Scheduled(fixedRate = 15000)
     public void crawler() throws Exception {
+        try {
+            logger.info("=================== 피터팬 크롤러 실행 ========================");
 
-        // 1) 로그인
-        boolean pass = loginService.doLogin(Naver.ID, Naver.PASSWORD);
-        logger.info("로그인 결과 : " + pass);
+            // 1) 로그인
+            boolean pass = loginService.doLogin(Naver.ID, Naver.PASSWORD);
+            logger.info("로그인 결과 : " + pass);
 
-        cookies = loginService.getLoginCookie();
+            cookies = loginService.getLoginCookie();
 
-        // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
-        String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
-        logger.info("키워드로 검색한 URL 획득 성공");
-        Document document = Jsoup.connect(searchUrl).cookies(cookies).get();
-        logger.info("Document 획득!");
+            // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
+            String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
+            logger.info("키워드로 검색한 URL 획득 성공");
+            Document document = Jsoup.connect(searchUrl).cookies(cookies).get();
+            logger.info("Document 획득!");
 
-        // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        Elements elements = initializer.initPosts(document, 2);
-        logger.info("Elements 획득!");
+            // 3) 원하는 PAGE 입력 받아 게시글 initializing
+            Elements elements = initializer.initPosts(document, 2);
+            logger.info("Elements 획득!");
 
-        // 4) Service 클래스의 parseAll() 메소드 call
-        properties = parseTemplate.parseAll(elements, cookies);
-        logger.info("Parsing Success ...");
+            // 4) Service 클래스의 parseAll() 메소드 call
+            properties = parseTemplate.parseAll(elements, cookies);
+            logger.info("Parsing Success ...");
 
-        // 5) Parsing 한 모든 게시글만큼 Loop -> DB 저장
-        int row = 0;
-        for (ModelMapper property : properties) {
-            queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
-            row += queryStrategy.createProp(property);
+            // 5) Parsing 한 모든 게시글만큼 Loop -> DB 저장
+            int row = 0;
+            for (ModelMapper property : properties) {
+                queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
+                row += queryStrategy.createProp(property);
+            }
+            logger.info("INSERT ROW COUNT : {}", row);
+
+            // 6) 해당 객체를 csv 파일화
+            service.writeAll(properties, "피터팬");
+            logger.info("Crawling Success!");
+
+            // 7) 스케줄링 로그 저장
+            repository.insertLog(row);
+            logger.info("Save log");
+        } catch (Exception e) {
+            logger.error("에러 발생ㅠㅠ {}", e);
+        } finally {
+            properties.clear();
         }
-        logger.info("INSERT ROW COUNT : {}", row);
-
-        // 6) 해당 객체를 csv 파일화
-        service.writeAll(properties, "피터팬");
-        logger.info("Crawling Success!");
-
-        // 7) 스케줄링 로그 저장
-        repository.insertLog(row);
-        logger.info("Save log");
-
-        properties.clear();
-        cookies.clear();
     }
 }

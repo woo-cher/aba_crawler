@@ -61,6 +61,9 @@ public class NaverLoginService implements LoginStrategy {
         HtmlPasswordInput inputPassword = page.getFirstByXPath(Naver.PW_XPATH);
         HtmlSubmitInput inputSubmit = page.getFirstByXPath(Naver.SUBMIT_XPATH);
 
+        webClient.waitForBackgroundJavaScriptStartingBefore(200);
+        webClient.waitForBackgroundJavaScript(20000);
+
         logger.warn("세팅아디 : {}", id);
 
         inputId.setText(id);
@@ -76,6 +79,8 @@ public class NaverLoginService implements LoginStrategy {
             isLogin = true;
             logger.info("login success !!");
         }
+
+        page.remove();
 
         return isLogin;
     }

@@ -24,15 +24,17 @@ public class HappyHouseCrawlingScheduler extends CustomScheduler {
     private ParseTemplate parseTemplate;
 
     @Transactional
-    @Scheduled(cron = "0 0 21 ? * 3")
+    @Scheduled(cron = "0 51 13 ? * *")
     protected void crawler() throws Exception {
+        try {
+        logger.info("=================== 행가집 크롤러 실행 ========================");
         // 1) 네이버 로그인 및 쿠키값 저장
         loginService.doLogin(Naver.ID, Naver.PASSWORD);
 
         cookies = loginService.getLoginCookie();
 
         // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
-        String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
+        String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
         logger.info("키워드로 검색한 URL 획득 성공");
         Document document = Jsoup.connect(searchUrl).cookies(cookies).get();
         logger.info("Document 획득!");
@@ -60,8 +62,10 @@ public class HappyHouseCrawlingScheduler extends CustomScheduler {
         // 7) 스케줄링 로그 저장
         repository.insertLog(row);
         logger.info("Save log");
-
-        properties.clear();
-        cookies.clear();
+    } catch (Exception e) {
+        logger.error("에러 발생ㅠㅠ {}", e);
+    } finally {
+            properties.clear();
+        }
     }
 }

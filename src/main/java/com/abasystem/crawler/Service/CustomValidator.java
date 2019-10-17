@@ -74,7 +74,6 @@ public class CustomValidator implements ValidationStrategy {
 
         Pattern pattern = Pattern.compile(PHONE_REGEX);
         Matcher matcher = pattern.matcher(str);
-        logger.info("Str {}", str);
 
         if(matcher.find()) {
             return true;
