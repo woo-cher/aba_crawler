@@ -14,6 +14,8 @@ public enum InvalidKeyWord implements TypeMapper {
     KEY7("공지"),
     KEY8("공인중개사"),
     KEY9("소장"),
+    KEY10("접수"),
+    KEY11("부촌"),
 
     SPECIFIC1("장갑");
 
