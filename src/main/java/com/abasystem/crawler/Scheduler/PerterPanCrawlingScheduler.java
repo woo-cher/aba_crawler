@@ -24,7 +24,7 @@ public class PerterPanCrawlingScheduler extends CustomScheduler {
     private ParseTemplate parseTemplate;
 
     @Transactional
-    @Scheduled(cron = "0 48 13 ? * *")
+    @Scheduled(cron = "0 50 23 ? * 7")
 //    @Scheduled(fixedRate = 15000)
     public void crawler() throws Exception {
         try {

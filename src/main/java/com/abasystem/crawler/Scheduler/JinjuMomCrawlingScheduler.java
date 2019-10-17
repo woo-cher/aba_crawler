@@ -23,41 +23,41 @@ public class JinjuMomCrawlingScheduler extends CustomScheduler {
     private ParseTemplate parseTemplate;
 
     @Transactional
-    @Scheduled(cron = "0 54 13 ? * *")
+    @Scheduled(cron = "0 50 23 ? * 7")
     protected void crawler() throws Exception {
         try {
-        logger.info("=================== 맘카페 크롤러 실행 ========================");
+            logger.info("=================== 맘카페 크롤러 실행 ========================");
 
-        // 1) 로그인
-        boolean pass = loginService.doLogin(Naver.MOM_ID, Naver.MOM_PW);
-        logger.info("로그인 결과 : " + pass);
+            // 1) 로그인
+            boolean pass = loginService.doLogin(Naver.MOM_ID, Naver.MOM_PW);
+            logger.info("로그인 결과 : " + pass);
 
-        cookies = loginService.getLoginCookie();
-        Document document = Jsoup.connect(Naver.MOM_DIRECT_URL).cookies(cookies).get();
+            cookies = loginService.getLoginCookie();
+            Document document = Jsoup.connect(Naver.MOM_DIRECT_URL).cookies(cookies).get();
 
-        // 3) 원하는 PAGE 입력 받아 게시글 initializing
-        Elements elements = initializer.initPosts(document, 4);
-        logger.info("Elements 획득! {}", elements);
+            // 3) 원하는 PAGE 입력 받아 게시글 initializing
+            Elements elements = initializer.initPosts(document, 4);
+            logger.info("Elements 획득! {}", elements);
 
-        // 4) Service 클래스의 parseAll() 메소드 call
-        properties = parseTemplate.parseAll(elements, cookies);
-        logger.info("Parsing Success ... {}", properties);
+            // 4) Service 클래스의 parseAll() 메소드 call
+            properties = parseTemplate.parseAll(elements, cookies);
+            logger.info("Parsing Success ... {}", properties);
 
-        // 5) Parsing 한 모든 게시글만큼 Loop -> DB 저장
-        int row = 0;
-        for (ModelMapper property : properties) {
-            queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
-            row += queryStrategy.createProp(property);
-        }
+            // 5) Parsing 한 모든 게시글만큼 Loop -> DB 저장
+            int row = 0;
+            for (ModelMapper property : properties) {
+                queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
+                row += queryStrategy.createProp(property);
+            }
 
-        logger.debug("INSERT ROW COUNT : {}", row);
+            logger.debug("INSERT ROW COUNT : {}", row);
 
-        // 6) 해당 객체를 csv 파일화
-        service.writeAll(properties, "진주아지매");
+            // 6) 해당 객체를 csv 파일화
+            service.writeAll(properties, "진주아지매");
 
-        // 7) 스케줄링 로그 저장
-        repository.insertLog(row);
-        logger.info("Save log");
+            // 7) 스케줄링 로그 저장
+            repository.insertLog(row);
+            logger.info("Save log");
         } catch (Exception e) {
             logger.error("에러 발생ㅠㅠ {}", e);
         } finally {
