@@ -97,11 +97,6 @@ public class DbTest {
     }
 
     @Test
-    public void schedulerLog() {
-        logger.debug("id : " + schedulerRepository.getNextId());
-    }
-
-    @Test
     public void test() {
         BasicQueryStrategy repository = factory.getTypeRepositoryCreator(RegularProperty.class);
         logger.debug("repository {}", repository);

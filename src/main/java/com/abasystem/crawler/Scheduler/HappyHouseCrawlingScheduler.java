@@ -1,71 +1,48 @@
 package com.abasystem.crawler.Scheduler;
 
-import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
+import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
 
 @Component
-public class HappyHouseCrawlingScheduler extends CustomScheduler {
+public class HappyHouseCrawlingScheduler extends CrawlerTemplate {
     private static final Logger logger = LoggerFactory.getLogger(HappyHouseCrawlingScheduler.class);
 
     @Autowired
     @Qualifier("momOperator")
     private ParseTemplate parseTemplate;
 
-    @Transactional
+    @Override
+    String getUrlAfterSearch() throws IOException {
+        return CommonsUtils.getPostUrlWithSearch("직거래", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
+    }
+
     @Scheduled(cron = "0 50 23 ? * 7")
-    protected void crawler() throws Exception {
+    public void happyHouseCrawler() {
         try {
-            logger.info("=================== 행가집 크롤러 실행 ========================");
-            // 1) 네이버 로그인 및 쿠키값 저장
-            loginService.doLogin(Naver.ID, Naver.PASSWORD);
+            logger.info("──── HappyHouse Crawler initialize\n");
 
-            cookies = loginService.getLoginCookie();
-
-            // 2) 피터팬 카페에 KEYWORD 검색된 URL GET
-            String searchUrl = CommonsUtils.getPostUrlWithSearch("진주", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
-            logger.info("키워드로 검색한 URL 획득 성공");
-            Document document = Jsoup.connect(searchUrl).cookies(cookies).get();
-            logger.info("Document 획득!");
-
-            // 3) 원하는 PAGE 입력 받아 게시글 initializing
-            Elements elements = initializer.initPosts(document, 3);
-            logger.info("Elements 획득!");
-
-            // 4) Service 클래스의 parseAll() 메소드 call
-            properties = parseTemplate.parseAll(elements, cookies);
-            logger.info("Parsing Success ...");
-
-            // 5) Parsing 한 모든 게시글만큼 Loop -> DB 저장
-            int row = 0;
-            for (ModelMapper property : properties) {
-                queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
-                row += queryStrategy.createProp(property);
-            }
-            logger.info("INSERT ROW COUNT : {}", row);
-
-            // 6) 해당 객체를 csv 파일화
-            service.writeAll(properties, "행가집");
-            logger.info("Crawling Success!");
-
-            // 7) 스케줄링 로그 저장
-            repository.insertLog(row);
-            logger.info("Save log");
+            crawling(Naver.ID, Naver.PASSWORD, "행가집", 2, this.parseTemplate, new ObtainDocumentStrategy() {
+                @Override
+                public Document getDocument(String url) throws IOException {
+                    return Jsoup.connect(url).cookies(cookies).get();
+                }
+            });
         } catch (Exception e) {
-            logger.error("에러 발생ㅠㅠ {}", e);
+            logger.error("HappyHouseCrawling Failure : " + e);
         } finally {
-            properties.clear();
+            logger.info("──── End HappyHouse Crawling\n");
         }
     }
 }

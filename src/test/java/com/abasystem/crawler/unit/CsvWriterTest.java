@@ -5,7 +5,6 @@ import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Factory.ServiceFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.Property.IrregularProperty;
-import com.abasystem.crawler.Scheduler.PerterPanCrawlingScheduler;
 import com.abasystem.crawler.Service.Converter.ModelConverter;
 import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
@@ -39,9 +38,6 @@ public class CsvWriterTest {
 
     @Autowired
     private CrawlerService service;
-
-    @Autowired
-    private PerterPanCrawlingScheduler crawler;
 
     private List<ModelMapper> properties;
 
@@ -82,10 +78,5 @@ public class CsvWriterTest {
         }
 
         assertTrue(service.writeAll(properties, "TestCSV"));
-    }
-
-    @Test
-    public void crawling() throws Exception {
-        crawler.crawler();
     }
 }

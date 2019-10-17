@@ -13,8 +13,4 @@ public class SchedulerRepository {
     public int insertLog(int row) {
         return sqlSession.insert("insertLog", row);
     }
-
-    public int getNextId() {
-        return sqlSession.selectOne("selectRowCount");
-    }
 }
