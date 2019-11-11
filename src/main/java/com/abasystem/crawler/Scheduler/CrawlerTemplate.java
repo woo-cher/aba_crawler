@@ -2,13 +2,12 @@ package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
+import com.abasystem.crawler.Model.Dto.CrawlerDto;
 import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Service.NaverLoginService;
-import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
-import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,18 +43,15 @@ public abstract class CrawlerTemplate {
     protected List<? extends ModelMapper> properties;
     protected BasicQueryStrategy queryStrategy;
 
-    abstract String getUrlAfterSearch() throws IOException;
+    abstract protected String getUrlAfterSearch() throws IOException;
 
-    public void crawling(String id, String pw, String fileName, int maxPage, ParseTemplate parseTemplate, ObtainDocumentStrategy strategy) throws Exception {
-        loginService.doLogin(id, pw);
-        logger.info("──── Is login ?" + loginService.isLogin());
+    public void singleCrawling(CrawlerDto dto) throws Exception {
+        initializer(dto.getId(), dto.getPassword());
 
-        cookies = loginService.getLoginCookie();
-
-        Elements elements = initializer.initPosts(strategy.getDocument(getUrlAfterSearch()), maxPage);
+        Elements elements = initializer.initPosts(dto.getStrategy().getDocument(getUrlAfterSearch()), dto.getMaxPage());
         logger.info("──── Elements obtain Success");
 
-        properties = parseTemplate.parseAll(elements, cookies);
+        properties = dto.getParseTemplate().parseAll(elements, cookies);
         logger.info("──── Parsing Success");
 
         int row = 0;
@@ -65,11 +61,44 @@ public abstract class CrawlerTemplate {
         }
         logger.info("──── INSERT ROW COUNT : {}", row);
 
-        service.writeAll(properties, fileName);
+        service.writeAll(properties, dto.getFileName());
         logger.info("──── Crawling Success");
 
         repository.insertLog(row);
         logger.info("──── Log save complete");
         logger.info("──── End Crawling");
+    }
+
+    public void multipleCrawling(CrawlerDto dto, List<String> urls) throws Exception {
+        initializer(dto.getId(), dto.getPassword());
+
+        for(String url : urls) {
+            Elements elements = initializer.initPosts(dto.getStrategy().getDocument(url), dto.getMaxPage());
+            logger.info("──── Elements obtain OK");
+
+            properties = dto.getParseTemplate().parseAll(elements, cookies);
+            logger.info("──── Parsing OK");
+
+            int row = 0;
+            for (ModelMapper property : properties) {
+                queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
+                row += queryStrategy.createProp(property);
+            }
+            logger.info("──── INSERT ROW COUNT : {}", row);
+
+            service.writeAll(properties, dto.getFileName());
+            logger.info("──── Crawling OK");
+
+            repository.insertLog(row);
+            logger.info("──── Log save complete");
+            logger.info("──── End Crawling");
+        }
+    }
+
+    private void initializer(String id, String pw) throws Exception {
+        loginService.doLogin(id, pw);
+        logger.info("──── Is login ?" + loginService.isLogin());
+
+        cookies = loginService.getLoginCookie();
     }
 }

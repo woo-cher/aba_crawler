@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <appender name="privateLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/private.${port:-default}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/private.${port:-default}.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%replace(%msg){'\n', ' '}%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="OFF"/>
+    <logger name="com.gargoylesoftware" level="OFF"/>
+    <logger name="org.apache" level="OFF"/>
+
+    <!-- 좀 더 보기 좋은 MyBatis 쿼리 Log : log4jdbc -->
+    <logger name="jdbc.sqlonly" level="debug" />
+    <logger name="jdbc.sqltiming" level="off" />
+    <logger name="jdbc.audit" level="off" />
+    <logger name="jdbc.resultset" level="off" />
+    <logger name="jdbc.resultsettable" level="debug" />
+    <logger name="jdbc.connection" level="off" />
+</configuration>

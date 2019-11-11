@@ -1,5 +1,6 @@
 package com.abasystem.crawler.Scheduler;
 
+import com.abasystem.crawler.Model.Dto.CrawlerDto;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
@@ -23,7 +24,7 @@ public class JinjuMomCrawlingScheduler extends CrawlerTemplate {
     private ParseTemplate parseTemplate;
 
     @Override
-    String getUrlAfterSearch() throws IOException {
+    protected String getUrlAfterSearch() throws IOException {
         // Nothing to search
         return Naver.MOM_DIRECT_URL;
     }
@@ -33,12 +34,16 @@ public class JinjuMomCrawlingScheduler extends CrawlerTemplate {
         try {
             logger.info("──── JinjuMom Crawler initialize\n");
 
-            crawling(Naver.MOM_ID, Naver.MOM_PW, "진주아지매", 4, this.parseTemplate, new ObtainDocumentStrategy() {
-                @Override
-                public Document getDocument(String url) throws IOException {
-                    return Jsoup.connect(url).cookies(cookies).get();
-                }
-            });
+            singleCrawling(
+                new CrawlerDto(Naver.MOM_ID, Naver.MOM_PW, "진주아지매", 4, this.parseTemplate,
+                    new ObtainDocumentStrategy() {
+                        @Override
+                        public Document getDocument(String url) throws IOException {
+                            return Jsoup.connect(url).cookies(cookies).get();
+                        }
+                    })
+            );
+
         } catch (Exception e) {
             logger.error("MomCrawling Failure : " + e);
         } finally {

@@ -1,5 +1,6 @@
 package com.abasystem.crawler.Scheduler;
 
+import com.abasystem.crawler.Model.Dto.CrawlerDto;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
@@ -14,6 +15,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class PerterPanCrawlingScheduler extends CrawlerTemplate {
@@ -24,25 +27,42 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
     private ParseTemplate parseTemplate;
 
     @Override
-    String getUrlAfterSearch() throws IOException {
+    protected String getUrlAfterSearch() throws IOException {
         return CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
     }
 
     @Scheduled(cron = "0 30 23 ? * 7")
-    public void peterPanCrawler() {
+    public void crawlingAfterSearch() {
         try {
-            logger.info("──── PeterPanCrawler initialize\n");
+            logger.info("──── PeterPan Single Crawler initialize\n");
 
-            crawling(Naver.ID, Naver.PASSWORD, "피터팬", 1, this.parseTemplate, new ObtainDocumentStrategy() {
-                @Override
-                public Document getDocument(String url) throws IOException {
-                    return Jsoup.connect(url).cookies(cookies).get();
-                }
-            });
+            singleCrawling(
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "피터팬", 1, this.parseTemplate,
+                    new ObtainDocumentStrategy() {
+                        @Override
+                        public Document getDocument(String url) throws IOException {
+                            return Jsoup.connect(url).cookies(cookies).get();
+                        }
+                    })
+            );
+
         } catch (Exception e) {
-            logger.error("HappyHouseCrawling Failure : " + e);
+            logger.error("PeterPan Single Crawling Failure : " + e);
         } finally {
-            logger.info("──── End PeterPan Crawling\n");
+            logger.info("──── End PeterPan Single Crawling\n");
+        }
+    }
+
+    public void crawlingCategories() {
+        List<String> urls = new ArrayList<String>();
+
+        try {
+            logger.info("──── PeterPan Multiple Crawler initialize\n");
+
+        } catch (Exception e) {
+            logger.error("PeterPan Multiple Crawling Failure : " + e);
+        } finally {
+            logger.info("──── End PeterPan Multiple Crawling\n");
         }
     }
 }

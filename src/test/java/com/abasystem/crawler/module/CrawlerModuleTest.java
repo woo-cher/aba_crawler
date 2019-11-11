@@ -29,7 +29,7 @@ public class CrawlerModuleTest {
     @Test
     @Transactional
     public void peterPanCrawler() {
-        peterPanScheduler.peterPanCrawler();
+        peterPanScheduler.crawlingAfterSearch();
     }
 
     @Test

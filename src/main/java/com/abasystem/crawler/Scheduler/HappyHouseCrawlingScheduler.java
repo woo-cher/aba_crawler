@@ -1,5 +1,6 @@
 package com.abasystem.crawler.Scheduler;
 
+import com.abasystem.crawler.Model.Dto.CrawlerDto;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
@@ -24,7 +25,7 @@ public class HappyHouseCrawlingScheduler extends CrawlerTemplate {
     private ParseTemplate parseTemplate;
 
     @Override
-    String getUrlAfterSearch() throws IOException {
+    protected String getUrlAfterSearch() throws IOException {
         return CommonsUtils.getPostUrlWithSearch("직거래", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
     }
 
@@ -33,12 +34,16 @@ public class HappyHouseCrawlingScheduler extends CrawlerTemplate {
         try {
             logger.info("──── HappyHouse Crawler initialize\n");
 
-            crawling(Naver.ID, Naver.PASSWORD, "행가집", 2, this.parseTemplate, new ObtainDocumentStrategy() {
-                @Override
-                public Document getDocument(String url) throws IOException {
-                    return Jsoup.connect(url).cookies(cookies).get();
-                }
-            });
+            singleCrawling(
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "행가집", 2, this.parseTemplate,
+                    new ObtainDocumentStrategy() {
+                        @Override
+                        public Document getDocument(String url) throws IOException {
+                            return Jsoup.connect(url).cookies(cookies).get();
+                        }
+                    })
+            );
+
         } catch (Exception e) {
             logger.error("HappyHouseCrawling Failure : " + e);
         } finally {
