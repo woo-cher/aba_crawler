@@ -55,10 +55,12 @@ public abstract class CrawlerTemplate {
         logger.info("──── Parsing Success");
 
         int row = 0;
+
         for (ModelMapper property : properties) {
             queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
             row += queryStrategy.createProp(property);
         }
+
         logger.info("──── INSERT ROW COUNT : {}", row);
 
         service.writeAll(properties, dto.getFileName());
@@ -69,29 +71,24 @@ public abstract class CrawlerTemplate {
         logger.info("──── End Crawling");
     }
 
-    public void multipleCrawling(CrawlerDto dto, List<String> urls) throws Exception {
+    public void multipleCrawling(CrawlerDto dto, Map<String, String> map) throws Exception {
         initializer(dto.getId(), dto.getPassword());
 
-        for(String url : urls) {
-            Elements elements = initializer.initPosts(dto.getStrategy().getDocument(url), dto.getMaxPage());
-            logger.info("──── Elements obtain OK");
+        for (String categoryKey : map.keySet()) {
+            Elements elements = initializer.initPosts(dto.getStrategy().getDocument(map.get(categoryKey)), dto.getMaxPage());
 
             properties = dto.getParseTemplate().parseAll(elements, cookies);
-            logger.info("──── Parsing OK");
 
             int row = 0;
+
             for (ModelMapper property : properties) {
                 queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
                 row += queryStrategy.createProp(property);
-            }
-            logger.info("──── INSERT ROW COUNT : {}", row);
 
-            service.writeAll(properties, dto.getFileName());
-            logger.info("──── Crawling OK");
+                service.writeAll(properties, categoryKey);
+            }
 
             repository.insertLog(row);
-            logger.info("──── Log save complete");
-            logger.info("──── End Crawling");
         }
     }
 

@@ -15,7 +15,7 @@ public class Naver {
 
     /**
      *  --------------------------------------------------
-     *  \\                    URL                       \\
+     *  \\                    URLs                      \\
      *  --------------------------------------------------
      */
     public static final String LOGIN_URL = "http://nid.naver.com/nidlogin.login";

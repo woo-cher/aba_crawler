@@ -2,9 +2,9 @@
 
 <configuration>
     <appender name="privateLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/private.${port:-default}.log</file>
+        <file>/logs/crawler_%d{yyyy-MM-dd}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/private.${port:-default}.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>/logs/crawler_%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
