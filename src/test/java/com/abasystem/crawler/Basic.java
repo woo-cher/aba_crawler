@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,6 +89,19 @@ public class Basic {
         matcher = pattern.matcher(p5);
         if(matcher.find()) {
             System.out.println(matcher.group());
+        }
+    }
+
+    @Test
+    public void hashMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("1", "A");
+        map.put("2", "B");
+        map.put("3", "C");
+        map.put("4", "D");
+
+        for(String key : map.keySet()) {
+            System.out.println(String.format("키 : %s, 값 : %s", key, map.get(key)));
         }
     }
 }
