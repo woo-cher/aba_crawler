@@ -1,15 +1,17 @@
 package com.abasystem.crawler.Factory;
 
 import com.abasystem.crawler.Storage.Naver;
+import com.abasystem.crawler.Strategy.ObtainCategoryObjectStrategy;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class CategoryMapFactory {
+public class PeterPanCategoryMapFactory implements ObtainCategoryObjectStrategy {
 
-    public Map<String, String> getPeterPanCategoryMap() {
+    @Override
+    public Map<String, String> getCategoryMap() {
         Map<String, String> map = new HashMap<>();
 
         map.put("아파트.전세.서울", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1104&search.boardtype=L");
