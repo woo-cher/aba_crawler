@@ -12,7 +12,7 @@ public class CrawlerDtoBuilder implements Buildable {
     private String id;
     private String password;
     private String fileName;
-    private int maxPage;
+    private int pageCount;
     private ParseTemplate parseTemplate;
     private ObtainDocumentStrategy strategy;
 
@@ -37,8 +37,8 @@ public class CrawlerDtoBuilder implements Buildable {
         return this;
     }
 
-    public CrawlerDtoBuilder maxPage(int maxPage) {
-        this.maxPage = maxPage;
+    public CrawlerDtoBuilder pageCount(int maxPage) {
+        this.pageCount = maxPage;
         return this;
     }
 

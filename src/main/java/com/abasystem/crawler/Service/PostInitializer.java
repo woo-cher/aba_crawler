@@ -19,11 +19,11 @@ public class PostInitializer implements InitStrategy {
     private String pageUrl;
 
     @Override
-    public Elements initPosts(Document document, int maxPage) throws IOException {
+    public Elements initPosts(Document document, int pageCount) throws IOException {
         this.elements = document.select(Naver.POST_ARTICLE);
         this.pageUrl = Naver.CAFE_PREFIX.concat(document.select(Naver.PAGE_NAVIGATOR).attr("href"));
 
-        for (int n = 2; n < maxPage + 1; n++) {
+        for (int n = 2; n < pageCount + 1; n++) {
             elements.addAll(
                     Jsoup.connect(convertPageToNext(pageUrl, n)).get().select(Naver.POST_ARTICLE)
             );
@@ -44,11 +44,11 @@ public class PostInitializer implements InitStrategy {
     }
 
     @Override
-    public Elements initMultiplePosts(int maxPage, Document... documents) throws IOException {
+    public Elements initMultiplePosts(int pageCount, Document... documents) throws IOException {
         Elements multiplePosts = new Elements();
 
         for(Document document : documents) {
-            if(!multiplePosts.addAll(initPosts(document, maxPage))) {
+            if(!multiplePosts.addAll(initPosts(document, pageCount))) {
                 throw new NullPointerException("addAll() run fail");
             }
         }

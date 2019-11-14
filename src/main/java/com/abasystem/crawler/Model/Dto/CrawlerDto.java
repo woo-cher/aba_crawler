@@ -16,7 +16,7 @@ public class CrawlerDto {
     private String id;
     private String password;
     private String fileName;
-    private int maxPage;
+    private int pageCount;
     private ParseTemplate parseTemplate;
     private ObtainDocumentStrategy strategy;
 
@@ -24,7 +24,7 @@ public class CrawlerDto {
         this.id = builder.getId();
         this.password = builder.getPassword();
         this.fileName = builder.getFileName();
-        this.maxPage = builder.getMaxPage();
+        this.pageCount = builder.getPageCount();
         this.parseTemplate = builder.getParseTemplate();
         this.strategy = builder.getStrategy();
     }

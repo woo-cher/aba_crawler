@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Todo)
@@ -52,13 +50,7 @@ public class CommonsUtils {
         return currPage.getUrl().toString().concat(Naver.CAFE_POSTFIX);
     }
 
-    public static List<String> getUrls(String ... urls) {
-        List<String> urlList = new ArrayList<>();
-
-        for(String url : urls) {
-            urlList.add(url);
-        }
-
-        return urlList;
+    public static String connectUrlWithNaverPrefix(String postFix) {
+        return Naver.CAFE_PREFIX.concat(postFix);
     }
 }

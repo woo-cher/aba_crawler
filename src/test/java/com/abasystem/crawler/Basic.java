@@ -1,7 +1,12 @@
 package com.abasystem.crawler;
 
+import com.abasystem.crawler.Storage.Naver;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,9 +37,9 @@ public class Basic {
         b.b = 4;
 
         System.out.println("a.a : " + a.a);
-        System.out.println("a.a : " + a.b);
+        System.out.println("a.b : " + a.b);
         System.out.println("b.a : " + b.a);
-        System.out.println("b.a : " + b.b);
+        System.out.println("b.b : " + b.b);
 
         System.out.println("" + a.sub(new I() {
                 @Override
@@ -103,6 +108,14 @@ public class Basic {
         for(String key : map.keySet()) {
             System.out.println(String.format("키 : %s, 값 : %s", key, map.get(key)));
         }
+    }
+
+    @Test
+    public void testCase4() throws IOException {
+        Document document = Jsoup.connect(Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=2&search.boardtype=L").get();
+        Elements elements = document.select("#sub-tit .sub-tit-color");
+
+        System.out.println(elements.text());
     }
 }
 

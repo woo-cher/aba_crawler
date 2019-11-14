@@ -58,11 +58,11 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
     }
 
     public void crawlingCategories() throws Exception {
-            Map<String, String> peterPanMap = categoryFactory.getCategoryMap();
+            Map<String, Integer> peterPanMap = categoryFactory.getCategoryMap();
             logger.info("──── PeterPan Multiple Crawler initialize\n");
 
             multipleCrawling(
-                    new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate).maxPage(1).build(), peterPanMap);
+                    new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate).pageCount(1).build(), peterPanMap);
 
             logger.info("──── End PeterPan Multiple Crawling\n");
     }

@@ -53,4 +53,5 @@ public class Naver {
     public static final String POST_ARTICLE = ".board-list .article";
     public static final String PAGE_NAVIGATOR = ".prev-next .on";
     public static final String POST_TABLE_TBODY = "#tbody table tbody";
+    public static final String CATEGORY_TITLE = "#sub-tit .sub-tit-color";
 }

@@ -7,6 +7,7 @@ import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.PostInitializer;
+import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -50,7 +51,7 @@ public abstract class CrawlerTemplate {
     public void singleCrawling(CrawlerDto dto) throws Exception {
         initializer(dto.getId(), dto.getPassword());
 
-        Elements elements = initializer.initPosts(dto.getStrategy().getDocument(getUrlAfterSearch()), dto.getMaxPage());
+        Elements elements = initializer.initPosts(dto.getStrategy().getDocument(getUrlAfterSearch()), dto.getPageCount());
         logger.info("──── Elements obtain Success");
 
         properties = dto.getParseTemplate().parseAll(elements, cookies);
@@ -73,14 +74,14 @@ public abstract class CrawlerTemplate {
         logger.info("──── End Crawling");
     }
 
-    public void multipleCrawling(CrawlerDto dto, Map<String, String> map) throws Exception {
+    public void multipleCrawling(CrawlerDto dto, Map<String, Integer> map) throws Exception {
         initializer(dto.getId(), dto.getPassword());
 
-        for (String categoryKey : map.keySet()) {
-            logger.info("Key : {}", categoryKey);
+        for (String urlKey : map.keySet()) {
+            Document document = Jsoup.connect(urlKey).cookies(cookies).get();
+            Elements elements = initializer.initPosts(document, map.get(urlKey));
 
-            Document document = Jsoup.connect(map.get(categoryKey)).cookies(cookies).get();
-            Elements elements = initializer.initPosts(document, dto.getMaxPage());
+            dto.setFileName(document.select(Naver.CATEGORY_TITLE).text());
 
             properties = dto.getParseTemplate().parseAll(elements, cookies);
 
@@ -91,7 +92,7 @@ public abstract class CrawlerTemplate {
                 row += queryStrategy.createProp(property);
             }
 
-            service.writeAll(properties, categoryKey);
+            service.writeAll(properties, dto.getFileName());
 
             repository.insertLog(row);
         }
