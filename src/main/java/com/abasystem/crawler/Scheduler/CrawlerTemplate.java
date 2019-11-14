@@ -8,6 +8,8 @@ import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +77,10 @@ public abstract class CrawlerTemplate {
         initializer(dto.getId(), dto.getPassword());
 
         for (String categoryKey : map.keySet()) {
-            Elements elements = initializer.initPosts(dto.getStrategy().getDocument(map.get(categoryKey)), dto.getMaxPage());
+            logger.info("Key : {}", categoryKey);
+
+            Document document = Jsoup.connect(map.get(categoryKey)).cookies(cookies).get();
+            Elements elements = initializer.initPosts(document, dto.getMaxPage());
 
             properties = dto.getParseTemplate().parseAll(elements, cookies);
 
@@ -84,9 +89,9 @@ public abstract class CrawlerTemplate {
             for (ModelMapper property : properties) {
                 queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
                 row += queryStrategy.createProp(property);
-
-                service.writeAll(properties, categoryKey);
             }
+
+            service.writeAll(properties, categoryKey);
 
             repository.insertLog(row);
         }

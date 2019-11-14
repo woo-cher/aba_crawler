@@ -1,5 +1,7 @@
 package com.abasystem.crawler.Scheduler;
 
+import com.abasystem.crawler.Builder.CrawlerDtoBuilder;
+import com.abasystem.crawler.Factory.CategoryMapFactory;
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
@@ -15,7 +17,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -26,8 +27,8 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
     @Qualifier("peterOperator")
     private ParseTemplate parseTemplate;
 
-    public PerterPanCrawlingScheduler() {
-    }
+    @Autowired
+    private CategoryMapFactory categoryFactory;
 
     @Override
     protected String getUrlAfterSearch() throws IOException {
@@ -56,40 +57,13 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
         }
     }
 
-    public void crawlingCategories() {
-        try {
+    public void crawlingCategories() throws Exception {
+            Map<String, String> peterPanMap = categoryFactory.getPeterPanCategoryMap();
             logger.info("──── PeterPan Multiple Crawler initialize\n");
 
-        } catch (Exception e) {
-            logger.error("PeterPan Multiple Crawling Failure : " + e);
-        } finally {
+            multipleCrawling(
+                    new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate).maxPage(1).build(), peterPanMap);
+
             logger.info("──── End PeterPan Multiple Crawling\n");
-        }
-    }
-
-    private Map<String, String> getCustomMap() {
-        Map<String, String> map = new HashMap<>();
-
-        map.put("아파트.전세.서울", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1104&search.boardtype=L");
-        map.put("아파트.전세.경기", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1105&search.boardtype=L");
-        map.put("아파트.전세.인천", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1108&search.boardtype=L");
-        map.put("아파트.전세.지방", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1107&search.boardtype=L");
-
-        map.put("아파트.월세.서울", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1106&search.boardtype=L");
-        map.put("아파트.월세.경기", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1113&search.boardtype=L");
-        map.put("아파트.월세.인천", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1114&search.boardtype=L");
-        map.put("아파트.월세.지방", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1115&search.boardtype=L");
-
-        map.put("아파트.매매.서울", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1109&search.boardtype=L");
-        map.put("아파트.매매.경기", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1110&search.boardtype=L");
-        map.put("아파트.매매.인천", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1111&search.boardtype=L");
-        map.put("아파트.매매.지방", Naver.CAFE_PREFIX + "/ArticleList.nhn?search.clubid=10322296&search.menuid=1112&search.boardtype=L");
-
-        /*map.put("오피스텔.전월세.서울", Naver.CAFE_PREFIX + "");
-        map.put("오피스텔.전월세.수도권", Naver.CAFE_PREFIX + "");
-        map.put("오피스텔.전월세.지방권", Naver.CAFE_PREFIX + "");
-        map.put("오피스텔.매매.전국", Naver.CAFE_PREFIX + "");*/
-
-        return map;
     }
 }

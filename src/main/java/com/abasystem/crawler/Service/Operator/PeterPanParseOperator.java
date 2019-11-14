@@ -20,8 +20,14 @@ public class PeterPanParseOperator extends ParseTemplate {
         return factory.parserCreator(flag).parse(doc, url, title);
     }
 
+    /**
+     * '진주' 지역만 검색해서 뽑는 크롤러의 경우에만 사용
+     * @param elements
+     * @return
+     */
     @Override
     public boolean isContainModerateKeyword(Elements elements) {
-        return validationStrategy.isPropertyPost(elements);
+        return true;
+//        return validationStrategy.isPropertyPost(elements);
     }
 }

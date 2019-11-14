@@ -43,4 +43,10 @@ public class CrawlerModuleTest {
     public void happyCrawler() {
         happyScheduler.happyHouseCrawler();
     }
+
+    @Test
+    @Transactional
+    public void peterPanMultipleCrawler() throws Exception {
+        peterPanScheduler.crawlingCategories();
+    }
 }

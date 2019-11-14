@@ -38,6 +38,7 @@ public class CrawlerService<P extends ModelMapper> extends CustomOpenCsv {
 
     public boolean writeAll(List<P> properties, String name) throws Exception {
         this.cw = getCSVWriter(name);
+        logger.warn("─────────────────── 세이브 완료!! : " + name);
         cw.writeNext(TABLE_ROW);
 
         int index = 1;

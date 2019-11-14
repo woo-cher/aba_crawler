@@ -53,7 +53,7 @@ public class CrawlerDtoBuilder implements Buildable {
     }
 
     @Override
-    public Object build() {
+    public CrawlerDto build() {
         return new CrawlerDto(this);
     }
 }
