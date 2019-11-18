@@ -35,13 +35,13 @@ public class HappyHouseCrawlingScheduler extends CrawlerTemplate {
             logger.info("──── HappyHouse Crawler initialize\n");
 
             singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "행가집", 2, this.parseTemplate,
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "직거래매물", 2, this.parseTemplate,
                     new ObtainDocumentStrategy() {
                         @Override
                         public Document getDocument(String url) throws IOException {
                             return Jsoup.connect(url).cookies(cookies).get();
                         }
-                    })
+                    }, "행가집")
             );
 
         } catch (Exception e) {

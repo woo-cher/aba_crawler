@@ -77,6 +77,6 @@ public class CsvWriterTest {
             properties.add(new IrregularProperty("TITLE" + i, "DESCRIPTION" + i, "DATE" + i, "URL" + i, "PHONE" + i));
         }
 
-        assertTrue(service.writeAll(properties, "TestCSV"));
+        assertTrue(service.writeAll(properties, "TestCSV", ""));
     }
 }

@@ -15,11 +15,13 @@ public class CrawlerDtoBuilder implements Buildable {
     private int pageCount;
     private ParseTemplate parseTemplate;
     private ObtainDocumentStrategy strategy;
+    private String directory;
 
-    public CrawlerDtoBuilder(String id, String password, ParseTemplate parseTemplate) {
+    public CrawlerDtoBuilder(String id, String password, ParseTemplate parseTemplate, String directory) {
         this.id = id;
         this.password = password;
         this.parseTemplate = parseTemplate;
+        this.directory = directory;
     }
 
     public CrawlerDtoBuilder id(String id) {
@@ -51,6 +53,12 @@ public class CrawlerDtoBuilder implements Buildable {
         this.strategy = strategy;
         return this;
     }
+
+    public CrawlerDtoBuilder directory(String directory) {
+        this.directory = directory;
+        return this;
+    }
+
 
     @Override
     public CrawlerDto build() {

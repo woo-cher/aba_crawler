@@ -66,7 +66,7 @@ public abstract class CrawlerTemplate {
 
         logger.info("──── INSERT ROW COUNT : {}", row);
 
-        service.writeAll(properties, dto.getFileName());
+        service.writeAll(properties, dto.getFileName(), dto.getDirectory());
         logger.info("──── Crawling Success");
 
         repository.insertLog(row);
@@ -92,7 +92,7 @@ public abstract class CrawlerTemplate {
                 row += queryStrategy.createProp(property);
             }
 
-            service.writeAll(properties, dto.getFileName());
+            service.writeAll(properties, dto.getFileName(), dto.getDirectory());
 
             repository.insertLog(row);
         }

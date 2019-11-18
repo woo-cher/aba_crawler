@@ -19,6 +19,7 @@ public class CrawlerDto {
     private int pageCount;
     private ParseTemplate parseTemplate;
     private ObtainDocumentStrategy strategy;
+    private String directory;
 
     public CrawlerDto(CrawlerDtoBuilder builder) {
         this.id = builder.getId();
@@ -27,5 +28,6 @@ public class CrawlerDto {
         this.pageCount = builder.getPageCount();
         this.parseTemplate = builder.getParseTemplate();
         this.strategy = builder.getStrategy();
+        this.directory = builder.getDirectory();
     }
 }

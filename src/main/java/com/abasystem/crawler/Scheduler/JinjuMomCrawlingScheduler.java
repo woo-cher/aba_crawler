@@ -35,13 +35,13 @@ public class JinjuMomCrawlingScheduler extends CrawlerTemplate {
             logger.info("──── JinjuMom Crawler initialize\n");
 
             singleCrawling(
-                new CrawlerDto(Naver.MOM_ID, Naver.MOM_PW, "진주아지매", 4, this.parseTemplate,
+                new CrawlerDto(Naver.MOM_ID, Naver.MOM_PW, "부동산 (본인 직거래만 가능)", 4, this.parseTemplate,
                     new ObtainDocumentStrategy() {
                         @Override
                         public Document getDocument(String url) throws IOException {
                             return Jsoup.connect(url).cookies(cookies).get();
                         }
-                    })
+                    }, "진주맘")
             );
 
         } catch (Exception e) {

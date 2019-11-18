@@ -47,7 +47,7 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
                         public Document getDocument(String url) throws IOException {
                             return Jsoup.connect(url).cookies(cookies).get();
                         }
-                    })
+                    }, "피터팬")
             );
 
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
             logger.info("──── PeterPan Multiple Crawler initialize\n");
 
             multipleCrawling(
-                    new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate).pageCount(1).build(), peterPanMap);
+                    new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "피터팬").pageCount(1).build(), peterPanMap);
 
             logger.info("──── End PeterPan Multiple Crawling\n");
     }
