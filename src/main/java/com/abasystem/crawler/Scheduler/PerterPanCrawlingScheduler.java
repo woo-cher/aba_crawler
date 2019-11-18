@@ -35,8 +35,8 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
         return CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
     }
 
-    @Scheduled(cron = "0 30 23 ? * 7")
-    public void crawlingAfterSearch() {
+    @Scheduled(cron = "0 30 22 ? * 7")
+    public void jinjuAreaCrawler() {
         try {
             logger.info("──── PeterPan Single Crawler initialize\n");
 
@@ -57,7 +57,7 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
         }
     }
 
-    public void crawlingCategories() throws Exception {
+    public void categoriesCrawler() throws Exception {
             Map<String, Integer> peterPanMap = categoryFactory.getCategoryMap();
             logger.info("──── PeterPan Multiple Crawler initialize\n");
 

@@ -29,7 +29,7 @@ public class CrawlerModuleTest {
     @Test
     @Transactional
     public void peterPanCrawler() {
-        peterPanScheduler.crawlingAfterSearch();
+        peterPanScheduler.jinjuAreaCrawler();
     }
 
     @Test
@@ -47,6 +47,6 @@ public class CrawlerModuleTest {
     @Test
     @Transactional
     public void peterPanMultipleCrawler() throws Exception {
-        peterPanScheduler.crawlingCategories();
+        peterPanScheduler.categoriesCrawler();
     }
 }
