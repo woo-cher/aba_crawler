@@ -7,13 +7,16 @@ public class Naver {
      *  \\              USER FOR LOGIN                  \\
      *  --------------------------------------------------
      */
-    public static final String ID = "uioo9034";
-    public static final String PASSWORD = "tkfkd01";
+    public static final String ID = "aba9246";
+    public static final String PASSWORD = "dkqk123!!";
 
-    public static final String MOM_ID = "kthlove0328";
-    public static final String MOM_PW = "xognsqudtls";
+//    public static final String ID = "uioo9034";
+//    public static final String PASSWORD = "tkfkd01";
 
-    /**
+//    public static final String MOM_ID = "kthlove0328";
+//    public static final String MOM_PW = "xognsqudtls";
+
+   /**
      *  --------------------------------------------------
      *  \\                    URLs                      \\
      *  --------------------------------------------------

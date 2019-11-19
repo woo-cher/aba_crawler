@@ -35,7 +35,7 @@ public class JinjuMomCrawlingScheduler extends CrawlerTemplate {
             logger.info("──── JinjuMom Crawler initialize\n");
 
             singleCrawling(
-                new CrawlerDto(Naver.MOM_ID, Naver.MOM_PW, "부동산 (본인 직거래만 가능)", 4, this.parseTemplate,
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "부동산 (본인 직거래만 가능)", 4, this.parseTemplate,
                     new ObtainDocumentStrategy() {
                         @Override
                         public Document getDocument(String url) throws IOException {
