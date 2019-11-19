@@ -41,7 +41,7 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
             logger.info("──── PeterPan Single Crawler initialize\n");
 
             singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "피터팬", 1, this.parseTemplate,
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "피터팬", 2, this.parseTemplate,
                     new ObtainDocumentStrategy() {
                         @Override
                         public Document getDocument(String url) throws IOException {
