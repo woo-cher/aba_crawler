@@ -24,7 +24,7 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
     private static final Logger logger = LoggerFactory.getLogger(PerterPanCrawlingScheduler.class);
 
     @Autowired
-    @Qualifier("peterOperator")
+    @Qualifier("CategoryWithPostTypeOperator")
     private ParseTemplate parseTemplate;
 
     @Autowired

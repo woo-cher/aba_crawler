@@ -51,7 +51,7 @@ public class PeterPanParseTest {
     private PostInitializer initializer;
 
     @Autowired
-    @Qualifier("peterOperator")
+    @Qualifier("CategoryWithSearchOperator")
     private ParseTemplate parseTemplate;
 
     private Elements elements;

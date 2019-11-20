@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("momOperator")
-public class JinjuMomParseOperator extends ParseTemplate {
-    private static final Logger logger = LoggerFactory.getLogger(JinjuMomParseOperator.class);
+@Qualifier("CategoryOfPropertyOperator")
+public class CategoryOfPropertyOperator extends ParseTemplate {
+    private static final Logger logger = LoggerFactory.getLogger(CategoryOfPropertyOperator.class);
 
     @Override
     public IrregularProperty getModelAfterParse(Elements elements, Document doc, String url, String title) {
-        logger.info("MomOperator initialize");
+        logger.info("CategoryOfPropertyOperator initialize");
         return (IrregularProperty) factory.parserCreator(false).parse(doc, url, title);
     }
 
     @Override
-    public boolean isContainModerateKeyword(Elements elements) {
+    public boolean isContainPropertyKeyword(Elements elements) {
         // Nothing to validation
         return true;
     }

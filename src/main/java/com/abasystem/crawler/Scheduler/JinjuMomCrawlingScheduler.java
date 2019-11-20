@@ -20,7 +20,7 @@ public class JinjuMomCrawlingScheduler extends CrawlerTemplate {
     private static final Logger logger = LoggerFactory.getLogger(JinjuMomCrawlingScheduler.class);
 
     @Autowired
-    @Qualifier("momOperator")
+    @Qualifier("CategoryOfPropertyOperator")
     private ParseTemplate parseTemplate;
 
     @Override

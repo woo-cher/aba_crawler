@@ -21,7 +21,7 @@ public class HappyHouseCrawlingScheduler extends CrawlerTemplate {
     private static final Logger logger = LoggerFactory.getLogger(HappyHouseCrawlingScheduler.class);
 
     @Autowired
-    @Qualifier("momOperator")
+    @Qualifier("CategoryOfPropertyOperator")
     private ParseTemplate parseTemplate;
 
     @Override

@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("happyOperator")
-public class HappyHouseParseOperator extends ParseTemplate {
-    private static final Logger logger = LoggerFactory.getLogger(HappyHouseParseOperator.class);
+@Qualifier("CategoryWithSearchOperator")
+public class CategoryWithSearchOperator extends ParseTemplate {
+    private static final Logger logger = LoggerFactory.getLogger(CategoryWithSearchOperator.class);
 
     @Override
     public IrregularProperty getModelAfterParse(Elements elements, Document doc, String url, String title) {
-        logger.info("HappyOperator initialize");
+        logger.info("CategoryWithSearchOperator initialize");
         return (IrregularProperty) factory.parserCreator(false).parse(doc, url, title);
     }
 
     @Override
-    public boolean isContainModerateKeyword(Elements elements) {
+    public boolean isContainPropertyKeyword(Elements elements) {
         return validationStrategy.isContainPropertyType(elements);
     }
 }

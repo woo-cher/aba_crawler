@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("peterOperator")
-public class PeterPanParseOperator extends ParseTemplate {
-    private static final Logger logger = LoggerFactory.getLogger(PeterPanParseOperator.class);
+@Qualifier("CategoryWithPostTypeOperator")
+public class CategoryWithPostTypeOperator extends ParseTemplate {
+    private static final Logger logger = LoggerFactory.getLogger(CategoryWithPostTypeOperator.class);
 
     @Override
     public ModelMapper getModelAfterParse(Elements elements, Document doc, String url, String title) {
         boolean flag = validationStrategy.isRegularPost(doc.select("#tbody"));
-        logger.info("PeterOperation initialize");
+        logger.info("CategoryWithPostTypeOperator initialize");
         return factory.parserCreator(flag).parse(doc, url, title);
     }
 
@@ -26,7 +26,7 @@ public class PeterPanParseOperator extends ParseTemplate {
      * @return
      */
     @Override
-    public boolean isContainModerateKeyword(Elements elements) {
+    public boolean isContainPropertyKeyword(Elements elements) {
         return true;
 //        return validationStrategy.isPropertyPost(elements);
     }
