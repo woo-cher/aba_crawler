@@ -29,7 +29,7 @@ public class PostInitializer implements InitStrategy {
             );
         }
 
-        logger.info("init posts successfully: {}");
+        logger.info("init posts successfully");
         return elements;
     }
 

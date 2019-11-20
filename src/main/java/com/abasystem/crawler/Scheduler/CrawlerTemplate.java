@@ -4,6 +4,7 @@ import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
 import com.abasystem.crawler.Repository.SchedulerRepository;
+import com.abasystem.crawler.Service.Converter.DataConverter;
 import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.PostInitializer;
@@ -48,7 +49,7 @@ public abstract class CrawlerTemplate {
 
     abstract protected String getUrlAfterSearch() throws IOException;
 
-    public void singleCrawling(CrawlerDto dto) throws Exception {
+    protected void singleCrawling(CrawlerDto dto) throws Exception {
         initializer(dto.getId(), dto.getPassword());
 
         Elements elements = initializer.initPosts(dto.getStrategy().getDocument(getUrlAfterSearch()), dto.getPageCount());
@@ -74,14 +75,15 @@ public abstract class CrawlerTemplate {
         logger.info("──── End Crawling");
     }
 
-    public void multipleCrawling(CrawlerDto dto, Map<String, Integer> map) throws Exception {
+    protected void multipleCrawling(CrawlerDto dto, Map<String, Integer> map) throws Exception {
         initializer(dto.getId(), dto.getPassword());
 
         for (String urlKey : map.keySet()) {
             Document document = Jsoup.connect(urlKey).cookies(cookies).get();
             Elements elements = initializer.initPosts(document, map.get(urlKey));
 
-            dto.setFileName(document.select(Naver.CATEGORY_TITLE).text());
+            String categoryTitle = document.select(Naver.CATEGORY_TITLE).text();
+            dto.setFileName(DataConverter.convertNameToValidFileName(categoryTitle));
 
             properties = dto.getParseTemplate().parseAll(elements, cookies);
 

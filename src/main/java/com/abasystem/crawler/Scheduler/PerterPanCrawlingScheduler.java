@@ -62,7 +62,7 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
             logger.info("──── PeterPan Multiple Crawler initialize\n");
 
             multipleCrawling(
-                    new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "피터팬").pageCount(1).build(), peterPanMap);
+                    new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "피터팬").build(), peterPanMap);
 
             logger.info("──── End PeterPan Multiple Crawling\n");
     }

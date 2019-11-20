@@ -2,7 +2,7 @@ package com.abasystem.crawler.Service;
 
 import com.abasystem.crawler.Factory.ServiceFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
-import com.abasystem.crawler.Service.Converter.ModelConverter;
+import com.abasystem.crawler.Service.Converter.DataConverter;
 import com.abasystem.crawler.Service.Writer.CustomOpenCsv;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
@@ -45,7 +45,7 @@ public class CrawlerService<P extends ModelMapper> extends CustomOpenCsv {
 
         for (P property : properties) {
             CsvWriteStrategy csvWriteStrategy = factory.writerCreator(property.getClass());
-            JsonObject object = ModelConverter.convertModelToJsonObject(property);
+            JsonObject object = DataConverter.convertModelToJsonObject(property);
             csvWriteStrategy.doWrite(object, cw, index);
             index++;
         }

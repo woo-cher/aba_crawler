@@ -117,6 +117,30 @@ public class Basic {
 
         System.out.println(elements.text());
     }
+
+    @Test
+    public void testCase5() {
+        String invalidChar = "[\\\\|/|:|*|?|\"|>|<|]";
+        String case1 = "개인:직거래";
+        String case2 = "개인*직거래";
+        String case3 = "<개인>직거래";
+        String case4 = "개인|직거래";
+        String case5 = "\"개인\"직거래";
+        String case6 = "개인\\직거래";
+
+        for(String str : invalidChar.split("")) {
+            if(case1.contains(str)) {
+                System.out.println("true");
+            }
+        }
+
+        System.out.println(case1.replaceAll(invalidChar, ""));
+        System.out.println(case2.replaceAll(invalidChar, ""));
+        System.out.println(case3.replaceAll(invalidChar, ""));
+        System.out.println(case4.replaceAll(invalidChar, ""));
+        System.out.println(case5.replaceAll(invalidChar, ""));
+        System.out.println(case6.replaceAll(invalidChar, ""));
+    }
 }
 
 class Super {

@@ -5,7 +5,7 @@ import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Factory.ServiceFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.Property.IrregularProperty;
-import com.abasystem.crawler.Service.Converter.ModelConverter;
+import com.abasystem.crawler.Service.Converter.DataConverter;
 import com.abasystem.crawler.Service.CrawlerService;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
 import com.google.gson.JsonObject;
@@ -59,7 +59,7 @@ public class CsvWriterTest {
         cw.writeNext(new String[]{"번호", "제목", "링크", "날짜", "설명2"});
         int index = 1;
         for (ModelMapper property : properties) {
-            JsonObject object = ModelConverter.convertModelToJsonObject(property);
+            JsonObject object = DataConverter.convertModelToJsonObject(property);
             CsvWriteStrategy csvWriteStrategy = factory.writerCreator(property.getClass());
             csvWriteStrategy.doWrite(object, cw, index++);
         }

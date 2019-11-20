@@ -24,6 +24,8 @@ public class CustomValidator implements ValidationStrategy {
     public static final String PHONE_REGEX =
             "(0일|영1|01|영일|공일|공1)(0|영|공)(\\.|-| )?[0-9|영|공|일|이|둘|삼|셋|사|넷|오|육|칠|팔|구]{4}(\\.|-| )?[0-9|영|공|일|이|둘|삼|셋|사|넷|오|육|칠|팔|구]{4}";
 
+    public static final String FILE_NAME_INVALID_REGEX = "[\\\\|/|:|*|?|\"|>|<|]";
+
     @Override
     public boolean isPropertyPost(Elements elements) {
         parameterHandler(elements);

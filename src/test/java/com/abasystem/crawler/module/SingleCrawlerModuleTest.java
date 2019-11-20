@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CrawlerModuleTest {
-    private static final Logger logger = LoggerFactory.getLogger(CrawlerModuleTest.class);
+public class SingleCrawlerModuleTest {
+    private static final Logger logger = LoggerFactory.getLogger(SingleCrawlerModuleTest.class);
 
     @Autowired
     private JinjuMomCrawlingScheduler momScheduler;
@@ -42,11 +42,5 @@ public class CrawlerModuleTest {
     @Transactional
     public void happyCrawler() {
         happyScheduler.happyHouseCrawler();
-    }
-
-    @Test
-    @Transactional
-    public void peterPanMultipleCrawler() throws Exception {
-        peterPanScheduler.categoriesCrawler();
     }
 }

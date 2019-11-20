@@ -6,6 +6,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import lombok.experimental.UtilityClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
  *  1. 현재 피터팬 카페에 관한 액션만 구현되어 있어서, 다형성을 갖도록 리팩토링 해야한다
  *  2. 이름이 갖는 의미가 에매하다
  */
+@UtilityClass
 public class CommonsUtils {
     private static final Logger logger = LoggerFactory.getLogger(CommonsUtils.class);
 
@@ -48,9 +50,5 @@ public class CommonsUtils {
         logger.debug("currPage ? {}", currPage.getUrl());
 
         return currPage.getUrl().toString().concat(Naver.CAFE_POSTFIX);
-    }
-
-    public static String connectUrlWithNaverPrefix(String postFix) {
-        return Naver.CAFE_PREFIX.concat(postFix);
     }
 }
