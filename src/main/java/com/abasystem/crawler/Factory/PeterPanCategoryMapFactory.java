@@ -1,10 +1,10 @@
 package com.abasystem.crawler.Factory;
 
+import com.abasystem.crawler.Mapper.CategoryMapper;
 import com.abasystem.crawler.Strategy.ObtainCategoryObjectStrategy;
 import com.abasystem.crawler.Util.CommonsUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,17 +12,10 @@ import java.util.Map;
  *  - a 태그의 href Attribute 를 직접 파싱하기에 시간 복잡도가 너무 커질 것
  */
 @Component
-public class PeterPanCategoryMapFactory implements ObtainCategoryObjectStrategy {
-
-    private final Integer DEFAULT_MAX_PAGE = 1;
+public class PeterPanCategoryMapFactory extends CategoryMapper implements ObtainCategoryObjectStrategy {
 
     @Override
     public Map<String, Integer> getCategoryMap() {
-
-        /**
-         * Map <카테고리 Link, 긁어올 maxPage>
-         */
-        Map<String, Integer> map = new HashMap<>();
 
         /**
          *  --------------------------------------------------
