@@ -1,7 +1,6 @@
 package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Builder.CrawlerDtoBuilder;
-import com.abasystem.crawler.Factory.PeterPanCategoryMapFactory;
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
@@ -26,9 +25,6 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
     @Autowired
     @Qualifier("CategoryWithPostTypeOperator")
     private ParseTemplate parseTemplate;
-
-    @Autowired
-    private PeterPanCategoryMapFactory categoryFactory;
 
     @Override
     protected String getUrlAfterSearch() throws IOException {
@@ -58,7 +54,7 @@ public class PerterPanCrawlingScheduler extends CrawlerTemplate {
     }
 
     public void categoriesCrawler() throws Exception {
-            Map<String, Integer> peterPanMap = categoryFactory.getCategoryMap();
+            Map<String, Integer> peterPanMap = categoryMapFactory.getPeterPanCategoryMap();
             logger.info("──── PeterPan Multiple Crawler initialize\n");
 
             multipleCrawling(

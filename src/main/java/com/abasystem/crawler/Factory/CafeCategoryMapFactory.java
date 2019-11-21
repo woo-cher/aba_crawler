@@ -2,20 +2,61 @@ package com.abasystem.crawler.Factory;
 
 import com.abasystem.crawler.Mapper.CategoryMapper;
 import com.abasystem.crawler.Service.Converter.DataConverter;
-import com.abasystem.crawler.Strategy.ObtainCategoryObjectStrategy;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-/**
- * Ref. https://cafe.naver.com/kig
- *  - a 태그의 href Attribute 를 직접 파싱하기에 시간 복잡도가 너무 커질 것
- */
 @Component
-public class PeterPanCategoryMapFactory extends CategoryMapper implements ObtainCategoryObjectStrategy {
+public class CafeCategoryMapFactory extends CategoryMapper {
 
-    @Override
-    public Map<String, Integer> getCategoryMap() {
+    /**
+     *  Ref. https://cafe.naver.com/25land
+     */
+    public Map<String, Integer> getChuncheonCategoryMap() {
+        clear(map);
+
+        /**
+         *  --------------------------------------------------
+         *  \\              개인매물-춘천직거래                \\
+         *  --------------------------------------------------
+         */
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=18824768&search.menuid=798&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=18824768&search.menuid=800&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=18824768&search.menuid=803&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=18824768&search.menuid=799&search.boardtype=L"), DEFAULT_MAX_PAGE);
+
+        return map;
+    }
+
+    /**
+     *  Ref. https://cafe.naver.com/ttcu
+     */
+    public Map<String, Integer> getGoodShopCategoryMap() {
+        clear(map);
+
+        /**
+         *  --------------------------------------------------
+         *  \\               업종별 부동산매물                 \\
+         *  --------------------------------------------------
+         */
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=391&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=392&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=393&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=394&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=395&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=396&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=398&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=397&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=450&search.boardtype=L"), DEFAULT_MAX_PAGE);
+
+        return map;
+    }
+
+    /**
+     *  Ref. https://cafe.naver.com/kig
+     */
+    public Map<String, Integer> getPeterPanCategoryMap() {
+        clear(map);
 
         /**
          *  --------------------------------------------------
@@ -192,5 +233,9 @@ public class PeterPanCategoryMapFactory extends CategoryMapper implements Obtain
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=10322296&search.menuid=849&search.boardtype=L"), DEFAULT_MAX_PAGE);
 
         return map;
+    }
+
+    private void clear(Map map) {
+        map.clear();
     }
 }

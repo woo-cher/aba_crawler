@@ -1,5 +1,6 @@
 package com.abasystem.crawler.Scheduler;
 
+import com.abasystem.crawler.Factory.CafeCategoryMapFactory;
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
@@ -42,6 +43,9 @@ public abstract class CrawlerTemplate {
 
     @Autowired
     protected PostInitializer initializer;
+
+    @Autowired
+    protected CafeCategoryMapFactory categoryMapFactory;
 
     protected Map<String, String> cookies;
     protected List<? extends ModelMapper> properties;

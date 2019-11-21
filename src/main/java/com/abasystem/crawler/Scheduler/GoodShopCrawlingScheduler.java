@@ -1,7 +1,6 @@
 package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Builder.CrawlerDtoBuilder;
-import com.abasystem.crawler.Factory.GoodShopCategoryMapFactory;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.Map;
 
 @Component
@@ -22,17 +20,14 @@ public class GoodShopCrawlingScheduler extends CrawlerTemplate {
     @Qualifier("CategoryOfPropertyOperator")
     private ParseTemplate parseTemplate;
 
-    @Autowired
-    private GoodShopCategoryMapFactory categoryMapFactory;
-
     @Override
-    protected String getUrlAfterSearch() throws IOException {
+    protected String getUrlAfterSearch() {
         // Nothing to do
         return StringUtils.EMPTY;
     }
 
     public void categoriesCrawler() throws Exception {
-        Map<String, Integer> goodShopMap = categoryMapFactory.getCategoryMap();
+        Map<String, Integer> goodShopMap = categoryMapFactory.getGoodShopCategoryMap();
 
         logger.info("──── GoodShop Multiple Crawler initialize\n");
 

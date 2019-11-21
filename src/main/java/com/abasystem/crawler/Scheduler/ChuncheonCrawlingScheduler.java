@@ -1,7 +1,6 @@
 package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Builder.CrawlerDtoBuilder;
-import com.abasystem.crawler.Factory.ChuncheonCategoryMapFactory;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import org.apache.commons.lang3.StringUtils;
@@ -21,9 +20,6 @@ public class ChuncheonCrawlingScheduler extends CrawlerTemplate {
     @Qualifier("CategoryOfPropertyOperator")
     private ParseTemplate parseTemplate;
 
-    @Autowired
-    private ChuncheonCategoryMapFactory categoryMapFactory;
-
     @Override
     protected String getUrlAfterSearch() {
         // Nothing to do
@@ -31,7 +27,7 @@ public class ChuncheonCrawlingScheduler extends CrawlerTemplate {
     }
 
     public void categoriesCrawler() throws Exception{
-        Map<String, Integer> chuncheonMap = categoryMapFactory.getCategoryMap();
+        Map<String, Integer> chuncheonMap = categoryMapFactory.getChuncheonCategoryMap();
 
         logger.info("──── Chuncheon Multiple Crawler initialize\n");
 
