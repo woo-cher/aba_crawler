@@ -1,6 +1,7 @@
 package com.abasystem.crawler.module;
 
 import com.abasystem.crawler.Scheduler.ChuncheonCrawlingScheduler;
+import com.abasystem.crawler.Scheduler.GoodShopCrawlingScheduler;
 import com.abasystem.crawler.Scheduler.PerterPanCrawlingScheduler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,9 @@ public class MultipleCrawlerModuleTest {
     @Autowired
     private ChuncheonCrawlingScheduler chuncheonScheduler;
 
+    @Autowired
+    private GoodShopCrawlingScheduler goodShopScheduler;
+
     @Test
     @Transactional
     public void peterPanMultipleCrawler() throws Exception {
@@ -32,5 +36,11 @@ public class MultipleCrawlerModuleTest {
     @Transactional
     public void chuncheonMultipleCrawler() throws Exception {
         chuncheonScheduler.categoriesCrawler();
+    }
+
+    @Test
+    @Transactional
+    public void goodShopMultipleCrawler() throws Exception {
+        goodShopScheduler.categoriesCrawler();
     }
 }
