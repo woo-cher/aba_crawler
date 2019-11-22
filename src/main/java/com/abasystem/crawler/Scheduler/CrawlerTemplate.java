@@ -11,6 +11,8 @@ import com.abasystem.crawler.Service.NaverLoginService;
 import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
+import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
+import com.abasystem.crawler.Strategy.ObtainHtmlResourceStrategy;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -20,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -51,12 +52,14 @@ public abstract class CrawlerTemplate {
     protected List<? extends ModelMapper> properties;
     protected BasicQueryStrategy queryStrategy;
 
-    abstract protected String getUrlAfterSearch() throws IOException;
-
     protected void singleCrawling(CrawlerDto dto) throws Exception {
         initializer(dto.getId(), dto.getPassword());
 
-        Elements elements = initializer.initPosts(dto.getStrategy().getDocument(getUrlAfterSearch()), dto.getPageCount());
+        ObtainDocumentStrategy documentStrategy = dto.getDocumentStrategy();
+        ObtainHtmlResourceStrategy resourceStrategy = dto.getResourceStrategy();
+        String urlAfterSearch = resourceStrategy.getUrlAfterSearch();
+
+        Elements elements = initializer.initPosts(documentStrategy.getDocument(urlAfterSearch), dto.getPageCount());
         logger.info("──── Elements obtain Success");
 
         properties = dto.getParseTemplate().parseAll(elements, cookies);

@@ -1,17 +1,14 @@
-package com.abasystem.crawler.Scheduler.Normal;
+package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Builder.CrawlerDtoBuilder;
-import com.abasystem.crawler.Scheduler.CrawlerTemplate;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.Map;
 
 @Component
@@ -21,12 +18,6 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
     @Autowired
     @Qualifier("CategoryOfPropertyOperator")
     private ParseTemplate parseTemplate;
-
-    @Override
-    protected String getUrlAfterSearch() throws IOException {
-        // Nothing to do
-        return StringUtils.EMPTY;
-    }
 
     public void chuncheonCrawler() throws Exception{
         Map<String, Integer> chuncheonMap = categoryMapFactory.getChuncheonCategoryMap();

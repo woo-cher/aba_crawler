@@ -1,8 +1,7 @@
 package com.abasystem.crawler.module;
 
-import com.abasystem.crawler.Scheduler.Special.HappyHouseCrawlingScheduler;
-import com.abasystem.crawler.Scheduler.Special.JinjuMomCrawlingScheduler;
-import com.abasystem.crawler.Scheduler.Special.PerterPanCrawlingScheduler;
+import com.abasystem.crawler.Scheduler.WithSearchAllScheduler;
+import com.abasystem.crawler.Scheduler.WithoutSearchSingleScheduler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -18,29 +17,26 @@ public class SingleCrawlerModuleTest {
     private static final Logger logger = LoggerFactory.getLogger(SingleCrawlerModuleTest.class);
 
     @Autowired
-    private JinjuMomCrawlingScheduler momScheduler;
+    private WithSearchAllScheduler searchAllScheduler;
 
     @Autowired
-    private HappyHouseCrawlingScheduler happyScheduler;
-
-    @Autowired
-    private PerterPanCrawlingScheduler peterPanScheduler;
+    private WithoutSearchSingleScheduler nonSearchScheduler;
 
     @Test
     @Transactional
-    public void peterPanCrawler() {
-        peterPanScheduler.jinjuAreaCrawler();
+    public void peterPanCrawler() throws Exception {
+        searchAllScheduler.jinjuAreaCrawler();
     }
 
     @Test
     @Transactional
-    public void momCrawler() {
-        momScheduler.momCrawler();
+    public void momCrawler() throws Exception {
+        nonSearchScheduler.jinjuMomCrawler();
     }
 
     @Test
     @Transactional
-    public void happyCrawler() {
-        happyScheduler.happyHouseCrawler();
+    public void happyCrawler() throws Exception {
+        searchAllScheduler.happyHouseCrawler();
     }
 }

@@ -3,6 +3,7 @@ package com.abasystem.crawler.Model.Dto;
 import com.abasystem.crawler.Builder.CrawlerDtoBuilder;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
+import com.abasystem.crawler.Strategy.ObtainHtmlResourceStrategy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,9 @@ public class CrawlerDto {
     private String fileName;
     private int pageCount;
     private ParseTemplate parseTemplate;
-    private ObtainDocumentStrategy strategy;
     private String directory;
+    private ObtainDocumentStrategy documentStrategy;
+    private ObtainHtmlResourceStrategy resourceStrategy;
 
     public CrawlerDto(CrawlerDtoBuilder builder) {
         this.id = builder.getId();
@@ -27,7 +29,7 @@ public class CrawlerDto {
         this.fileName = builder.getFileName();
         this.pageCount = builder.getPageCount();
         this.parseTemplate = builder.getParseTemplate();
-        this.strategy = builder.getStrategy();
+        this.documentStrategy = builder.getDocumentStrategy();
         this.directory = builder.getDirectory();
     }
 }

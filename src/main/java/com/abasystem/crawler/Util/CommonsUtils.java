@@ -21,7 +21,7 @@ import java.io.IOException;
 public class CommonsUtils {
     private static final Logger logger = LoggerFactory.getLogger(CommonsUtils.class);
 
-    public static String getPostUrlWithSearch(String key, String url, String btnXPath) throws IOException {
+    public static String getUrlWithSearch(String key, String url, String btnXPath) throws IOException {
         WebClient webClient = new WebClient();
 
         // Get Page
