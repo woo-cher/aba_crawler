@@ -1,8 +1,8 @@
 package com.abasystem.crawler.module;
 
-import com.abasystem.crawler.Scheduler.HappyHouseCrawlingScheduler;
-import com.abasystem.crawler.Scheduler.JinjuMomCrawlingScheduler;
-import com.abasystem.crawler.Scheduler.PerterPanCrawlingScheduler;
+import com.abasystem.crawler.Scheduler.Special.HappyHouseCrawlingScheduler;
+import com.abasystem.crawler.Scheduler.Special.JinjuMomCrawlingScheduler;
+import com.abasystem.crawler.Scheduler.Special.PerterPanCrawlingScheduler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

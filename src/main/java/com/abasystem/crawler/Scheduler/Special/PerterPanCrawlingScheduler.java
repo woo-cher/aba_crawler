@@ -1,9 +1,11 @@
-package com.abasystem.crawler.Scheduler;
+package com.abasystem.crawler.Scheduler.Special;
 
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
+import com.abasystem.crawler.Scheduler.CrawlerTemplate;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
+import com.abasystem.crawler.Util.CommonsUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
@@ -16,38 +18,37 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class JinjuMomCrawlingScheduler extends CrawlerTemplate {
-    private static final Logger logger = LoggerFactory.getLogger(JinjuMomCrawlingScheduler.class);
+public class PerterPanCrawlingScheduler extends CrawlerTemplate {
+    private static final Logger logger = LoggerFactory.getLogger(PerterPanCrawlingScheduler.class);
 
     @Autowired
-    @Qualifier("CategoryOfPropertyOperator")
+    @Qualifier("CategoryWithPostTypeOperator")
     private ParseTemplate parseTemplate;
 
     @Override
     protected String getUrlAfterSearch() throws IOException {
-        // Nothing to search
-        return Naver.MOM_DIRECT_URL;
+        return CommonsUtils.getPostUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
     }
 
-    @Scheduled(cron = "0 40 23 ? * 7")
-    public void momCrawler() {
+    @Scheduled(cron = "0 30 22 ? * 7")
+    public void jinjuAreaCrawler() {
         try {
-            logger.info("──── JinjuMom Crawler initialize\n");
+            logger.info("──── PeterPan Single Crawler initialize\n");
 
             singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "부동산 (본인 직거래만 가능)", 4, this.parseTemplate,
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "피터팬", 2, this.parseTemplate,
                     new ObtainDocumentStrategy() {
                         @Override
                         public Document getDocument(String url) throws IOException {
                             return Jsoup.connect(url).cookies(cookies).get();
                         }
-                    }, "진주맘")
+                    }, "피터팬")
             );
 
         } catch (Exception e) {
-            logger.error("MomCrawling Failure : " + e);
+            logger.error("PeterPan Single Crawling Failure : " + e);
         } finally {
-            logger.info("──── End JinjuMom Crawling\n");
+            logger.info("──── End PeterPan Single Crawling\n");
         }
     }
 }

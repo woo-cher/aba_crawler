@@ -1,8 +1,6 @@
 package com.abasystem.crawler.module;
 
-import com.abasystem.crawler.Scheduler.ChuncheonCrawlingScheduler;
-import com.abasystem.crawler.Scheduler.GoodShopCrawlingScheduler;
-import com.abasystem.crawler.Scheduler.PerterPanCrawlingScheduler;
+import com.abasystem.crawler.Scheduler.Normal.WithoutSearchMultipleScheduler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -18,29 +16,23 @@ public class MultipleCrawlerModuleTest {
     private static final Logger logger = LoggerFactory.getLogger(MultipleCrawlerModuleTest.class);
 
     @Autowired
-    private PerterPanCrawlingScheduler peterPanScheduler;
-
-    @Autowired
-    private ChuncheonCrawlingScheduler chuncheonScheduler;
-
-    @Autowired
-    private GoodShopCrawlingScheduler goodShopScheduler;
+    private WithoutSearchMultipleScheduler scheduler;
 
     @Test
     @Transactional
     public void peterPanMultipleCrawler() throws Exception {
-        peterPanScheduler.categoriesCrawler();
+        scheduler.peterPanCrawler();
     }
 
     @Test
     @Transactional
-    public void chuncheonMultipleCrawler() throws Exception {
-        chuncheonScheduler.categoriesCrawler();
+    public void chunCheonMultipleCrawler() throws Exception {
+        scheduler.chuncheonCrawler();
     }
 
     @Test
     @Transactional
     public void goodShopMultipleCrawler() throws Exception {
-        goodShopScheduler.categoriesCrawler();
+        scheduler.goodShopCrawler();
     }
 }
