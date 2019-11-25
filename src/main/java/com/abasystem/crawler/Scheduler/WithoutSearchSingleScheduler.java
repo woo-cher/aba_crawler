@@ -1,6 +1,7 @@
 package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
+import com.abasystem.crawler.Service.Initializer.DivTagPostInitializer;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
@@ -42,8 +43,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
                                 return Naver.MOM_DIRECT_URL;
                             }
                         }
-                )
-        );
+                ), DivTagPostInitializer.class);
         logger.info("──── End JinjuMom Crawling\n");
     }
 }

@@ -1,4 +1,4 @@
-package com.abasystem.crawler.Service;
+package com.abasystem.crawler.Service.Initializer;
 
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.InitStrategy;
@@ -12,20 +12,23 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class PostInitializer implements InitStrategy {
+public abstract class PostInitializer implements InitStrategy {
     private static final Logger logger = LoggerFactory.getLogger(PostInitializer.class);
 
     private Elements elements;
     private String pageUrl;
 
+    abstract String getPostArticleSelector();
+    abstract String getPageNavigationSelector();
+
     @Override
     public Elements initPosts(Document document, int pageCount) throws IOException {
-        this.elements = document.select(Naver.POST_ARTICLE);
-        this.pageUrl = Naver.CAFE_PREFIX.concat(document.select(Naver.PAGE_NAVIGATOR).attr("href"));
+        this.elements = document.select(getPostArticleSelector());
+        this.pageUrl = Naver.CAFE_PREFIX.concat(document.select(getPageNavigationSelector()).attr("href"));
 
         for (int n = 2; n < pageCount + 1; n++) {
             elements.addAll(
-                    Jsoup.connect(convertPageToNext(pageUrl, n)).get().select(Naver.POST_ARTICLE)
+                    Jsoup.connect(convertPageToNext(pageUrl, n)).get().select(Naver.DIV_POST_ARTICLE)
             );
         }
 
@@ -41,22 +44,5 @@ public class PostInitializer implements InitStrategy {
         str = str.concat(Integer.toString(next));
 
         return str.concat(Naver.CAFE_POSTFIX);
-    }
-
-    @Override
-    public Elements initMultiplePosts(int pageCount, Document... documents) throws IOException {
-        Elements multiplePosts = new Elements();
-
-        for(Document document : documents) {
-            if(!multiplePosts.addAll(initPosts(document, pageCount))) {
-                throw new NullPointerException("addAll() run fail");
-            }
-        }
-
-        if(multiplePosts.isEmpty()) {
-            throw new NullPointerException("InitMultiplePosts Error");
-        }
-
-        return multiplePosts;
     }
 }

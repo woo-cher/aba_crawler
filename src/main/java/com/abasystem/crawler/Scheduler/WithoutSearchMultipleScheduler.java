@@ -1,6 +1,8 @@
 package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Builder.CrawlerDtoBuilder;
+import com.abasystem.crawler.Service.Initializer.DivTagPostInitializer;
+import com.abasystem.crawler.Service.Initializer.SpanTagPostInitializer;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import org.slf4j.Logger;
@@ -24,7 +26,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── Chuncheon Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "춘천부동산").build(), chuncheonMap);
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "춘천부동산").build(), chuncheonMap, DivTagPostInitializer.class);
 
         logger.info("──── End Chuncheon Multiple Crawling\n");
     }
@@ -34,7 +36,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── GoodShop Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "좋은점포구하기").build(), goodShopMap);
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "좋은점포구하기").build(), goodShopMap, DivTagPostInitializer.class);
 
         logger.info("──── End GoodShop Multiple Crawling\n");
     }
@@ -44,8 +46,18 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── PeterPan Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "피터팬").build(), peterPanMap);
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "피터팬").build(), peterPanMap, DivTagPostInitializer.class);
 
         logger.info("──── End PeterPan Multiple Crawling\n");
+    }
+
+    public void boodongDirectCrawler() throws Exception {
+        Map<String, Integer> boodongDirectMap = categoryMapFactory.getBoodongDirectCategoryMap();
+        logger.info("──── BoodongDirectCrawler Multiple Crawler initialize\n");
+
+        multipleCrawling(
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "부동산직거래").build(), boodongDirectMap, SpanTagPostInitializer.class);
+
+        logger.info("──── End BoodongDirect Multiple Crawling\n");
     }
 }

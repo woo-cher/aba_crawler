@@ -18,21 +18,27 @@ public class MultipleCrawlerModuleTest {
     @Autowired
     private WithoutSearchMultipleScheduler scheduler;
 
-    @Test
-    @Transactional
-    public void peterPanMultipleCrawler() throws Exception {
-        scheduler.peterPanCrawler();
-    }
+//    @Test
+//    @Transactional
+//    public void peterPan() throws Exception {
+//        scheduler.peterPanCrawler();
+//    }
 
     @Test
     @Transactional
-    public void chunCheonMultipleCrawler() throws Exception {
+    public void chunCheon() throws Exception {
         scheduler.chuncheonCrawler();
     }
 
     @Test
     @Transactional
-    public void goodShopMultipleCrawler() throws Exception {
+    public void goodShop() throws Exception {
         scheduler.goodShopCrawler();
+    }
+
+    @Test
+    @Transactional
+    public void boodongDirect() throws Exception {
+        scheduler.boodongDirectCrawler();
     }
 }

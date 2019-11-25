@@ -10,5 +10,4 @@ import java.io.IOException;
 public interface InitStrategy {
     Elements initPosts(Document document, int pageCount) throws IOException;
     String convertPageToNext(String url, int next);
-    Elements initMultiplePosts(int pageCount, Document... doc) throws IOException;
 }

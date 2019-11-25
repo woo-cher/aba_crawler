@@ -1,6 +1,7 @@
 package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
+import com.abasystem.crawler.Service.Initializer.DivTagPostInitializer;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
@@ -47,8 +48,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                                 return CommonsUtils.getUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
                             }
                         }
-                )
-        );
+                ), DivTagPostInitializer.class);
         logger.info("──── End PeterPan Single Crawling\n");
     }
 
@@ -70,8 +70,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                                 return CommonsUtils.getUrlWithSearch("직거래", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
                             }
                         }
-                )
-        );
+                ), DivTagPostInitializer.class);
         logger.info("──── End HappyHouse Crawling\n");
     }
 }

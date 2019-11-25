@@ -1,14 +1,15 @@
 package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Factory.CafeCategoryMapFactory;
+import com.abasystem.crawler.Factory.PostInitializerFactory;
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
 import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Service.Converter.DataConverter;
 import com.abasystem.crawler.Service.CrawlerService;
+import com.abasystem.crawler.Service.Initializer.PostInitializer;
 import com.abasystem.crawler.Service.NaverLoginService;
-import com.abasystem.crawler.Service.PostInitializer;
 import com.abasystem.crawler.Storage.Naver;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import com.abasystem.crawler.Strategy.ObtainDocumentStrategy;
@@ -37,13 +38,13 @@ public abstract class CrawlerTemplate {
     protected NaverLoginService loginService;
 
     @Autowired
-    protected RepositoryFactory factory;
+    protected RepositoryFactory repositoryFactory;
 
     @Autowired
     protected SchedulerRepository repository;
 
     @Autowired
-    protected PostInitializer initializer;
+    protected PostInitializerFactory postInitializerFactory;
 
     @Autowired
     protected CafeCategoryMapFactory categoryMapFactory;
@@ -51,15 +52,16 @@ public abstract class CrawlerTemplate {
     protected Map<String, String> cookies;
     protected List<? extends ModelMapper> properties;
     protected BasicQueryStrategy queryStrategy;
+    protected PostInitializer postInitializer;
 
-    protected void singleCrawling(CrawlerDto dto) throws Exception {
-        initializer(dto.getId(), dto.getPassword());
+    protected void singleCrawling(CrawlerDto dto, Class clazz) throws Exception {
+        initializer(dto.getId(), dto.getPassword(), clazz);
 
         ObtainDocumentStrategy documentStrategy = dto.getDocumentStrategy();
         ObtainHtmlResourceStrategy resourceStrategy = dto.getResourceStrategy();
         String urlAfterSearch = resourceStrategy.getUrlAfterSearch();
 
-        Elements elements = initializer.initPosts(documentStrategy.getDocument(urlAfterSearch), dto.getPageCount());
+        Elements elements = postInitializer.initPosts(documentStrategy.getDocument(urlAfterSearch), dto.getPageCount());
         logger.info("──── Elements obtain Success");
 
         properties = dto.getParseTemplate().parseAll(elements, cookies);
@@ -68,7 +70,7 @@ public abstract class CrawlerTemplate {
         int row = 0;
 
         for (ModelMapper property : properties) {
-            queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
+            queryStrategy = repositoryFactory.getTypeRepositoryCreator(property.getClass());
             row += queryStrategy.createProp(property);
         }
 
@@ -82,12 +84,12 @@ public abstract class CrawlerTemplate {
         logger.info("──── End Crawling");
     }
 
-    protected void multipleCrawling(CrawlerDto dto, Map<String, Integer> map) throws Exception {
-        initializer(dto.getId(), dto.getPassword());
+    protected void multipleCrawling(CrawlerDto dto, Map<String, Integer> map, Class clazz) throws Exception {
+        initializer(dto.getId(), dto.getPassword(), clazz);
 
         for (String urlKey : map.keySet()) {
             Document document = Jsoup.connect(urlKey).cookies(cookies).get();
-            Elements elements = initializer.initPosts(document, map.get(urlKey));
+            Elements elements = postInitializer.initPosts(document, map.get(urlKey));
 
             String categoryTitle = document.select(Naver.CATEGORY_TITLE).text();
             dto.setFileName(DataConverter.convertNameToValidFileName(categoryTitle));
@@ -97,7 +99,7 @@ public abstract class CrawlerTemplate {
             int row = 0;
 
             for (ModelMapper property : properties) {
-                queryStrategy = factory.getTypeRepositoryCreator(property.getClass());
+                queryStrategy = repositoryFactory.getTypeRepositoryCreator(property.getClass());
                 row += queryStrategy.createProp(property);
             }
 
@@ -107,10 +109,11 @@ public abstract class CrawlerTemplate {
         }
     }
 
-    private void initializer(String id, String pw) throws Exception {
+    private void initializer(String id, String pw, Class clazz) throws Exception {
         loginService.doLogin(id, pw);
         logger.info("──── Is login ?" + loginService.isLogin());
 
-        cookies = loginService.getLoginCookie();
+        this.cookies = loginService.getLoginCookie();
+        this.postInitializer = postInitializerFactory.getPostCreator(clazz);
     }
 }

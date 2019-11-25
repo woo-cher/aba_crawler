@@ -52,6 +52,8 @@ public abstract class ParseTemplate {
                     .cookies(cookies)
                     .get();
 
+            elementsGarbageClear(document);
+
             Elements els = document.select(".inbox");
 
             if (validationStrategy.isInvalidPost(els)) {
@@ -73,5 +75,9 @@ public abstract class ParseTemplate {
         }
 
         return properties;
+    }
+
+    private void elementsGarbageClear(Document document) {
+        document.select(".inbox form").remove();
     }
 }

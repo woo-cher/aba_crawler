@@ -39,12 +39,12 @@ public class CafeCategoryMapFactory extends CategoryMapper {
          *  \\               업종별 부동산매물                 \\
          *  --------------------------------------------------
          */
-        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=391&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=391&search.boardtype=L"), 4);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=392&search.boardtype=L"), DEFAULT_MAX_PAGE);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=393&search.boardtype=L"), DEFAULT_MAX_PAGE);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=394&search.boardtype=L"), DEFAULT_MAX_PAGE);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=395&search.boardtype=L"), DEFAULT_MAX_PAGE);
-        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=396&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=396&search.boardtype=L"), 3);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=398&search.boardtype=L"), DEFAULT_MAX_PAGE);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=397&search.boardtype=L"), DEFAULT_MAX_PAGE);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=22081311&search.menuid=450&search.boardtype=L"), DEFAULT_MAX_PAGE);
@@ -231,6 +231,34 @@ public class CafeCategoryMapFactory extends CategoryMapper {
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=10322296&search.menuid=847&search.boardtype=L"), DEFAULT_MAX_PAGE);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=10322296&search.menuid=848&search.boardtype=L"), DEFAULT_MAX_PAGE);
         map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=10322296&search.menuid=849&search.boardtype=L"), DEFAULT_MAX_PAGE);
+
+        return map;
+    }
+
+    /**
+     *  Ref. https://cafe.naver.com/svzero
+     */
+    public Map<String, Integer> getBoodongDirectCategoryMap() {
+        clear(map);
+
+        /**
+         *  --------------------------------------------------
+         *  \\               ★ 부동산 직거래                  \\
+         *  --------------------------------------------------
+         */
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=657&search.boardtype=L"), 2);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=624&search.boardtype=L"), 4);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=623&search.boardtype=L"), 4);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=656&search.boardtype=L"), 10);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=655&search.boardtype=L"), 7);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=658&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=628&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=626&search.boardtype=L"), 5);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=627&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=621&search.boardtype=L"), 5);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=649&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=629&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=13173024&search.menuid=664&search.boardtype=L"), DEFAULT_MAX_PAGE);
 
         return map;
     }
