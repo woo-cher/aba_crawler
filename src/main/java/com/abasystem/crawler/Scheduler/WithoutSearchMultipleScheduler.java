@@ -80,4 +80,16 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         logger.info("──── End ChangWon Multiple Crawling\n");
     }
+
+    public void busanRoomCrawler() throws Exception {
+        Map<String, Integer> busanRoomMap = categoryMapFactory.getBusanRoomCategoryMap();
+        logger.info("──── BusanRoomMap Multiple Crawler initialize\n");
+
+        multipleCrawling(
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "부산부동산직거래")
+                        .build(), busanRoomMap, SpanTagPostInitializer.class
+        );
+
+        logger.info("──── End BusanRoomMap Multiple Crawling\n");
+    }
 }

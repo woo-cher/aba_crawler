@@ -283,6 +283,27 @@ public class CafeCategoryMapFactory extends CategoryMapper {
         return map;
     }
 
+    /**
+     *  Ref. https://cafe.naver.com/ydbusan
+     */
+    public Map<String, Integer> getBusanRoomCategoryMap() {
+        map.clear();
+
+        /**
+         *  --------------------------------------------------
+         *  \\            ★ 부산 직거래 [전월세]               \\
+         *  --------------------------------------------------
+         */
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20024874&search.menuid=35&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20024874&search.menuid=33&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20024874&search.menuid=38&search.boardtype=L"), 2);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20024874&search.menuid=39&search.boardtype=L"), 2);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20024874&search.menuid=45&search.boardtype=L"), 2);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20024874&search.menuid=55&search.boardtype=L"), DEFAULT_MAX_PAGE);
+
+        return map;
+    }
+
     private void clear(Map map) {
         map.clear();
     }

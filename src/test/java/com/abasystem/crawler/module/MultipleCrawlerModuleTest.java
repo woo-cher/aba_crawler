@@ -18,11 +18,11 @@ public class MultipleCrawlerModuleTest {
     @Autowired
     private WithoutSearchMultipleScheduler scheduler;
 
-//    @Test
-//    @Transactional
-//    public void peterPan() throws Exception {
-//        scheduler.peterPanCrawler();
-//    }
+    @Test
+    @Transactional
+    public void peterPan() throws Exception {
+        scheduler.peterPanCrawler();
+    }
 
     @Test
     @Transactional
@@ -46,5 +46,11 @@ public class MultipleCrawlerModuleTest {
     @Transactional
     public void changWon() throws Exception {
         scheduler.changWonCrawler();
+    }
+
+    @Test
+    @Transactional
+    public void busanRoom() throws Exception {
+        scheduler.busanRoomCrawler();
     }
 }
