@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
-public class CustomOpenCsv {
+public class CustomOpenCsvWriter {
     public CSVWriter cw;
 
     public CSVWriter getCSVWriter(String fileName, String directory) throws Exception {

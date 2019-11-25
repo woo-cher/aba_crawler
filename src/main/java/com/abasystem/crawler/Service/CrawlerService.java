@@ -3,7 +3,7 @@ package com.abasystem.crawler.Service;
 import com.abasystem.crawler.Factory.ServiceFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Service.Converter.DataConverter;
-import com.abasystem.crawler.Service.Writer.CustomOpenCsv;
+import com.abasystem.crawler.Service.Writer.CustomOpenCsvWriter;
 import com.abasystem.crawler.Strategy.CsvWriteStrategy;
 import com.abasystem.crawler.Strategy.ValidationStrategy;
 import com.google.gson.JsonObject;
@@ -18,7 +18,7 @@ import java.util.List;
  * Init 메소드는 Util 성에 성격이 가까워보인다.
  */
 @Service
-public class CrawlerService<P extends ModelMapper> extends CustomOpenCsv {
+public class CrawlerService<P extends ModelMapper> extends CustomOpenCsvWriter {
     private static final Logger logger = LoggerFactory.getLogger(CrawlerService.class);
 
     private static final String[] TABLE_ROW = {
