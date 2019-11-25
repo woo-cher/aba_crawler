@@ -8,9 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -140,6 +138,13 @@ public class Basic {
         System.out.println(case4.replaceAll(invalidChar, ""));
         System.out.println(case5.replaceAll(invalidChar, ""));
         System.out.println(case6.replaceAll(invalidChar, ""));
+    }
+
+    @Test
+    public void testCase6() {
+        List list = new ArrayList();
+        System.out.println("Result : " + list.isEmpty());
+        assertTrue(list.isEmpty());
     }
 }
 

@@ -37,8 +37,14 @@ public class CrawlerService<P extends ModelMapper> extends CustomOpenCsvWriter {
     }
 
     public boolean writeAll(List<P> properties, String fileName, String directory) throws Exception {
-        this.cw = getCSVWriter(fileName, directory);
-        logger.warn("─────────────────── 세이브 완료!! : " + fileName);
+
+        if(properties.isEmpty()) {
+            logger.warn("─────────────────── List is Empty. File make failure");
+            return false;
+        }
+
+        this.cw = getCsvWriter(fileName, directory);
+        logger.warn("─────────────────── File make success : " + fileName);
         cw.writeNext(TABLE_ROW);
 
         int index = 1;
@@ -50,7 +56,7 @@ public class CrawlerService<P extends ModelMapper> extends CustomOpenCsvWriter {
             index++;
         }
 
-        if (cw.checkError() == true) {
+        if (cw.checkError()) {
             return false;
         }
 

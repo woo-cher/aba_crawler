@@ -1,4 +1,0 @@
-Todo)
- # LoginTest 와 PeterPanParseTest 를 합쳐야할 것 같다
-  - 전체 테스트 실행 시, 쿠키가 없어 Elements 가 Null 인 현상이 발생한다
- # Module 테스트 역시 쿠키가 없어 Null 현상이 발생한다
