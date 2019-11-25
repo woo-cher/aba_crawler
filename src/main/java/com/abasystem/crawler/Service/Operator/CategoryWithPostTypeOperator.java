@@ -17,7 +17,7 @@ public class CategoryWithPostTypeOperator extends ParseTemplate {
     public ModelMapper getModelAfterParse(Elements elements, Document doc, String url, String title) {
         boolean flag = validationStrategy.isRegularPost(doc.select("#tbody"));
         logger.info("CategoryWithPostTypeOperator initialize");
-        return factory.parserCreator(flag).parse(doc, url, title);
+        return serviceFactory.parserCreator(flag).parse(doc, url, title);
     }
 
     /**

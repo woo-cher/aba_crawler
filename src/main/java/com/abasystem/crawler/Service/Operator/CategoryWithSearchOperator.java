@@ -16,7 +16,7 @@ public class CategoryWithSearchOperator extends ParseTemplate {
     @Override
     public IrregularProperty getModelAfterParse(Elements elements, Document doc, String url, String title) {
         logger.info("CategoryWithSearchOperator initialize");
-        return (IrregularProperty) factory.parserCreator(false).parse(doc, url, title);
+        return (IrregularProperty) serviceFactory.parserCreator(false).parse(doc, url, title);
     }
 
     @Override

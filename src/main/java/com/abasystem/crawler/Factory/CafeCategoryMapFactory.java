@@ -263,6 +263,26 @@ public class CafeCategoryMapFactory extends CategoryMapper {
         return map;
     }
 
+    /**
+     *  Ref. https://cafe.naver.com/kig070
+     */
+    public Map<String, Integer> getChangWonCategoryMap() {
+        map.clear();
+
+        /**
+         *  --------------------------------------------------
+         *  \\             ★ 회원 직거래 게시판               \\
+         *  --------------------------------------------------
+         */
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20662382&search.menuid=17&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20662382&search.menuid=18&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20662382&search.menuid=19&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20662382&search.menuid=143&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20662382&search.menuid=144&search.boardtype=L"), DEFAULT_MAX_PAGE);
+
+        return map;
+    }
+
     private void clear(Map map) {
         map.clear();
     }

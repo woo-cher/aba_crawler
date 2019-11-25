@@ -41,4 +41,10 @@ public class MultipleCrawlerModuleTest {
     public void boodongDirect() throws Exception {
         scheduler.boodongDirectCrawler();
     }
+
+    @Test
+    @Transactional
+    public void changWon() throws Exception {
+        scheduler.changWonCrawler();
+    }
 }

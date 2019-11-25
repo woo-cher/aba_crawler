@@ -54,10 +54,13 @@ public class Naver {
      *  --------------------------------------------------
      */
     public static final String POST_MINI_TITLE = ".tit-box div table tbody tr td a";
-    public static final String DIV_POST_ARTICLE = ".board-list .article";
+
+    public static final String DIV_POST_ARTICLE = ".article";
+    public static final String SPAN_POST_ARTICLE = "a[onmouseover='']";
+
     public static final String PAGE_NAVIGATOR = ".prev-next .on";
+    public static final String PAGE_NAVIGATOR2 = ".prev-next td[class='on'] a";
+
     public static final String POST_TABLE_TBODY = "#tbody table tbody";
     public static final String CATEGORY_TITLE = "#sub-tit .sub-tit-color";
-    public static final String SPAN_POST_ARTICLE = ".board-list .aaa a";
-    public static final String PAGE_NAVIGATOR2 = ".prev-next td[class='on'] a";
 }

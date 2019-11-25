@@ -161,7 +161,7 @@ public class PeterPanParseTest {
         elements = factory.getPostCreator(DivTagPostInitializer.class).initPosts(doc, 1);
 
         logger.debug("el ? {}", elements.text());
-        logger.debug("크롤링 결과 : {}", parseTemplate.parseAll(elements, cookies));
+        logger.debug("크롤링 결과 : {}", parseTemplate.parseAll(elements, cookies, DivTagPostInitializer.class));
     }
 
     @Test

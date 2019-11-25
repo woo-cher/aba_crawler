@@ -1,5 +1,6 @@
 package com.abasystem.crawler.Service.Operator;
 
+import com.abasystem.crawler.Factory.PostInitializerFactory;
 import com.abasystem.crawler.Factory.ServiceFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Storage.Naver;
@@ -24,7 +25,10 @@ public abstract class ParseTemplate {
     private static final Logger logger = LoggerFactory.getLogger(ParseTemplate.class);
 
     @Autowired
-    public ServiceFactory factory;
+    public ServiceFactory serviceFactory;
+
+    @Autowired
+    public PostInitializerFactory initializerFactory;
 
     @Autowired
     @Qualifier("customValidator")
@@ -39,12 +43,14 @@ public abstract class ParseTemplate {
 
     public abstract boolean isContainPropertyKeyword(Elements elements);
 
-    public List<? extends ModelMapper> parseAll(Elements elements, Map<String, String> cookies) throws IOException {
+    public List<? extends ModelMapper> parseAll(Elements elements, Map<String, String> cookies, Class clazz) throws IOException {
         properties = new ArrayList<>();
+        String selector = initializerFactory.getPostTitleSelector(clazz);
+        logger.info("SELECTOR : {}", selector);
 
         for (Element post : elements) {
-            url = Naver.CAFE_PREFIX.concat(post.select("a").attr("href"));
-            title = post.select("a").text();
+            url = Naver.CAFE_PREFIX.concat(post.select(selector).attr("href"));
+            title = post.select(selector).text();
             logger.info("TITLE : {}", title);
             logger.info("URL : {}", url);
 

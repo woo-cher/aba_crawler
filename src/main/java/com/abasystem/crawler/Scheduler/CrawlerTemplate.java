@@ -64,7 +64,7 @@ public abstract class CrawlerTemplate {
         Elements elements = postInitializer.initPosts(documentStrategy.getDocument(urlAfterSearch), dto.getPageCount());
         logger.info("──── Elements obtain Success");
 
-        properties = dto.getParseTemplate().parseAll(elements, cookies);
+        properties = dto.getParseTemplate().parseAll(elements, cookies, clazz);
         logger.info("──── Parsing Success");
 
         int row = 0;
@@ -94,7 +94,7 @@ public abstract class CrawlerTemplate {
             String categoryTitle = document.select(Naver.CATEGORY_TITLE).text();
             dto.setFileName(DataConverter.convertNameToValidFileName(categoryTitle));
 
-            properties = dto.getParseTemplate().parseAll(elements, cookies);
+            properties = dto.getParseTemplate().parseAll(elements, cookies, clazz);
 
             int row = 0;
 
