@@ -304,6 +304,46 @@ public class CafeCategoryMapFactory extends CategoryMapper {
         return map;
     }
 
+    /**
+     *  Ref. https://cafe.naver.com/kig042
+     */
+    public Map<String, Integer> getCheonanDirectCategoryMap() {
+        map.clear();
+
+        /**
+         *  --------------------------------------------------
+         *  \\                 천안시 직거래                  \\
+         *  --------------------------------------------------
+         */
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=18355813&search.menuid=19&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=18355813&search.menuid=17&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=18355813&search.menuid=18&search.boardtype=L"), DEFAULT_MAX_PAGE);
+
+        return map;
+    }
+
+    /**
+     *  Ref. https://cafe.naver.com/chobomamy
+     */
+    public Map<String, Integer> getYangSanMomCategoryMap() {
+        map.clear();
+
+        /**
+         *  --------------------------------------------------
+         *  \\               ◆ 부동산 직거래방                 \\
+         *  --------------------------------------------------
+         */
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20655292&search.menuid=1223&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20655292&search.menuid=1224&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20655292&search.menuid=1225&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20655292&search.menuid=1226&search.boardtype=L"), DEFAULT_MAX_PAGE);
+//        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20655292&search.menuid=1227&search.boardtype=L"), DEFAULT_MAX_PAGE);
+//        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20655292&search.menuid=1228&search.boardtype=L"), DEFAULT_MAX_PAGE);
+        map.put(DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=20655292&search.menuid=1229&search.boardtype=L"), DEFAULT_MAX_PAGE);
+
+        return map;
+    }
+
     private void clear(Map map) {
         map.clear();
     }

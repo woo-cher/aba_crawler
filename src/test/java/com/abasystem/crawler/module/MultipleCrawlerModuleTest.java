@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class MultipleCrawlerModuleTest {
     private static final Logger logger = LoggerFactory.getLogger(MultipleCrawlerModuleTest.class);
 
@@ -19,38 +20,42 @@ public class MultipleCrawlerModuleTest {
     private WithoutSearchMultipleScheduler scheduler;
 
     @Test
-    @Transactional
     public void peterPan() throws Exception {
         scheduler.peterPanCrawler();
     }
 
     @Test
-    @Transactional
     public void chunCheon() throws Exception {
         scheduler.chuncheonCrawler();
     }
 
     @Test
-    @Transactional
     public void goodShop() throws Exception {
         scheduler.goodShopCrawler();
     }
 
     @Test
-    @Transactional
     public void boodongDirect() throws Exception {
         scheduler.boodongDirectCrawler();
     }
 
     @Test
-    @Transactional
     public void changWon() throws Exception {
         scheduler.changWonCrawler();
     }
 
     @Test
-    @Transactional
     public void busanRoom() throws Exception {
         scheduler.busanRoomCrawler();
+    }
+
+    @Test
+    public void CheonanDirect() throws Exception {
+        scheduler.cheonanDirectCrawler();
+    }
+
+    @Test
+    public void YangSanMom() throws Exception {
+        scheduler.yangSanMomCrawler();
     }
 }

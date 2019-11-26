@@ -83,13 +83,37 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
     public void busanRoomCrawler() throws Exception {
         Map<String, Integer> busanRoomMap = categoryMapFactory.getBusanRoomCategoryMap();
-        logger.info("──── BusanRoomMap Multiple Crawler initialize\n");
+        logger.info("──── BusanRoom Multiple Crawler initialize\n");
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "부산부동산직거래")
                         .build(), busanRoomMap, SpanTagPostInitializer.class
         );
 
-        logger.info("──── End BusanRoomMap Multiple Crawling\n");
+        logger.info("──── End BusanRoom Multiple Crawling\n");
+    }
+
+    public void cheonanDirectCrawler() throws Exception {
+        Map<String, Integer> cheonanDirectMap = categoryMapFactory.getCheonanDirectCategoryMap();
+        logger.info("──── CheonanDirect Multiple Crawler initialize\n");
+
+        multipleCrawling(
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "천안부동산직거래")
+                       .build(), cheonanDirectMap, SpanTagPostInitializer.class
+        );
+
+        logger.info("──── End CheonanDirect Multiple Crawling\n");
+    }
+
+    public void yangSanMomCrawler() throws Exception {
+        Map<String, Integer> yangSanMap = categoryMapFactory.getYangSanMomCategoryMap();
+        logger.info("──── YangSanMom Multiple Crawler initialize\n");
+
+        multipleCrawling(
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "러브양산맘")
+                        .build(), yangSanMap, DivTagPostInitializer.class
+        );
+
+        logger.info("──── End YangSanMom Multiple Crawling\n");
     }
 }

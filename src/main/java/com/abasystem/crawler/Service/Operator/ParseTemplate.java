@@ -46,7 +46,6 @@ public abstract class ParseTemplate {
     public List<? extends ModelMapper> parseAll(Elements elements, Map<String, String> cookies, Class clazz) throws IOException {
         properties = new ArrayList<>();
         String selector = initializerFactory.getPostTitleSelector(clazz);
-        logger.info("SELECTOR : {}", selector);
 
         for (Element post : elements) {
             url = Naver.CAFE_PREFIX.concat(post.select(selector).attr("href"));
