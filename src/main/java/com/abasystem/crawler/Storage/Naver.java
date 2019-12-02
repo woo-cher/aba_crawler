@@ -37,7 +37,7 @@ public class Naver {
     public static final String ID_XPATH = "//*[@id=\"id\"]";
     public static final String PW_XPATH = "//*[@id=\"pw\"]";
     public static final String SUBMIT_XPATH = "//*[@id=\"frmNIDLogin\"]/fieldset/input";
-    public static final String PETER_SEARCH_BUTTON_XPATH = "//*[@id=\"info-search\"]/form/button";
+    public static final String PETER_SEARCH_BUTTON_XPATH = "//*[@id=\"cafe-search\"]/form/button";
     public static final String HAPPY_SEARCH_BUTTON_XPATH = "//*[@id=\"cafe-search\"]/form/button";
 
     /**

@@ -38,6 +38,7 @@ public class CommonsUtils {
 
         // Find 'button' element with XPath
         HtmlButton btn = (HtmlButton) form.getByXPath(btnXPath).get(0);
+        logger.info("하.. : {}", form.getByXPath(btnXPath));
 
         /**
          * Result URL : https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=10322296&search.searchBy=0&search.query=%C1%F8%C1%D6
