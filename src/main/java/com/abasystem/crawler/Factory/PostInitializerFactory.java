@@ -31,4 +31,12 @@ public class PostInitializerFactory {
 
         else return Naver.DIV_POST_ARTICLE;
     }
+
+    public String getPagingNextSelector(Class clazz) {
+        if(clazz.equals(SpanTagPostInitializer.class)) {
+            return Naver.SPAN_POST_NEXT;
+        }
+
+        else return Naver.DIV_POST_NEXT;
+    }
 }

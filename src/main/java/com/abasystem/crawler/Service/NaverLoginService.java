@@ -84,4 +84,8 @@ public class NaverLoginService implements LoginStrategy {
 
         return isLogin;
     }
+
+    public void close() {
+        this.webClient.close();
+    }
 }

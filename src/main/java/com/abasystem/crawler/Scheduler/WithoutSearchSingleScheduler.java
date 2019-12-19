@@ -1,6 +1,7 @@
 package com.abasystem.crawler.Scheduler;
 
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
+import com.abasystem.crawler.Service.Converter.DataConverter;
 import com.abasystem.crawler.Service.Initializer.DivTagPostInitializer;
 import com.abasystem.crawler.Service.Operator.ParseTemplate;
 import com.abasystem.crawler.Storage.Naver;
@@ -41,6 +42,27 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
                             @Override
                             public String getUrlAfterSearch() {
                                 return Naver.MOM_DIRECT_URL;
+                            }
+                        }
+                ), DivTagPostInitializer.class);
+        logger.info("──── End JinjuMom Crawling\n");
+    }
+
+    public void test() throws Exception {
+        logger.info("──── initialize\n");
+        singleCrawling(
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "[사무실]전라.경상 사무실", 4, this.parseTemplate, "[직거래]상가-업종별",
+                        new ObtainDocumentStrategy() {
+                            @Override
+                            public Document getDocument(String url) throws IOException {
+                                return Jsoup.connect(url).cookies(cookies).get();
+                            }
+                        },
+
+                        new ObtainHtmlResourceStrategy() {
+                            @Override
+                            public String getUrlAfterSearch() {
+                                return DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=10322296&search.menuid=849&search.boardtype=L");
                             }
                         }
                 ), DivTagPostInitializer.class);

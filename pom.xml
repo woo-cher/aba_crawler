@@ -98,7 +98,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <executable>true</executable>
-                    <jvmArguments>-Xmx128m</jvmArguments>
+                    <jvmArguments>-Xms1024m</jvmArguments>
+                    <jvmArguments>-Xmx1024m</jvmArguments>
                 </configuration>
             </plugin>
             <plugin>

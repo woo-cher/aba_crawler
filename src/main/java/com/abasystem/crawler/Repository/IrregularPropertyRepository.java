@@ -1,5 +1,6 @@
 package com.abasystem.crawler.Repository;
 
+import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.Property.IrregularProperty;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import org.apache.ibatis.session.SqlSession;
@@ -43,5 +44,9 @@ public class IrregularPropertyRepository implements BasicQueryStrategy<Irregular
 
     public int getLastIndexId() {
         return sqlSession.selectOne("selectLastId");
+    }
+
+    public int createPropByList(List<? extends ModelMapper> properties) {
+        return sqlSession.insert("insertIrregularProps", properties);
     }
 }

@@ -20,12 +20,12 @@ public class IrregularReader implements ReadStrategy<IrregularProperty> {
     @Override
     public IrregularProperty parse(Document document, String url, String title) {
         logger.info("IrregularParser.parse initialize");
-        String phone = getPhoneNumber(document.select("#tbody"));
+        String phone = getPhoneNumber(document.select(".inbox"));
 
         return new IrregularProperty(title, document.select("#tbody").text(), document.select(".date").text(), url, phone);
     }
 
-    private String getPhoneNumber(Elements elements) {
+    public String getPhoneNumber(Elements elements) {
         String str = elements.text().replaceAll(" ", "");
 
         Pattern pattern = Pattern.compile(CustomValidator.PHONE_REGEX);

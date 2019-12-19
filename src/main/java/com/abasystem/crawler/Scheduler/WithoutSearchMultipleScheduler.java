@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -21,6 +22,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
     @Qualifier("CategoryOfPropertyOperator")
     private ParseTemplate parseTemplate;
 
+    @Scheduled(cron = "0 0 11 ? * 7")
     public void chuncheonCrawler() throws Exception {
         Map<String, Integer> chuncheonMap = categoryMapFactory.getChuncheonCategoryMap();
         logger.info("──── Chuncheon Multiple Crawler initialize\n");
@@ -33,6 +35,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── End Chuncheon Multiple Crawling\n");
     }
 
+    @Scheduled(cron = "0 0 12 ? * 7")
     public void goodShopCrawler() throws Exception {
         Map<String, Integer> goodShopMap = categoryMapFactory.getGoodShopCategoryMap();
         logger.info("──── GoodShop Multiple Crawler initialize\n");
@@ -45,18 +48,20 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── End GoodShop Multiple Crawling\n");
     }
 
+    @Scheduled(cron = "0 0 13 ? * 7")
     public void peterPanCrawler() throws Exception {
         Map<String, Integer> peterPanMap = categoryMapFactory.getPeterPanCategoryMap();
         logger.info("──── PeterPan Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "피터팬")
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "여기")
                         .build(), peterPanMap, DivTagPostInitializer.class
         );
 
         logger.info("──── End PeterPan Multiple Crawling\n");
     }
 
+    @Scheduled(cron = "0 0 15 ? * 7")
     public void boodongDirectCrawler() throws Exception {
         Map<String, Integer> boodongDirectMap = categoryMapFactory.getBoodongDirectCategoryMap();
         logger.info("──── BoodongDirect Multiple Crawler initialize\n");
@@ -69,6 +74,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── End BoodongDirect Multiple Crawling\n");
     }
 
+    @Scheduled(cron = "0 0 16 ? * 7")
     public void changWonCrawler() throws Exception {
         Map<String, Integer> changWonMap = categoryMapFactory.getChangWonCategoryMap();
         logger.info("──── ChangWon Multiple Crawler initialize\n");
@@ -81,6 +87,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── End ChangWon Multiple Crawling\n");
     }
 
+    @Scheduled(cron = "0 0 17 ? * 7")
     public void busanRoomCrawler() throws Exception {
         Map<String, Integer> busanRoomMap = categoryMapFactory.getBusanRoomCategoryMap();
         logger.info("──── BusanRoom Multiple Crawler initialize\n");
@@ -93,6 +100,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── End BusanRoom Multiple Crawling\n");
     }
 
+    @Scheduled(cron = "0 0 18 ? * 7")
     public void cheonanDirectCrawler() throws Exception {
         Map<String, Integer> cheonanDirectMap = categoryMapFactory.getCheonanDirectCategoryMap();
         logger.info("──── CheonanDirect Multiple Crawler initialize\n");

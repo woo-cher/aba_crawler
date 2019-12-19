@@ -30,6 +30,7 @@ public abstract class PostInitializer implements InitStrategy {
             elements.addAll(
                     Jsoup.connect(convertPageToNext(pageUrl, n)).get().select(Naver.DIV_POST_ARTICLE)
             );
+            logger.warn("n : {}", n);
         }
 
         logger.info("init posts successfully");

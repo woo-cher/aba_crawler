@@ -4,7 +4,7 @@ import com.abasystem.crawler.Builder.RegularPostBuilder;
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Model.Property.IrregularProperty;
 import com.abasystem.crawler.Model.Property.RegularProperty;
-import com.abasystem.crawler.Repository.SchedulerRepository;
+import com.abasystem.crawler.Repository.IrregularPropertyRepository;
 import com.abasystem.crawler.Strategy.BasicQueryStrategy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.CoreMatchers.is;
@@ -39,7 +41,7 @@ public class DbTest {
     private RepositoryFactory factory;
 
     @Autowired
-    private SchedulerRepository schedulerRepository;
+    private IrregularPropertyRepository Irepository;
 
     @Test
     public void dataSource() throws SQLException {
@@ -98,8 +100,16 @@ public class DbTest {
 
     @Test
     public void test() {
-        BasicQueryStrategy repository = factory.getTypeRepositoryCreator(RegularProperty.class);
-        logger.debug("repository {}", repository);
+        List<IrregularProperty> lists = new ArrayList<>();
+        lists.add(I_MOCK);
+        lists.add(I_MOCK);
+        lists.add(I_MOCK);
+        lists.add(I_MOCK);
+        lists.add(I_MOCK);
+        lists.add(I_MOCK);
+
+        int row = Irepository.createPropByList(lists);
+        logger.warn("row : {}", row);
     }
 
 }

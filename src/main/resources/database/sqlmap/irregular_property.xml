@@ -24,4 +24,14 @@
     <delete id="deleteIrregularProp" parameterType="int">
         DELETE FROM irregular_properties WHERE id = #{id}
     </delete>
+
+    <insert id="insertIrregularProps" parameterType="java.util.List">
+        INSERT INTO irregular_properties (title, url, description, date, phone, created_at)
+        VALUES
+        <foreach collection="list" item="property" separator=",">
+        (
+            #{property.title}, #{property.url}, #{property.description}, #{property.date}, #{property.phone}, current_timestamp
+        )
+        </foreach>
+    </insert>
 </mapper>

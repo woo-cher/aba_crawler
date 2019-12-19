@@ -5,6 +5,7 @@ import com.abasystem.crawler.Factory.PostInitializerFactory;
 import com.abasystem.crawler.Factory.RepositoryFactory;
 import com.abasystem.crawler.Mapper.ModelMapper;
 import com.abasystem.crawler.Model.Dto.CrawlerDto;
+import com.abasystem.crawler.Repository.IrregularPropertyRepository;
 import com.abasystem.crawler.Repository.SchedulerRepository;
 import com.abasystem.crawler.Service.Converter.DataConverter;
 import com.abasystem.crawler.Service.CrawlerService;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +51,9 @@ public abstract class CrawlerTemplate {
     @Autowired
     protected CafeCategoryMapFactory categoryMapFactory;
 
+    @Autowired
+    protected IrregularPropertyRepository irregularPropertyRepository;
+
     protected Map<String, String> cookies;
     protected List<? extends ModelMapper> properties;
     protected BasicQueryStrategy queryStrategy;
@@ -61,7 +66,12 @@ public abstract class CrawlerTemplate {
         ObtainHtmlResourceStrategy resourceStrategy = dto.getResourceStrategy();
         String urlAfterSearch = resourceStrategy.getUrlAfterSearch();
 
+        Document document = documentStrategy.getDocument(urlAfterSearch);
         Elements elements = postInitializer.initPosts(documentStrategy.getDocument(urlAfterSearch), dto.getPageCount());
+
+//        int maxPage = getMaxPage(document, clazz);
+//        logger.info("──── Max Page : {}", maxPage);
+//        Elements elements = postInitializer.initPosts(document, maxPage);
         logger.info("──── Elements obtain Success");
 
         properties = dto.getParseTemplate().parseAll(elements, cookies, clazz);
@@ -91,12 +101,18 @@ public abstract class CrawlerTemplate {
             Document document = Jsoup.connect(urlKey).cookies(cookies).get();
             Elements elements = postInitializer.initPosts(document, map.get(urlKey));
 
+//            int maxPage = getMaxPage(document, clazz);
+//            logger.warn("maxPage : {}", maxPage);
+//            Elements elements = postInitializer.initPosts(document, maxPage);
+
             String categoryTitle = document.select(Naver.CATEGORY_TITLE).text();
             dto.setFileName(DataConverter.convertNameToValidFileName(categoryTitle));
 
             properties = dto.getParseTemplate().parseAll(elements, cookies, clazz);
 
+//            int row = irregularPropertyRepository.createPropByList(properties);
             int row = 0;
+            logger.warn("─────────────────── End insert Query : {}", row);
 
             for (ModelMapper property : properties) {
                 queryStrategy = repositoryFactory.getTypeRepositoryCreator(property.getClass());
@@ -106,7 +122,10 @@ public abstract class CrawlerTemplate {
             service.writeAll(properties, dto.getFileName(), dto.getDirectory());
 
             repository.insertLog(row);
+
+            logger.warn("─────────────────── End writing");
         }
+        logger.warn("─────────────────── End Loop");
     }
 
     private void initializer(String id, String pw, Class clazz) throws Exception {
@@ -115,5 +134,28 @@ public abstract class CrawlerTemplate {
 
         this.cookies = loginService.getLoginCookie();
         this.postInitializer = postInitializerFactory.getPostCreator(clazz);
+    }
+
+    public int getMaxPage(Document document, Class clazz) throws IOException {
+        Document nextDoc = document;
+
+        int maxPage = 1;
+
+        while(true) {
+            String nextUrl = nextDoc.select(postInitializerFactory.getPagingNextSelector(clazz)).attr("href");
+
+            if(nextUrl.isEmpty()) {
+                break;
+            }
+
+            if(maxPage == 991) {
+                break;
+            }
+
+            nextDoc = Jsoup.connect(Naver.CAFE_PREFIX.concat(nextUrl)).get();
+            maxPage += 10;
+        }
+
+        return maxPage;
     }
 }

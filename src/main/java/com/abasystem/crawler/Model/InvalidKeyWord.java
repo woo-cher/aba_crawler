@@ -20,8 +20,12 @@ public enum InvalidKeyWord implements TypeMapper {
     KEY13("구함"),
     KEY14("중개업체"),
     KEY15("있을까요"),
+    KEY16("재테크"),
+    KEY17("투자"),
 
-    SPECIFIC1("장갑");
+    SPECIFIC1("장갑"),
+    SPECIFIC2("[양재동]1.5룸 반전세 있습니다"),
+    SPECIFIC3("성남시 은행동 완벽한 리모델링 전세!!");
 
     private String name;
 

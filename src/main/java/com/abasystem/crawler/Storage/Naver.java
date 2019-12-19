@@ -58,6 +58,9 @@ public class Naver {
     public static final String DIV_POST_ARTICLE = ".article";
     public static final String SPAN_POST_ARTICLE = "a[onmouseover='']";
 
+    public static final String DIV_POST_NEXT = ".pgR";
+    public static final String SPAN_POST_NEXT = ".pn";
+
     public static final String PAGE_NAVIGATOR = ".prev-next .on";
     public static final String PAGE_NAVIGATOR2 = ".prev-next td[class='on'] a";
 

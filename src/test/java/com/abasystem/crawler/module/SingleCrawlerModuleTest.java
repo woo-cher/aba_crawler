@@ -39,4 +39,9 @@ public class SingleCrawlerModuleTest {
     public void happyCrawler() throws Exception {
         searchAllScheduler.happyHouseCrawler();
     }
+
+//    @Test
+//    public void test() throws Exception {
+//        nonSearchScheduler.test();
+//    }
 }
