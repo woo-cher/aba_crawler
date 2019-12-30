@@ -26,7 +26,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
     @Qualifier("CategoryOfPropertyOperator")
     private ParseTemplate parseTemplate;
 
-    @Scheduled(cron = "0 40 23 ? * 7")
+    @Scheduled(cron = "0 0 23 ? * 7")
     public void jinjuMomCrawler() throws Exception {
         logger.info("──── JinjuMom Crawler initialize\n");
         singleCrawling(

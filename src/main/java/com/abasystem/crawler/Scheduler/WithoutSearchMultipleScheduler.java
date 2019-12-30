@@ -54,7 +54,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── PeterPan Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "여기")
+                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "피터팬의좋은방구하기")
                         .build(), peterPanMap, DivTagPostInitializer.class
         );
 

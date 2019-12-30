@@ -38,16 +38,13 @@ public class NaverLoginService implements LoginStrategy {
         Map<String, String> cookies = new HashMap<>();
         CookieManager cookieManager = webClient.getCookieManager();
 
-        logger.info("CookieManager : {}", cookieManager);
-        logger.info("WebClient : {}", webClient);
-
         Set<Cookie> cookieSet = cookieManager.getCookies();
 
         for (Cookie c : cookieSet) {
             cookies.put(c.getName(), c.getValue());
         }
 
-        logger.info("Get Cookies !! {}", cookies);
+        logger.info("Get Cookies : {}", cookies);
 
         return cookies;
     }
@@ -64,20 +61,18 @@ public class NaverLoginService implements LoginStrategy {
         webClient.waitForBackgroundJavaScriptStartingBefore(200);
         webClient.waitForBackgroundJavaScript(20000);
 
-        logger.warn("세팅아디 : {}", id);
-
         inputId.setText(id);
         inputPassword.setText(pw);
         inputSubmit.dblClick();
 
         if (!page.asText().contains("Naver Sign in")) {
             isLogin = false;
-            throw new Exception("cannot login with the id and pw");
+            throw new Exception("Cannot login with the id and pw");
         }
 
         else {
             isLogin = true;
-            logger.info("login success !!");
+            logger.info("──── login success");
         }
 
         page.remove();

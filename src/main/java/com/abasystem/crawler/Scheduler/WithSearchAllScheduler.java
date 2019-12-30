@@ -34,7 +34,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
     public void jinjuAreaCrawler() throws Exception {
         logger.info("──── PeterPan Single Crawler initialize\n");
         singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "피터팬", 2, this.templateWithType, "피터팬",
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "피터팬(진주지역)", 2, this.templateWithType, "피터팬",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {
@@ -52,7 +52,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
         logger.info("──── End PeterPan Single Crawling\n");
     }
 
-    @Scheduled(cron = "0 50 23 ? * 7")
+    @Scheduled(cron = "0 30 23 ? * 7")
     public void happyHouseCrawler() throws Exception {
         logger.info("──── HappyHouse Crawler initialize\n");
         singleCrawling(

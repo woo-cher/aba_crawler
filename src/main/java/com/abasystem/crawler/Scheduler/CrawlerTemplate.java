@@ -130,7 +130,6 @@ public abstract class CrawlerTemplate {
 
     private void initializer(String id, String pw, Class clazz) throws Exception {
         loginService.doLogin(id, pw);
-        logger.info("──── Is login ?" + loginService.isLogin());
 
         this.cookies = loginService.getLoginCookie();
         this.postInitializer = postInitializerFactory.getPostCreator(clazz);
