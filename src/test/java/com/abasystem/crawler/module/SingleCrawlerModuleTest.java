@@ -41,7 +41,8 @@ public class SingleCrawlerModuleTest {
     }
 
 //    @Test
-//    public void test() throws Exception {
-//        nonSearchScheduler.test();
+//    @Transactional
+//    public void daehakDongOneRoomCrawler() throws Exception {
+//        searchAllScheduler.daehakDongOneRoomCrawler();
 //    }
 }

@@ -122,7 +122,6 @@ public abstract class CrawlerTemplate {
             service.writeAll(properties, dto.getFileName(), dto.getDirectory());
 
             repository.insertLog(row);
-
             logger.warn("─────────────────── End writing");
         }
         logger.warn("─────────────────── End Loop");
@@ -133,6 +132,10 @@ public abstract class CrawlerTemplate {
 
         this.cookies = loginService.getLoginCookie();
         this.postInitializer = postInitializerFactory.getPostCreator(clazz);
+    }
+
+    private void clear() {
+        loginService.close();
     }
 
     public int getMaxPage(Document document, Class clazz) throws IOException {

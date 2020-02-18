@@ -73,4 +73,25 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                 ), DivTagPostInitializer.class);
         logger.info("──── End HappyHouse Crawling\n");
     }
+
+    public void daehakDongOneRoomCrawler() throws Exception {
+        logger.info("──── daehakDong Crawler initialize\n");
+        singleCrawling(
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "대학동", 100, this.templateWithoutType, "관악구_대학동",
+                        new ObtainDocumentStrategy() {
+                            @Override
+                            public Document getDocument(String url) throws IOException {
+                                return Jsoup.connect(url).cookies(cookies).get();
+                            }
+                        },
+
+                        new ObtainHtmlResourceStrategy() {
+                            @Override
+                            public String getUrlAfterSearch() throws IOException {
+                                return CommonsUtils.getUrlWithSearch("대학동", Naver.PETERPAN_GWANAKGU_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
+                            }
+                        }
+                ), DivTagPostInitializer.class);
+        logger.info("──── End daehakDong Crawler\n");
+    }
 }
