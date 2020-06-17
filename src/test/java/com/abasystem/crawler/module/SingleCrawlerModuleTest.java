@@ -40,6 +40,12 @@ public class SingleCrawlerModuleTest {
         searchAllScheduler.happyHouseCrawler();
     }
 
+    @Test
+    @Transactional
+    public void customCrawler() throws Exception {
+        nonSearchScheduler.peterOneRoomGangnamSeocho();
+    }
+
 //    @Test
 //    @Transactional
 //    public void daehakDongOneRoomCrawler() throws Exception {

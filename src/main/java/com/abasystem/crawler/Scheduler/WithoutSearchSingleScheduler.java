@@ -26,6 +26,10 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
     @Qualifier("CategoryOfPropertyOperator")
     private ParseTemplate parseTemplate;
 
+    @Autowired
+    @Qualifier("CategoryWithPostTypeOperator")
+    private ParseTemplate parseWithTypeTemplate;
+
     @Scheduled(cron = "0 0 23 ? * 7")
     public void jinjuMomCrawler() throws Exception {
         logger.info("──── JinjuMom Crawler initialize\n");
@@ -46,6 +50,29 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
                         }
                 ), DivTagPostInitializer.class);
         logger.info("──── End JinjuMom Crawling\n");
+    }
+
+    public void peterOneRoomGangnamSeocho() throws Exception {
+        // [원룸] 강남구.서초구
+        String url = "https://cafe.naver.com/ArticleList.nhn?search.clubid=10322296&search.menuid=2&search.boardtype=L";
+        logger.info("──── Custom Peterpan initialize\n {}", url);
+        singleCrawling(
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "[원룸]강남구.서초구3", 1000, this.parseWithTypeTemplate, "커스텀",
+                        new ObtainDocumentStrategy() {
+                            @Override
+                            public Document getDocument(String url) throws IOException {
+                                return Jsoup.connect(url).cookies(cookies).get();
+                            }
+                        },
+
+                        new ObtainHtmlResourceStrategy() {
+                            @Override
+                            public String getUrlAfterSearch() {
+                                return url;
+                            }
+                        }
+                ), DivTagPostInitializer.class);
+        logger.info("──── End Custom Peterpan Crawling\n");
     }
 
     public void test() throws Exception {

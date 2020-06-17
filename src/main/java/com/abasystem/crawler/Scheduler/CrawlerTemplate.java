@@ -72,7 +72,7 @@ public abstract class CrawlerTemplate {
 //        int maxPage = getMaxPage(document, clazz);
 //        logger.info("──── Max Page : {}", maxPage);
 //        Elements elements = postInitializer.initPosts(document, maxPage);
-        logger.info("──── Elements obtain Success");
+//        logger.info("──── Elements obtain Success");
 
         properties = dto.getParseTemplate().parseAll(elements, cookies, clazz);
         logger.info("──── Parsing Success");
