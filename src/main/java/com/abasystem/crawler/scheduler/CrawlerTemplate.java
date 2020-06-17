@@ -1,16 +1,17 @@
 package com.abasystem.crawler.scheduler;
 
-import com.abasystem.crawler.factory.CafeCategoryMapFactory;
-import com.abasystem.crawler.factory.PostInitializerFactory;
-import com.abasystem.crawler.factory.RepositoryFactory;
-import com.abasystem.crawler.mapper.ModelMapper;
-import com.abasystem.crawler.model.Dto.CrawlerDto;
 import com.abasystem.crawler.api.repository.IrregularPropertyRepository;
 import com.abasystem.crawler.api.repository.SchedulerRepository;
 import com.abasystem.crawler.api.service.Converter.DataConverter;
 import com.abasystem.crawler.api.service.CrawlerService;
 import com.abasystem.crawler.api.service.Initializer.PostInitializer;
 import com.abasystem.crawler.api.service.NaverLoginService;
+import com.abasystem.crawler.factory.CafeCategoryMapFactory;
+import com.abasystem.crawler.factory.PostInitializerFactory;
+import com.abasystem.crawler.factory.RepositoryFactory;
+import com.abasystem.crawler.mapper.ModelMapper;
+import com.abasystem.crawler.model.Dto.Account;
+import com.abasystem.crawler.model.Dto.CrawlerDto;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.BasicQueryStrategy;
 import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
@@ -60,7 +61,7 @@ public abstract class CrawlerTemplate {
     protected PostInitializer postInitializer;
 
     protected void singleCrawling(CrawlerDto dto, Class clazz) throws Exception {
-        initializer(dto.getId(), dto.getPassword(), clazz);
+        initializer(dto.getAccount(), clazz);
 
         ObtainDocumentStrategy documentStrategy = dto.getDocumentStrategy();
         ObtainHtmlResourceStrategy resourceStrategy = dto.getResourceStrategy();
@@ -95,7 +96,7 @@ public abstract class CrawlerTemplate {
     }
 
     protected void multipleCrawling(CrawlerDto dto, Map<String, Integer> map, Class clazz) throws Exception {
-        initializer(dto.getId(), dto.getPassword(), clazz);
+        initializer(dto.getAccount(), clazz);
 
         for (String urlKey : map.keySet()) {
             Document document = Jsoup.connect(urlKey).cookies(cookies).get();
@@ -127,8 +128,8 @@ public abstract class CrawlerTemplate {
         logger.warn("─────────────────── End Loop");
     }
 
-    private void initializer(String id, String pw, Class clazz) throws Exception {
-        loginService.doLogin(id, pw);
+    private void initializer(Account account, Class clazz) throws Exception {
+        loginService.doLogin(account.getUserId(), account.getPasswd());
 
         this.cookies = loginService.getLoginCookie();
         this.postInitializer = postInitializerFactory.getPostCreator(clazz);

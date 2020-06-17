@@ -14,8 +14,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class CrawlerDto {
-    private String id;
-    private String password;
+    private Account account;
     private String fileName;
     private int pageCount;
     private ParseTemplate parseTemplate;
@@ -24,8 +23,7 @@ public class CrawlerDto {
     private ObtainHtmlResourceStrategy resourceStrategy;
 
     public CrawlerDto(CrawlerDtoBuilder builder) {
-        this.id = builder.getId();
-        this.password = builder.getPassword();
+        this.account = builder.getAccount();
         this.fileName = builder.getFileName();
         this.pageCount = builder.getPageCount();
         this.parseTemplate = builder.getParseTemplate();

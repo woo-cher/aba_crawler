@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.logging.Level;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoginTest {
     private static final Logger logger = LoggerFactory.getLogger(LoginTest.class);

@@ -28,7 +28,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── Chuncheon Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "춘천부동산")
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "춘천부동산")
                         .build(), chuncheonMap, DivTagPostInitializer.class
         );
 
@@ -41,7 +41,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── GoodShop Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "좋은점포구하기")
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "좋은점포구하기")
                         .build(), goodShopMap, DivTagPostInitializer.class
         );
 
@@ -54,7 +54,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── PeterPan Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "피터팬의좋은방구하기")
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "피터팬의좋은방구하기")
                         .build(), peterPanMap, DivTagPostInitializer.class
         );
 
@@ -67,7 +67,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── BoodongDirect Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "부동산직거래")
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "부동산직거래")
                         .build(), boodongDirectMap, SpanTagPostInitializer.class
         );
 
@@ -80,7 +80,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── ChangWon Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "창원부동산직거래")
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "창원부동산직거래")
                         .build(), changWonMap, SpanTagPostInitializer.class
         );
 
@@ -93,7 +93,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── BusanRoom Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "부산부동산직거래")
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "부산부동산직거래")
                         .build(), busanRoomMap, SpanTagPostInitializer.class
         );
 
@@ -106,7 +106,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── CheonanDirect Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "천안부동산직거래")
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "천안부동산직거래")
                        .build(), cheonanDirectMap, SpanTagPostInitializer.class
         );
 
@@ -118,7 +118,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
         logger.info("──── YangSanMom Multiple Crawler initialize\n");
 
         multipleCrawling(
-                new CrawlerDtoBuilder(Naver.ID, Naver.PASSWORD, this.parseTemplate, "러브양산맘")
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "러브양산맘")
                         .build(), yangSanMap, DivTagPostInitializer.class
         );
 

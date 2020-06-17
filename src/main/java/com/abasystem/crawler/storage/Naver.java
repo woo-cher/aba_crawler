@@ -1,5 +1,8 @@
 package com.abasystem.crawler.storage;
 
+import com.abasystem.crawler.model.Dto.Account;
+import com.abasystem.crawler.util.CommonsUtils;
+
 public class Naver {
 
     /**
@@ -7,17 +10,9 @@ public class Naver {
      *  \\              USER FOR LOGIN                  \\
      *  --------------------------------------------------
      */
-    public static final String ID = "aba9246";
-    public static final String PASSWORD = "dkqk123!!";
-
-    public static final String ID2 = "uioo9034";
-    public static final String PASSWORD2 = "tkfkd01";
-
-    public static final String ID3 = "sbk5434";
-    public static final String PASSWORD3 = "dkqk123!!";
-
-//    public static final String MOM_ID = "kthlove0328";
-//    public static final String MOM_PW = "xognsqudtls";
+    public static final String ID = "";
+    public static final String PASSWORD = "";
+    public static final Account account = CommonsUtils.getAccountByProperties("id1", "pw1");
 
    /**
      *  --------------------------------------------------

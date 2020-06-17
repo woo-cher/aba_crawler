@@ -1,5 +1,6 @@
 package com.abasystem.crawler.util;
 
+import com.abasystem.crawler.model.Dto.Account;
 import com.abasystem.crawler.storage.Naver;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -10,7 +11,9 @@ import lombok.experimental.UtilityClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Todo)
@@ -50,5 +53,24 @@ public class CommonsUtils {
         logger.debug("currPage ? {}", currPage.getUrl());
 
         return currPage.getUrl().toString().concat(Naver.CAFE_POSTFIX);
+    }
+
+    public static Account getAccountByProperties(String ... aliasName) {
+        Account account = null;
+
+        try {
+            FileInputStream fi = new FileInputStream("db.properties");
+            Properties prop = new Properties();
+            prop.load(fi);
+
+            String id = prop.getProperty(aliasName[0]);
+            String pw = prop.getProperty(aliasName[1]);
+
+            account = new Account(id, pw);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return account;
     }
 }

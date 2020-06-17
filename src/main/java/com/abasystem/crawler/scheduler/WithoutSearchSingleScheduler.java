@@ -34,7 +34,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
     public void jinjuMomCrawler() throws Exception {
         logger.info("──── JinjuMom Crawler initialize\n");
         singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "부동산 (본인 직거래만 가능)", 4, this.parseTemplate, "진주맘",
+                new CrawlerDto(Naver.account, "부동산 (본인 직거래만 가능)", 4, this.parseTemplate, "진주맘",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {
@@ -57,7 +57,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
         String url = "https://cafe.naver.com/ArticleList.nhn?search.clubid=10322296&search.menuid=2&search.boardtype=L";
         logger.info("──── Custom Peterpan initialize\n {}", url);
         singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "[원룸]강남구.서초구3", 1000, this.parseWithTypeTemplate, "커스텀",
+                new CrawlerDto(Naver.account, "[원룸]강남구.서초구3", 1000, this.parseWithTypeTemplate, "커스텀",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {
@@ -78,7 +78,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
     public void test() throws Exception {
         logger.info("──── initialize\n");
         singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "[사무실]전라.경상 사무실", 4, this.parseTemplate, "[직거래]상가-업종별",
+                new CrawlerDto(Naver.account, "[사무실]전라.경상 사무실", 4, this.parseTemplate, "[직거래]상가-업종별",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {

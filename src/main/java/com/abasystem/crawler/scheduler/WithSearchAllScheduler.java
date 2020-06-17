@@ -34,7 +34,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
     public void jinjuAreaCrawler() throws Exception {
         logger.info("──── PeterPan Single Crawler initialize\n");
         singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "피터팬(진주지역)", 2, this.templateWithType, "피터팬",
+                new CrawlerDto(Naver.account, "피터팬(진주지역)", 2, this.templateWithType, "피터팬",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {
@@ -56,7 +56,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
     public void happyHouseCrawler() throws Exception {
         logger.info("──── HappyHouse Crawler initialize\n");
         singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "직거래매물", 2, this.templateWithoutType, "행가집",
+                new CrawlerDto(Naver.account, "직거래매물", 2, this.templateWithoutType, "행가집",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {
@@ -77,7 +77,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
     public void daehakDongOneRoomCrawler() throws Exception {
         logger.info("──── daehakDong Crawler initialize\n");
         singleCrawling(
-                new CrawlerDto(Naver.ID, Naver.PASSWORD, "대학동", 100, this.templateWithoutType, "관악구_대학동",
+                new CrawlerDto(Naver.account, "대학동", 100, this.templateWithoutType, "관악구_대학동",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {

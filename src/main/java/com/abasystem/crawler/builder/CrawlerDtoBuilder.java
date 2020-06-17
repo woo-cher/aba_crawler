@@ -1,7 +1,8 @@
 package com.abasystem.crawler.builder;
 
-import com.abasystem.crawler.model.Dto.CrawlerDto;
 import com.abasystem.crawler.api.service.Operator.ParseTemplate;
+import com.abasystem.crawler.model.Dto.Account;
+import com.abasystem.crawler.model.Dto.CrawlerDto;
 import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
 import com.abasystem.crawler.strategy.ObtainHtmlResourceStrategy;
 import lombok.Getter;
@@ -10,8 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CrawlerDtoBuilder implements Buildable {
-    private String id;
-    private String password;
+    private Account account;
     private String fileName;
     private int pageCount;
     private ParseTemplate parseTemplate;
@@ -19,20 +19,14 @@ public class CrawlerDtoBuilder implements Buildable {
     private String directory;
     private ObtainHtmlResourceStrategy resourceStrategy;
 
-    public CrawlerDtoBuilder(String id, String password, ParseTemplate parseTemplate, String directory) {
-        this.id = id;
-        this.password = password;
+    public CrawlerDtoBuilder(Account account, ParseTemplate parseTemplate, String directory) {
+        this.account = account;
         this.parseTemplate = parseTemplate;
         this.directory = directory;
     }
 
-    public CrawlerDtoBuilder id(String id) {
-        this.id = id;
-        return this;
-    }
-
-    public CrawlerDtoBuilder password(String password) {
-        this.password = password;
+    public CrawlerDtoBuilder id(Account account) {
+        this.account = account;
         return this;
     }
 

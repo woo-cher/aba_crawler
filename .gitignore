@@ -36,3 +36,4 @@ build/
 /property/
 /work/
 *.csv
+account.properties
