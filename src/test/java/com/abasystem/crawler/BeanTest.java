@@ -1,6 +1,6 @@
 package com.abasystem.crawler;
 
-import com.abasystem.crawler.Strategy.ValidationStrategy;
+import com.abasystem.crawler.strategy.ValidationStrategy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

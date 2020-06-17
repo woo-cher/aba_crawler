@@ -1,7 +1,7 @@
 package com.abasystem.crawler.module;
 
-import com.abasystem.crawler.Scheduler.WithSearchAllScheduler;
-import com.abasystem.crawler.Scheduler.WithoutSearchSingleScheduler;
+import com.abasystem.crawler.scheduler.WithSearchAllScheduler;
+import com.abasystem.crawler.scheduler.WithoutSearchSingleScheduler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

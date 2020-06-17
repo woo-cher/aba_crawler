@@ -1,7 +1,7 @@
 package com.abasystem.crawler.unit;
 
-import com.abasystem.crawler.Service.Reader.IrregularReader;
-import com.abasystem.crawler.Storage.Naver;
+import com.abasystem.crawler.service.Reader.IrregularReader;
+import com.abasystem.crawler.storage.Naver;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;

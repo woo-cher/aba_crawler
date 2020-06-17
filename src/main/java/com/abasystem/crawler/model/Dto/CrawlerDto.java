@@ -1,0 +1,35 @@
+package com.abasystem.crawler.model.Dto;
+
+import com.abasystem.crawler.builder.CrawlerDtoBuilder;
+import com.abasystem.crawler.service.Operator.ParseTemplate;
+import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
+import com.abasystem.crawler.strategy.ObtainHtmlResourceStrategy;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+public class CrawlerDto {
+    private String id;
+    private String password;
+    private String fileName;
+    private int pageCount;
+    private ParseTemplate parseTemplate;
+    private String directory;
+    private ObtainDocumentStrategy documentStrategy;
+    private ObtainHtmlResourceStrategy resourceStrategy;
+
+    public CrawlerDto(CrawlerDtoBuilder builder) {
+        this.id = builder.getId();
+        this.password = builder.getPassword();
+        this.fileName = builder.getFileName();
+        this.pageCount = builder.getPageCount();
+        this.parseTemplate = builder.getParseTemplate();
+        this.documentStrategy = builder.getDocumentStrategy();
+        this.directory = builder.getDirectory();
+    }
+}

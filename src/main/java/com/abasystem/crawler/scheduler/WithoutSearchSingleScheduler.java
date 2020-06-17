@@ -1,0 +1,98 @@
+package com.abasystem.crawler.scheduler;
+
+import com.abasystem.crawler.model.Dto.CrawlerDto;
+import com.abasystem.crawler.service.Converter.DataConverter;
+import com.abasystem.crawler.service.Initializer.DivTagPostInitializer;
+import com.abasystem.crawler.service.Operator.ParseTemplate;
+import com.abasystem.crawler.storage.Naver;
+import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
+import com.abasystem.crawler.strategy.ObtainHtmlResourceStrategy;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+@Component
+public class WithoutSearchSingleScheduler extends CrawlerTemplate {
+    private static final Logger logger = LoggerFactory.getLogger(WithoutSearchSingleScheduler.class);
+
+    @Autowired
+    @Qualifier("CategoryOfPropertyOperator")
+    private ParseTemplate parseTemplate;
+
+    @Autowired
+    @Qualifier("CategoryWithPostTypeOperator")
+    private ParseTemplate parseWithTypeTemplate;
+
+    @Scheduled(cron = "0 0 23 ? * 7")
+    public void jinjuMomCrawler() throws Exception {
+        logger.info("──── JinjuMom Crawler initialize\n");
+        singleCrawling(
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "부동산 (본인 직거래만 가능)", 4, this.parseTemplate, "진주맘",
+                        new ObtainDocumentStrategy() {
+                            @Override
+                            public Document getDocument(String url) throws IOException {
+                                return Jsoup.connect(url).cookies(cookies).get();
+                            }
+                        },
+
+                        new ObtainHtmlResourceStrategy() {
+                            @Override
+                            public String getUrlAfterSearch() {
+                                return Naver.MOM_DIRECT_URL;
+                            }
+                        }
+                ), DivTagPostInitializer.class);
+        logger.info("──── End JinjuMom Crawling\n");
+    }
+
+    public void peterOneRoomGangnamSeocho() throws Exception {
+        // [원룸] 강남구.서초구
+        String url = "https://cafe.naver.com/ArticleList.nhn?search.clubid=10322296&search.menuid=2&search.boardtype=L";
+        logger.info("──── Custom Peterpan initialize\n {}", url);
+        singleCrawling(
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "[원룸]강남구.서초구3", 1000, this.parseWithTypeTemplate, "커스텀",
+                        new ObtainDocumentStrategy() {
+                            @Override
+                            public Document getDocument(String url) throws IOException {
+                                return Jsoup.connect(url).cookies(cookies).get();
+                            }
+                        },
+
+                        new ObtainHtmlResourceStrategy() {
+                            @Override
+                            public String getUrlAfterSearch() {
+                                return url;
+                            }
+                        }
+                ), DivTagPostInitializer.class);
+        logger.info("──── End Custom Peterpan Crawling\n");
+    }
+
+    public void test() throws Exception {
+        logger.info("──── initialize\n");
+        singleCrawling(
+                new CrawlerDto(Naver.ID, Naver.PASSWORD, "[사무실]전라.경상 사무실", 4, this.parseTemplate, "[직거래]상가-업종별",
+                        new ObtainDocumentStrategy() {
+                            @Override
+                            public Document getDocument(String url) throws IOException {
+                                return Jsoup.connect(url).cookies(cookies).get();
+                            }
+                        },
+
+                        new ObtainHtmlResourceStrategy() {
+                            @Override
+                            public String getUrlAfterSearch() {
+                                return DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=10322296&search.menuid=849&search.boardtype=L");
+                            }
+                        }
+                ), DivTagPostInitializer.class);
+        logger.info("──── End JinjuMom Crawling\n");
+    }
+}

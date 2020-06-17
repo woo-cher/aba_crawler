@@ -1,6 +1,6 @@
 package com.abasystem.crawler.unit;
 
-import com.abasystem.crawler.Storage.Naver;
+import com.abasystem.crawler.storage.Naver;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;

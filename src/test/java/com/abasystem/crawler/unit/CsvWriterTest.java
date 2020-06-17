@@ -1,13 +1,13 @@
 package com.abasystem.crawler.unit;
 
 import au.com.bytecode.opencsv.CSVWriter;
-import com.abasystem.crawler.Builder.RegularPostBuilder;
-import com.abasystem.crawler.Factory.ServiceFactory;
-import com.abasystem.crawler.Mapper.ModelMapper;
-import com.abasystem.crawler.Model.Property.IrregularProperty;
-import com.abasystem.crawler.Service.Converter.DataConverter;
-import com.abasystem.crawler.Service.CrawlerService;
-import com.abasystem.crawler.Strategy.CsvWriteStrategy;
+import com.abasystem.crawler.builder.RegularPostBuilder;
+import com.abasystem.crawler.factory.ServiceFactory;
+import com.abasystem.crawler.mapper.ModelMapper;
+import com.abasystem.crawler.model.Property.IrregularProperty;
+import com.abasystem.crawler.service.Converter.DataConverter;
+import com.abasystem.crawler.service.CrawlerService;
+import com.abasystem.crawler.strategy.CsvWriteStrategy;
 import com.google.gson.JsonObject;
 import org.junit.Before;
 import org.junit.Test;

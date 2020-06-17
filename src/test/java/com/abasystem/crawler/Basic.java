@@ -1,6 +1,6 @@
 package com.abasystem.crawler;
 
-import com.abasystem.crawler.Storage.Naver;
+import com.abasystem.crawler.storage.Naver;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;

@@ -1,14 +1,14 @@
 package com.abasystem.crawler.unit;
 
-import com.abasystem.crawler.Builder.RegularPostBuilder;
-import com.abasystem.crawler.Factory.PostInitializerFactory;
-import com.abasystem.crawler.Model.Property.IrregularProperty;
-import com.abasystem.crawler.Model.Property.RegularProperty;
-import com.abasystem.crawler.Service.Initializer.DivTagPostInitializer;
-import com.abasystem.crawler.Service.NaverLoginService;
-import com.abasystem.crawler.Service.Operator.ParseTemplate;
-import com.abasystem.crawler.Storage.Naver;
-import com.abasystem.crawler.Strategy.ValidationStrategy;
+import com.abasystem.crawler.builder.RegularPostBuilder;
+import com.abasystem.crawler.factory.PostInitializerFactory;
+import com.abasystem.crawler.model.Property.IrregularProperty;
+import com.abasystem.crawler.model.Property.RegularProperty;
+import com.abasystem.crawler.service.Initializer.DivTagPostInitializer;
+import com.abasystem.crawler.service.NaverLoginService;
+import com.abasystem.crawler.service.Operator.ParseTemplate;
+import com.abasystem.crawler.storage.Naver;
+import com.abasystem.crawler.strategy.ValidationStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
