@@ -1,7 +1,7 @@
 package com.abasystem.crawler.builder;
 
 import com.abasystem.crawler.model.Dto.CrawlerDto;
-import com.abasystem.crawler.service.Operator.ParseTemplate;
+import com.abasystem.crawler.api.service.Operator.ParseTemplate;
 import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
 import com.abasystem.crawler.strategy.ObtainHtmlResourceStrategy;
 import lombok.Getter;

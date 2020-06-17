@@ -4,7 +4,7 @@ import com.abasystem.crawler.builder.RegularPostBuilder;
 import com.abasystem.crawler.factory.RepositoryFactory;
 import com.abasystem.crawler.model.Property.IrregularProperty;
 import com.abasystem.crawler.model.Property.RegularProperty;
-import com.abasystem.crawler.repository.IrregularPropertyRepository;
+import com.abasystem.crawler.api.repository.IrregularPropertyRepository;
 import com.abasystem.crawler.strategy.BasicQueryStrategy;
 import org.junit.Test;
 import org.junit.runner.RunWith;

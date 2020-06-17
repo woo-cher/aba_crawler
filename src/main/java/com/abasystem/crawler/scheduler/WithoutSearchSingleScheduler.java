@@ -1,9 +1,9 @@
 package com.abasystem.crawler.scheduler;
 
 import com.abasystem.crawler.model.Dto.CrawlerDto;
-import com.abasystem.crawler.service.Converter.DataConverter;
-import com.abasystem.crawler.service.Initializer.DivTagPostInitializer;
-import com.abasystem.crawler.service.Operator.ParseTemplate;
+import com.abasystem.crawler.api.service.Converter.DataConverter;
+import com.abasystem.crawler.api.service.Initializer.DivTagPostInitializer;
+import com.abasystem.crawler.api.service.Operator.ParseTemplate;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
 import com.abasystem.crawler.strategy.ObtainHtmlResourceStrategy;

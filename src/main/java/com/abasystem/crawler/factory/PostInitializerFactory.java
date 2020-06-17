@@ -1,7 +1,7 @@
 package com.abasystem.crawler.factory;
 
-import com.abasystem.crawler.service.Initializer.PostInitializer;
-import com.abasystem.crawler.service.Initializer.SpanTagPostInitializer;
+import com.abasystem.crawler.api.service.Initializer.PostInitializer;
+import com.abasystem.crawler.api.service.Initializer.SpanTagPostInitializer;
 import com.abasystem.crawler.storage.Naver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
