@@ -52,10 +52,30 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
         logger.info("──── End JinjuMom Crawling\n");
     }
 
+    public void jinjuNCrawler() throws Exception {
+        logger.info("──── JinJu_N Crawler initialize\n");
+        singleCrawling(
+                new CrawlerDto(Naver.account, "진주엔(부동산매물_개인)", 28, this.parseTemplate, "진주엔",
+                        new ObtainDocumentStrategy() {
+                            @Override
+                            public Document getDocument(String url) throws IOException {
+                                return Jsoup.connect(url).cookies(cookies).get();
+                            }
+                        },
+
+                        new ObtainHtmlResourceStrategy() {
+                            @Override
+                            public String getUrlAfterSearch() {
+                                return Naver.JINJU_N_URL;
+                            }
+                        }
+                ), DivTagPostInitializer.class, NaverCafeType.JINJU_N);
+        logger.info("──── End JinJu_N Crawling\n");
+    }
+
     public void peterOneRoomGangnamSeocho() throws Exception {
         // [원룸] 강남구.서초구
-        String url = "https://cafe.naver.com/ArticleList.nhn?search.clubid=10322296&search.menuid=2&search.boardtype=L";
-        logger.info("──── Custom Peterpan initialize\n {}", url);
+        logger.info("──── Custom Peterpan initialize\n {}");
         singleCrawling(
                 new CrawlerDto(Naver.account, "[원룸]강남구.서초구3", 1000, this.parseWithTypeTemplate, "커스텀",
                         new ObtainDocumentStrategy() {
@@ -68,7 +88,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
                         new ObtainHtmlResourceStrategy() {
                             @Override
                             public String getUrlAfterSearch() {
-                                return url;
+                                return "https://cafe.naver.com/ArticleList.nhn?search.clubid=10322296&search.menuid=2&search.boardtype=L";
                             }
                         }
                 ), DivTagPostInitializer.class, NaverCafeType.PETERPAN);

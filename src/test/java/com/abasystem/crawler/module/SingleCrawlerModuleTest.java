@@ -42,6 +42,12 @@ public class SingleCrawlerModuleTest {
 
     @Test
     @Transactional
+    public void jinjuNCrawler() throws Exception {
+        nonSearchScheduler.jinjuNCrawler();
+    }
+
+    @Test
+    @Transactional
     public void customCrawler() throws Exception {
         nonSearchScheduler.peterOneRoomGangnamSeocho();
     }

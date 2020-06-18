@@ -22,7 +22,7 @@ public class IrregularReader implements ReadStrategy<IrregularProperty> {
         logger.info("IrregularParser.parse initialize");
         String phone = getPhoneNumber(document.select("#main-area"));
 
-        return new IrregularProperty(title, document.select("#tbody").text(), document.select(".date").text(), url, phone);
+        return new IrregularProperty(title, document.select("#tbody").text(), document.select(".m-tcol-c.date").text(), url, phone);
     }
 
     public String getPhoneNumber(Elements elements) {

@@ -71,7 +71,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                                 return CommonsUtils.getUrlWithSearch("직거래", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
                             }
                         }
-                ), DivTagPostInitializer.class, NaverCafeType.HAPPY);
+                ), DivTagPostInitializer.class, NaverCafeType.HAPPY_HOUSE);
         logger.info("──── End HappyHouse Crawling\n");
     }
 

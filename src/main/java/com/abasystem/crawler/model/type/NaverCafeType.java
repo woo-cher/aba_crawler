@@ -11,8 +11,9 @@ public enum NaverCafeType implements TypeMapper {
      *  ex) https://cafe.naver.com/kig (피터팬)
      */
     MOM("/jinjululu"),
-    HAPPY("/jinju0004"),
+    HAPPY_HOUSE("/jinju0004"),
     PETERPAN("/kig"),
+    JINJU_N("/lgtabook"),
 
     UNKNOWN("Mismatch Cafe Name");
 
