@@ -7,8 +7,9 @@
 &nbsp;&nbsp;![][Build]
 &nbsp;&nbsp;![][Spring]
 &nbsp;&nbsp;![][Mybatis]
-&nbsp;&nbsp;![][HtmlUnit]
+&nbsp;&nbsp;![][Jsoup]
 &nbsp;&nbsp;![][OpenCsv]
+&nbsp;&nbsp;![][HtmlUnit]
 <br>
 
 &nbsp;&nbsp;**특정 카페**에 **지정한 카테고리**의 **부동산 매물 게시글**을 크롤링 하는 프로그램임.
@@ -92,5 +93,6 @@
 [Java]:https://img.shields.io/badge/java-1.8-blue?style=flat-square&logo=Java&logoColor=Red
 [Spring]:https://img.shields.io/badge/springboot-2.1.8.RELEASE-blue?style=flat-square&logo=Spring
 [Mybatis]:https://img.shields.io/badge/mybatis-2.0-blue?style=flat-square&logo=MySQL&logoColor=white
-[HtmlUnit]:https://img.shields.io/badge/jsoup-1.10.3-blue?style=flat-square&logo=LibraryThing&logoColor=white
+[Jsoup]:https://img.shields.io/badge/jsoup-1.10.3-blue?style=flat-square&logo=LibraryThing&logoColor=white
 [OpenCsv]:https://img.shields.io/badge/openCSV-2.3-blue?style=flat-square&logo=LibraryThing&logoColor=white
+[HtmlUnit]:https://img.shields.io/badge/htmlunit-2.36.0-blue?style=flat-square&logo=LibraryThing&logoColor=white
