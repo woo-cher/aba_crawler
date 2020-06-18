@@ -1,6 +1,6 @@
 package com.abasystem.crawler.api.service.Reader;
 
-import com.abasystem.crawler.model.Property.IrregularProperty;
+import com.abasystem.crawler.model.property.IrregularProperty;
 import com.abasystem.crawler.api.service.CustomValidator;
 import com.abasystem.crawler.strategy.ReadStrategy;
 import org.jsoup.nodes.Document;

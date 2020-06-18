@@ -1,9 +1,9 @@
 package com.abasystem.crawler.api.service;
 
 import com.abasystem.crawler.model.InvalidKeyWord;
-import com.abasystem.crawler.model.Type.PropertyType;
-import com.abasystem.crawler.model.Type.RegularType;
-import com.abasystem.crawler.model.Type.TradeType;
+import com.abasystem.crawler.model.type.PropertyType;
+import com.abasystem.crawler.model.type.RegularType;
+import com.abasystem.crawler.model.type.TradeType;
 import com.abasystem.crawler.model.ValidKeyword;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.ValidationStrategy;

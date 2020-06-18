@@ -1,8 +1,8 @@
 package com.abasystem.crawler.factory;
 
 import com.abasystem.crawler.mapper.ModelMapper;
-import com.abasystem.crawler.model.Property.IrregularProperty;
-import com.abasystem.crawler.model.Property.RegularProperty;
+import com.abasystem.crawler.model.property.IrregularProperty;
+import com.abasystem.crawler.model.property.RegularProperty;
 import com.abasystem.crawler.strategy.CsvWriteStrategy;
 import com.abasystem.crawler.strategy.ReadStrategy;
 import org.slf4j.Logger;

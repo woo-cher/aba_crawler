@@ -1,7 +1,7 @@
 package com.abasystem.crawler.api.repository;
 
 import com.abasystem.crawler.mapper.ModelMapper;
-import com.abasystem.crawler.model.Property.IrregularProperty;
+import com.abasystem.crawler.model.property.IrregularProperty;
 import com.abasystem.crawler.strategy.BasicQueryStrategy;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

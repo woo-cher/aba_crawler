@@ -1,6 +1,6 @@
 package com.abasystem.crawler.util;
 
-import com.abasystem.crawler.model.Dto.Account;
+import com.abasystem.crawler.model.dto.Account;
 import com.abasystem.crawler.storage.Naver;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;

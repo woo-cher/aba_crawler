@@ -1,6 +1,6 @@
 package com.abasystem.crawler;
 
-import com.abasystem.crawler.model.Type.NaverCafeType;
+import com.abasystem.crawler.model.type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

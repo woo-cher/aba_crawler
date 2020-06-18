@@ -1,6 +1,6 @@
 package com.abasystem.crawler.storage;
 
-import com.abasystem.crawler.model.Dto.Account;
+import com.abasystem.crawler.model.dto.Account;
 import com.abasystem.crawler.util.CommonsUtils;
 
 public class Naver {

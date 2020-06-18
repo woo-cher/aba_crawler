@@ -1,4 +1,4 @@
-package com.abasystem.crawler.model.Dto;
+package com.abasystem.crawler.model.dto;
 
 import lombok.*;
 

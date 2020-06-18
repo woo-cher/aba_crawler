@@ -1,6 +1,6 @@
 package com.abasystem.crawler.api.service.Operator;
 
-import com.abasystem.crawler.model.Property.IrregularProperty;
+import com.abasystem.crawler.model.property.IrregularProperty;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;

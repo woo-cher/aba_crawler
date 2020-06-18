@@ -1,7 +1,7 @@
 package com.abasystem.crawler.api.service.Writer;
 
 import au.com.bytecode.opencsv.CSVWriter;
-import com.abasystem.crawler.model.Property.RegularProperty;
+import com.abasystem.crawler.model.property.RegularProperty;
 import com.abasystem.crawler.strategy.CsvWriteStrategy;
 import com.google.gson.JsonObject;
 import org.slf4j.Logger;

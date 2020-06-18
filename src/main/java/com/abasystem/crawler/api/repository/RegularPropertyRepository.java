@@ -1,6 +1,6 @@
 package com.abasystem.crawler.api.repository;
 
-import com.abasystem.crawler.model.Property.RegularProperty;
+import com.abasystem.crawler.model.property.RegularProperty;
 import com.abasystem.crawler.strategy.BasicQueryStrategy;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

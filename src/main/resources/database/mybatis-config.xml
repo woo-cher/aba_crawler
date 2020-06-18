@@ -8,8 +8,8 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias alias="RegularProperty" type="com.abasystem.crawler.model.Property.RegularProperty"/>
-		<typeAlias alias="IrregularProperty" type="com.abasystem.crawler.model.Property.IrregularProperty"/>
+		<typeAlias alias="RegularProperty" type="com.abasystem.crawler.model.property.RegularProperty"/>
+		<typeAlias alias="IrregularProperty" type="com.abasystem.crawler.model.property.IrregularProperty"/>
 	</typeAliases>
 
 	<typeHandlers>

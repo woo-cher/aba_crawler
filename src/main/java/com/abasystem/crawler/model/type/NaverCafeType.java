@@ -1,4 +1,4 @@
-package com.abasystem.crawler.model.Type;
+package com.abasystem.crawler.model.type;
 
 import com.abasystem.crawler.mapper.TypeMapper;
 import com.fasterxml.jackson.annotation.JsonFormat;

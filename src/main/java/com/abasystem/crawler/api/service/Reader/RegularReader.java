@@ -1,7 +1,7 @@
 package com.abasystem.crawler.api.service.Reader;
 
 import com.abasystem.crawler.builder.RegularPostBuilder;
-import com.abasystem.crawler.model.Property.RegularProperty;
+import com.abasystem.crawler.model.property.RegularProperty;
 import com.abasystem.crawler.strategy.ReadStrategy;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;

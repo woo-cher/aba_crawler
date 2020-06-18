@@ -3,7 +3,7 @@ package com.abasystem.crawler.api.service.Operator;
 import com.abasystem.crawler.factory.PostInitializerFactory;
 import com.abasystem.crawler.factory.ServiceFactory;
 import com.abasystem.crawler.mapper.ModelMapper;
-import com.abasystem.crawler.model.Type.NaverCafeType;
+import com.abasystem.crawler.model.type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.ValidationStrategy;
 import org.jsoup.Jsoup;

@@ -1,4 +1,4 @@
-package com.abasystem.crawler.model.Property;
+package com.abasystem.crawler.model.property;
 
 import com.abasystem.crawler.mapper.ModelMapper;
 import lombok.*;

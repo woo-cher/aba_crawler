@@ -1,4 +1,4 @@
-package com.abasystem.crawler.model.Dto;
+package com.abasystem.crawler.model.dto;
 
 import com.abasystem.crawler.builder.CrawlerDtoBuilder;
 import com.abasystem.crawler.api.service.Operator.ParseTemplate;
