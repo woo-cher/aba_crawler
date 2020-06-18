@@ -5,18 +5,13 @@ import com.abasystem.crawler.api.service.Operator.ParseTemplate;
 import com.abasystem.crawler.model.dto.CrawlerDto;
 import com.abasystem.crawler.model.type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
-import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
 import com.abasystem.crawler.strategy.ObtainHtmlResourceStrategy;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 @Component
 public class WithoutSearchSingleScheduler extends CrawlerTemplate {
@@ -35,13 +30,6 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
         logger.info("──── JinjuMom Crawler initialize\n");
         singleCrawling(
                 new CrawlerDto(Naver.account, "부동산 (본인 직거래만 가능)", 45, this.parseTemplate, "진주맘",
-                        new ObtainDocumentStrategy() {
-                            @Override
-                            public Document getDocument(String url) throws IOException {
-                                return Jsoup.connect(url).cookies(cookies).get();
-                            }
-                        },
-
                         new ObtainHtmlResourceStrategy() {
                             @Override
                             public String getUrlAfterSearch() {
@@ -56,13 +44,6 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
         logger.info("──── JinJu_N Crawler initialize\n");
         singleCrawling(
                 new CrawlerDto(Naver.account, "진주엔(부동산매물_개인)", 28, this.parseTemplate, "진주엔",
-                        new ObtainDocumentStrategy() {
-                            @Override
-                            public Document getDocument(String url) throws IOException {
-                                return Jsoup.connect(url).cookies(cookies).get();
-                            }
-                        },
-
                         new ObtainHtmlResourceStrategy() {
                             @Override
                             public String getUrlAfterSearch() {
@@ -78,13 +59,6 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
         logger.info("──── Custom Peterpan initialize\n {}");
         singleCrawling(
                 new CrawlerDto(Naver.account, "[원룸]강남구.서초구3", 1000, this.parseWithTypeTemplate, "커스텀",
-                        new ObtainDocumentStrategy() {
-                            @Override
-                            public Document getDocument(String url) throws IOException {
-                                return Jsoup.connect(url).cookies(cookies).get();
-                            }
-                        },
-
                         new ObtainHtmlResourceStrategy() {
                             @Override
                             public String getUrlAfterSearch() {

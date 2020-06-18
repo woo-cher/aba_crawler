@@ -30,4 +30,13 @@ public class CrawlerDto {
         this.documentStrategy = builder.getDocumentStrategy();
         this.directory = builder.getDirectory();
     }
+
+    public CrawlerDto(Account account, String fileName, int pageCount, ParseTemplate parseTemplate, String directory, ObtainHtmlResourceStrategy resourceStrategy) {
+        this.account = account;
+        this.fileName = fileName;
+        this.pageCount = pageCount;
+        this.parseTemplate = parseTemplate;
+        this.directory = directory;
+        this.resourceStrategy = resourceStrategy;
+    }
 }

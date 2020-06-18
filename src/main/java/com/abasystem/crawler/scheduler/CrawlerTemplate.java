@@ -68,8 +68,8 @@ public class CrawlerTemplate {
         ObtainHtmlResourceStrategy resourceStrategy = dto.getResourceStrategy();
         String urlAfterSearch = resourceStrategy.getUrlAfterSearch();
 
-        Document document = documentStrategy.getDocument(urlAfterSearch);
-        Elements elements = postInitializer.initPosts(documentStrategy.getDocument(urlAfterSearch), dto.getPageCount());
+        Document document = Jsoup.connect(urlAfterSearch).cookies(cookies).get();
+        Elements elements = postInitializer.initPosts(document, dto.getPageCount());
 
 //        int maxPage = getMaxPage(document, clazz);
 //        logger.info("──── Max Page : {}", maxPage);
