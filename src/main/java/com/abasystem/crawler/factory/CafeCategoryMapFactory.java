@@ -1,7 +1,7 @@
 package com.abasystem.crawler.factory;
 
 import com.abasystem.crawler.mapper.CategoryMapper;
-import com.abasystem.crawler.api.service.Converter.DataConverter;
+import com.abasystem.crawler.api.service.converter.DataConverter;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

@@ -6,7 +6,7 @@ import com.abasystem.crawler.model.property.IrregularProperty;
 import com.abasystem.crawler.model.property.RegularProperty;
 import com.abasystem.crawler.api.service.Initializer.DivTagPostInitializer;
 import com.abasystem.crawler.api.service.NaverLoginService;
-import com.abasystem.crawler.api.service.Operator.ParseTemplate;
+import com.abasystem.crawler.api.service.operator.ParseTemplate;
 import com.abasystem.crawler.model.type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.ValidationStrategy;

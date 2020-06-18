@@ -1,6 +1,6 @@
 package com.abasystem.crawler.builder;
 
-import com.abasystem.crawler.api.service.Operator.ParseTemplate;
+import com.abasystem.crawler.api.service.operator.ParseTemplate;
 import com.abasystem.crawler.model.dto.Account;
 import com.abasystem.crawler.model.dto.CrawlerDto;
 import com.abasystem.crawler.strategy.ObtainDocumentStrategy;

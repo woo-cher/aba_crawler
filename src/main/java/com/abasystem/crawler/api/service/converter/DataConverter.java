@@ -1,4 +1,4 @@
-package com.abasystem.crawler.api.service.Converter;
+package com.abasystem.crawler.api.service.converter;
 
 import com.abasystem.crawler.mapper.ModelMapper;
 import com.abasystem.crawler.api.service.CustomValidator;

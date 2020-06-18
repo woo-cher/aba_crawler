@@ -1,4 +1,4 @@
-package com.abasystem.crawler.api.service.Operator;
+package com.abasystem.crawler.api.service.operator;
 
 import com.abasystem.crawler.model.property.IrregularProperty;
 import org.jsoup.nodes.Document;
@@ -9,18 +9,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("CategoryWithSearchOperator")
-public class CategoryWithSearchOperator extends ParseTemplate {
-    private static final Logger logger = LoggerFactory.getLogger(CategoryWithSearchOperator.class);
+@Qualifier("CategoryOfPropertyOperator")
+public class CategoryOfPropertyOperator extends ParseTemplate {
+    private static final Logger logger = LoggerFactory.getLogger(CategoryOfPropertyOperator.class);
 
     @Override
     public IrregularProperty getModelAfterParse(Elements elements, Document doc, String url, String title) {
-        logger.info("CategoryWithSearchOperator initialize");
+        logger.info("CategoryOfPropertyOperator initialize");
         return (IrregularProperty) serviceFactory.parserCreator(false).parse(doc, url, title);
     }
 
     @Override
     public boolean isContainPropertyKeyword(Elements elements) {
-        return validationStrategy.isContainPropertyType(elements);
+        // Nothing to validation
+        return true;
     }
 }

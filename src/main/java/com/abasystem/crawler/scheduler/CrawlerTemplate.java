@@ -2,7 +2,7 @@ package com.abasystem.crawler.scheduler;
 
 import com.abasystem.crawler.api.repository.IrregularPropertyRepository;
 import com.abasystem.crawler.api.repository.SchedulerRepository;
-import com.abasystem.crawler.api.service.Converter.DataConverter;
+import com.abasystem.crawler.api.service.converter.DataConverter;
 import com.abasystem.crawler.api.service.CrawlerService;
 import com.abasystem.crawler.api.service.Initializer.PostInitializer;
 import com.abasystem.crawler.api.service.NaverLoginService;

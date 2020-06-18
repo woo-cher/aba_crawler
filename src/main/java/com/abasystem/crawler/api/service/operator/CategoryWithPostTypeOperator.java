@@ -1,4 +1,4 @@
-package com.abasystem.crawler.api.service.Operator;
+package com.abasystem.crawler.api.service.operator;
 
 import com.abasystem.crawler.mapper.ModelMapper;
 import org.jsoup.nodes.Document;

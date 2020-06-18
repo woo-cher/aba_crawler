@@ -1,7 +1,7 @@
 package com.abasystem.crawler.scheduler;
 
 import com.abasystem.crawler.api.service.Initializer.DivTagPostInitializer;
-import com.abasystem.crawler.api.service.Operator.ParseTemplate;
+import com.abasystem.crawler.api.service.operator.ParseTemplate;
 import com.abasystem.crawler.model.dto.CrawlerDto;
 import com.abasystem.crawler.model.type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;

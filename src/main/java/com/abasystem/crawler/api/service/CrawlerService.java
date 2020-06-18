@@ -2,8 +2,8 @@ package com.abasystem.crawler.api.service;
 
 import com.abasystem.crawler.factory.ServiceFactory;
 import com.abasystem.crawler.mapper.ModelMapper;
-import com.abasystem.crawler.api.service.Converter.DataConverter;
-import com.abasystem.crawler.api.service.Writer.CustomOpenCsvWriter;
+import com.abasystem.crawler.api.service.converter.DataConverter;
+import com.abasystem.crawler.api.service.writer.CustomOpenCsvWriter;
 import com.abasystem.crawler.strategy.CsvWriteStrategy;
 import com.abasystem.crawler.strategy.ValidationStrategy;
 import com.google.gson.JsonObject;

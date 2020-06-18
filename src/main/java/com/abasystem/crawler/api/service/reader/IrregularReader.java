@@ -1,4 +1,4 @@
-package com.abasystem.crawler.api.service.Reader;
+package com.abasystem.crawler.api.service.reader;
 
 import com.abasystem.crawler.model.property.IrregularProperty;
 import com.abasystem.crawler.api.service.CustomValidator;

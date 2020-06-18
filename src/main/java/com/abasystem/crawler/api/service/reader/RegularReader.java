@@ -1,4 +1,4 @@
-package com.abasystem.crawler.api.service.Reader;
+package com.abasystem.crawler.api.service.reader;
 
 import com.abasystem.crawler.builder.RegularPostBuilder;
 import com.abasystem.crawler.model.property.RegularProperty;

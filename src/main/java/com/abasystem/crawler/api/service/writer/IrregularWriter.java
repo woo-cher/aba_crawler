@@ -1,4 +1,4 @@
-package com.abasystem.crawler.api.service.Writer;
+package com.abasystem.crawler.api.service.writer;
 
 import au.com.bytecode.opencsv.CSVWriter;
 import com.abasystem.crawler.model.property.IrregularProperty;
