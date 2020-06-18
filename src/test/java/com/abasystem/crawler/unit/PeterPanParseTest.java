@@ -7,6 +7,7 @@ import com.abasystem.crawler.model.Property.RegularProperty;
 import com.abasystem.crawler.api.service.Initializer.DivTagPostInitializer;
 import com.abasystem.crawler.api.service.NaverLoginService;
 import com.abasystem.crawler.api.service.Operator.ParseTemplate;
+import com.abasystem.crawler.model.Type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.ValidationStrategy;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -161,7 +162,7 @@ public class PeterPanParseTest {
         elements = factory.getPostCreator(DivTagPostInitializer.class).initPosts(doc, 1);
 
         logger.debug("el ? {}", elements.text());
-        logger.debug("크롤링 결과 : {}", parseTemplate.parseAll(elements, cookies, DivTagPostInitializer.class));
+        logger.debug("크롤링 결과 : {}", parseTemplate.parseAll(elements, cookies, DivTagPostInitializer.class, NaverCafeType.PETERPAN));
     }
 
     @Test

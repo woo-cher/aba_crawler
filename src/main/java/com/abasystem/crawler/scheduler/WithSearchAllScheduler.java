@@ -3,6 +3,7 @@ package com.abasystem.crawler.scheduler;
 import com.abasystem.crawler.model.Dto.CrawlerDto;
 import com.abasystem.crawler.api.service.Initializer.DivTagPostInitializer;
 import com.abasystem.crawler.api.service.Operator.ParseTemplate;
+import com.abasystem.crawler.model.Type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
 import com.abasystem.crawler.strategy.ObtainHtmlResourceStrategy;
@@ -48,7 +49,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                                 return CommonsUtils.getUrlWithSearch("진주", Naver.PETERPAN_CAFE_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
                             }
                         }
-                ), DivTagPostInitializer.class);
+                ), DivTagPostInitializer.class, NaverCafeType.PETERPAN);
         logger.info("──── End PeterPan Single Crawling\n");
     }
 
@@ -70,7 +71,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                                 return CommonsUtils.getUrlWithSearch("직거래", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
                             }
                         }
-                ), DivTagPostInitializer.class);
+                ), DivTagPostInitializer.class, NaverCafeType.HAPPY);
         logger.info("──── End HappyHouse Crawling\n");
     }
 
@@ -91,7 +92,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                                 return CommonsUtils.getUrlWithSearch("대학동", Naver.PETERPAN_GWANAKGU_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
                             }
                         }
-                ), DivTagPostInitializer.class);
+                ), DivTagPostInitializer.class, NaverCafeType.PETERPAN);
         logger.info("──── End daehakDong Crawler\n");
     }
 }

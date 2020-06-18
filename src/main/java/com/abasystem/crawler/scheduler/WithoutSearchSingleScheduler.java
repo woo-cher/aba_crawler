@@ -1,9 +1,9 @@
 package com.abasystem.crawler.scheduler;
 
-import com.abasystem.crawler.model.Dto.CrawlerDto;
-import com.abasystem.crawler.api.service.Converter.DataConverter;
 import com.abasystem.crawler.api.service.Initializer.DivTagPostInitializer;
 import com.abasystem.crawler.api.service.Operator.ParseTemplate;
+import com.abasystem.crawler.model.Dto.CrawlerDto;
+import com.abasystem.crawler.model.Type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
 import com.abasystem.crawler.strategy.ObtainHtmlResourceStrategy;
@@ -34,7 +34,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
     public void jinjuMomCrawler() throws Exception {
         logger.info("──── JinjuMom Crawler initialize\n");
         singleCrawling(
-                new CrawlerDto(Naver.account, "부동산 (본인 직거래만 가능)", 4, this.parseTemplate, "진주맘",
+                new CrawlerDto(Naver.account, "부동산 (본인 직거래만 가능)", 45, this.parseTemplate, "진주맘",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {
@@ -48,7 +48,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
                                 return Naver.MOM_DIRECT_URL;
                             }
                         }
-                ), DivTagPostInitializer.class);
+                ), DivTagPostInitializer.class, NaverCafeType.MOM);
         logger.info("──── End JinjuMom Crawling\n");
     }
 
@@ -71,28 +71,7 @@ public class WithoutSearchSingleScheduler extends CrawlerTemplate {
                                 return url;
                             }
                         }
-                ), DivTagPostInitializer.class);
+                ), DivTagPostInitializer.class, NaverCafeType.PETERPAN);
         logger.info("──── End Custom Peterpan Crawling\n");
-    }
-
-    public void test() throws Exception {
-        logger.info("──── initialize\n");
-        singleCrawling(
-                new CrawlerDto(Naver.account, "[사무실]전라.경상 사무실", 4, this.parseTemplate, "[직거래]상가-업종별",
-                        new ObtainDocumentStrategy() {
-                            @Override
-                            public Document getDocument(String url) throws IOException {
-                                return Jsoup.connect(url).cookies(cookies).get();
-                            }
-                        },
-
-                        new ObtainHtmlResourceStrategy() {
-                            @Override
-                            public String getUrlAfterSearch() {
-                                return DataConverter.convertPostFixToNaverUrl("/ArticleList.nhn?search.clubid=10322296&search.menuid=849&search.boardtype=L");
-                            }
-                        }
-                ), DivTagPostInitializer.class);
-        logger.info("──── End JinjuMom Crawling\n");
     }
 }

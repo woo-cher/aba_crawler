@@ -1,5 +1,6 @@
 package com.abasystem.crawler;
 
+import com.abasystem.crawler.model.Type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -145,6 +146,15 @@ public class Basic {
         List list = new ArrayList();
         System.out.println("Result : " + list.isEmpty());
         assertTrue(list.isEmpty());
+    }
+
+    @Test
+    public void testCase7() {
+        NaverCafeType name = NaverCafeType.create("/kig");
+        System.out.println("name : " + name);
+        System.out.println("getName : " + name.getName());
+        System.out.println("getCode : " + name.getCode());
+        System.out.println("is equals? " + NaverCafeType.PETERPAN.equals(name));
     }
 }
 

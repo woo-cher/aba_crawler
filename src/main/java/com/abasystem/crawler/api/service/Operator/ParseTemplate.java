@@ -3,6 +3,7 @@ package com.abasystem.crawler.api.service.Operator;
 import com.abasystem.crawler.factory.PostInitializerFactory;
 import com.abasystem.crawler.factory.ServiceFactory;
 import com.abasystem.crawler.mapper.ModelMapper;
+import com.abasystem.crawler.model.Type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.ValidationStrategy;
 import org.jsoup.Jsoup;
@@ -43,12 +44,21 @@ public abstract class ParseTemplate {
 
     public abstract boolean isContainPropertyKeyword(Elements elements);
 
-    public List<? extends ModelMapper> parseAll(Elements elements, Map<String, String> cookies, Class clazz) throws IOException {
+    public List<? extends ModelMapper> parseAll(Elements elements, Map<String, String> cookies, Class clazz, NaverCafeType type) throws IOException {
         properties = new ArrayList<>();
         String selector = initializerFactory.getPostTitleSelector(clazz);
 
         for (Element post : elements) {
-            url = Naver.CAFE_PREFIX.concat(post.select(selector).attr("href")).replace("ca-fe", "kig");
+            String postHrefUrl = post.select(selector).attr("href");
+
+            url = Naver.CAFE_PREFIX
+                    .concat(type.getName())
+                    .concat(postHrefUrl);
+
+            if(type.equals(NaverCafeType.PETERPAN)) {
+                url.replace("/ca-fe", "");
+            }
+
             title = post.select(selector).text();
             logger.info("TITLE : {}", title);
             logger.info("URL : {}", url);

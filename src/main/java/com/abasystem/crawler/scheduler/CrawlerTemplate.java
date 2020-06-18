@@ -12,6 +12,7 @@ import com.abasystem.crawler.factory.RepositoryFactory;
 import com.abasystem.crawler.mapper.ModelMapper;
 import com.abasystem.crawler.model.Dto.Account;
 import com.abasystem.crawler.model.Dto.CrawlerDto;
+import com.abasystem.crawler.model.Type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import com.abasystem.crawler.strategy.BasicQueryStrategy;
 import com.abasystem.crawler.strategy.ObtainDocumentStrategy;
@@ -31,7 +32,7 @@ import java.util.Map;
 
 @Service
 @Transactional
-public abstract class CrawlerTemplate {
+public class CrawlerTemplate {
     private static final Logger logger = LoggerFactory.getLogger(CrawlerTemplate.class);
 
     @Autowired
@@ -60,7 +61,7 @@ public abstract class CrawlerTemplate {
     protected BasicQueryStrategy queryStrategy;
     protected PostInitializer postInitializer;
 
-    protected void singleCrawling(CrawlerDto dto, Class clazz) throws Exception {
+    protected void singleCrawling(CrawlerDto dto, Class clazz, NaverCafeType type) throws Exception {
         initializer(dto.getAccount(), clazz);
 
         ObtainDocumentStrategy documentStrategy = dto.getDocumentStrategy();
@@ -75,7 +76,7 @@ public abstract class CrawlerTemplate {
 //        Elements elements = postInitializer.initPosts(document, maxPage);
 //        logger.info("──── Elements obtain Success");
 
-        properties = dto.getParseTemplate().parseAll(elements, cookies, clazz);
+        properties = dto.getParseTemplate().parseAll(elements, cookies, clazz, type);
         logger.info("──── Parsing Success");
 
         int row = 0;
@@ -109,7 +110,7 @@ public abstract class CrawlerTemplate {
             String categoryTitle = document.select(Naver.CATEGORY_TITLE).text();
             dto.setFileName(DataConverter.convertNameToValidFileName(categoryTitle));
 
-            properties = dto.getParseTemplate().parseAll(elements, cookies, clazz);
+            properties = dto.getParseTemplate().parseAll(elements, cookies, clazz, NaverCafeType.UNKNOWN);
 
 //            int row = irregularPropertyRepository.createPropByList(properties);
             int row = 0;
