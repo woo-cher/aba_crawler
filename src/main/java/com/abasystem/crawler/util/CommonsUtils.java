@@ -24,7 +24,7 @@ import java.util.Properties;
 public class CommonsUtils {
     private static final Logger logger = LoggerFactory.getLogger(CommonsUtils.class);
 
-    public static String getUrlWithSearch(String key, String url, String btnXPath) throws IOException {
+    public static String getUrlWithSearch(String key, String url, String submitXPath) throws IOException {
         WebClient webClient = new WebClient();
 
         // Get Page
@@ -40,7 +40,7 @@ public class CommonsUtils {
         logger.debug("query ? {}", query);
 
         // Find 'button' element with XPath
-        HtmlButton btn = (HtmlButton) form.getByXPath(btnXPath).get(0);
+        HtmlButton btn = (HtmlButton) form.getByXPath(submitXPath).get(0);
 
         /**
          * Result URL : https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=10322296&search.searchBy=0&search.query=%C1%F8%C1%D6

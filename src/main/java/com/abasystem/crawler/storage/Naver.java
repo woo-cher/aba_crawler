@@ -10,8 +10,6 @@ public class Naver {
      *  \\              USER FOR LOGIN                  \\
      *  --------------------------------------------------
      */
-    public static final String ID = "";
-    public static final String PASSWORD = "";
     public static final Account account = CommonsUtils.getAccountByProperties("id1", "pw1");
 
    /**

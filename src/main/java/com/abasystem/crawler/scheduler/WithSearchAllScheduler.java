@@ -34,7 +34,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
     public void jinjuAreaCrawler() throws Exception {
         logger.info("──── PeterPan Single Crawler initialize\n");
         singleCrawling(
-                new CrawlerDto(Naver.account, "피터팬(진주지역)", 2, this.templateWithType, "피터팬",
+                new CrawlerDto(Naver.account, "피터팬(진주지역)", 22, this.templateWithType, "피터팬",
                         new ObtainDocumentStrategy() {
                             @Override
                             public Document getDocument(String url) throws IOException {
@@ -45,7 +45,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                         new ObtainHtmlResourceStrategy() {
                             @Override
                             public String getUrlAfterSearch() throws IOException {
-                                return CommonsUtils.getUrlWithSearch("진주", Naver.APT_DIRECT_PROVINCES_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
+                                return CommonsUtils.getUrlWithSearch("진주", Naver.PETERPAN_CAFE_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
                             }
                         }
                 ), DivTagPostInitializer.class);

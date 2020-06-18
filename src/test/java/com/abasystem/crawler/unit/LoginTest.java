@@ -47,8 +47,8 @@ public class LoginTest {
         HtmlPasswordInput inputPassword = htmlPage.getFirstByXPath(Naver.PW_XPATH);
         HtmlSubmitInput inputSubmit = htmlPage.getFirstByXPath(Naver.SUBMIT_XPATH);
 
-        inputId.setText(Naver.ID);
-        inputPassword.setText(Naver.PASSWORD);
+        inputId.setText(Naver.account.getUserId());
+        inputPassword.setText(Naver.account.getPasswd());
         inputSubmit.dblClick();
 
         assertTrue(htmlPage.asText().contains("Naver Sign in"));

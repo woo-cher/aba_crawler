@@ -66,7 +66,7 @@ public class PeterPanParseTest {
     public static void initialize() throws Exception{
         service = new NaverLoginService();
         service.webClient = new WebClient();
-        service.doLogin(Naver.ID, Naver.PASSWORD);
+        service.doLogin(Naver.account.getUserId(), Naver.account.getPasswd());
     }
 
     @Test
