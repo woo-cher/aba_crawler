@@ -75,7 +75,7 @@ public class PeterPanParseTest {
                 .cookies(cookies)
                 .get();
 
-        elements = doc.select(".inbox");
+        elements = doc.select("#main-area");
 
         logger.debug(elements.text());
 

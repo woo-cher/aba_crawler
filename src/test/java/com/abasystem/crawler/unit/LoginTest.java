@@ -49,6 +49,7 @@ public class LoginTest {
 
         inputId.setText(Naver.account.getUserId());
         inputPassword.setText(Naver.account.getPasswd());
+        logger.info("account : {}", Naver.account);
         inputSubmit.dblClick();
 
         assertTrue(htmlPage.asText().contains("Naver Sign in"));

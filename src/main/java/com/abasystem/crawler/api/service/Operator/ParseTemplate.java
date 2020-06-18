@@ -48,10 +48,10 @@ public abstract class ParseTemplate {
         String selector = initializerFactory.getPostTitleSelector(clazz);
 
         for (Element post : elements) {
-            url = Naver.CAFE_PREFIX.concat(post.select(selector).attr("href"));
+            url = Naver.CAFE_PREFIX.concat(post.select(selector).attr("href")).replace("ca-fe", "kig");
             title = post.select(selector).text();
             logger.info("TITLE : {}", title);
-//            logger.info("URL : {}", url);
+            logger.info("URL : {}", url);
 
             document = Jsoup.connect(url)
                     .cookies(cookies)
@@ -59,7 +59,7 @@ public abstract class ParseTemplate {
 
             elementsGarbageClear(document);
 
-            Elements els = document.select(".inbox");
+            Elements els = document.select("#main-area");
 
             if (validationStrategy.isInvalidPost(els)) {
                 logger.error("\t---------- Is not a post for sail property ---------------\n");
@@ -83,6 +83,6 @@ public abstract class ParseTemplate {
     }
 
     private void elementsGarbageClear(Document document) {
-        document.select(".inbox form").remove();
+        document.select("#main-area form").remove();
     }
 }

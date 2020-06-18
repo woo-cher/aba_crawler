@@ -20,7 +20,7 @@ public class IrregularReader implements ReadStrategy<IrregularProperty> {
     @Override
     public IrregularProperty parse(Document document, String url, String title) {
         logger.info("IrregularParser.parse initialize");
-        String phone = getPhoneNumber(document.select(".inbox"));
+        String phone = getPhoneNumber(document.select("#main-area"));
 
         return new IrregularProperty(title, document.select("#tbody").text(), document.select(".date").text(), url, phone);
     }

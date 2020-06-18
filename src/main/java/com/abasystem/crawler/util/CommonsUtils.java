@@ -59,7 +59,7 @@ public class CommonsUtils {
         Account account = null;
 
         try {
-            FileInputStream fi = new FileInputStream("db.properties");
+            FileInputStream fi = new FileInputStream("account.properties");
             Properties prop = new Properties();
             prop.load(fi);
 

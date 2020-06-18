@@ -36,10 +36,11 @@ public class MethodTest {
 
     @Test
     public void getPhoneNumber() throws IOException {
-        Document document = Jsoup.connect("https://cafe.naver.com/ArticleRead.nhn?clubid=10322296&page=373&menuid=455&boardtype=L&articleid=7893385&referrerAllArticles=false")
-                            .get();
+        Document document = Jsoup.connect("https://cafe.naver.com/kig/ArticleRead.nhn?clubid=10322296&page=373&menuid=455&boardtype=L&articleid=7893385&referrerAllArticles=false")
+                .get();
 
+        logger.error("test : {}", document);
         IrregularReader reader = new IrregularReader();
-        logger.error("폰 : {}", reader.getPhoneNumber(document.select(".inbox")));
+        logger.error("폰 : {}", reader.getPhoneNumber(document.select("#main-area")));
     }
 }
