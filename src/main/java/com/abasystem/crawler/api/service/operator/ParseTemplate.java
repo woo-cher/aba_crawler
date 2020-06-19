@@ -71,6 +71,13 @@ public abstract class ParseTemplate {
 
             Elements els = document.select("#main-area");
 
+            // 2020~
+            String date = els.select(".m-tcol-c.date").text();
+            if(!date.contains("2020")) {
+                logger.warn("날짜뭔데 ? " + date);
+                break;
+            }
+
             if (validationStrategy.isInvalidPost(els)) {
                 logger.error("\t---------- Is not a post for sail property ---------------\n");
                 continue;

@@ -62,6 +62,7 @@ public class CrawlerTemplate {
     protected PostInitializer postInitializer;
 
     protected void singleCrawling(CrawlerDto dto, Class clazz, NaverCafeType type) throws Exception {
+        startLog(dto.getDirectory());
         initializer(dto.getAccount(), clazz);
 
         ObtainDocumentStrategy documentStrategy = dto.getDocumentStrategy();
@@ -93,10 +94,11 @@ public class CrawlerTemplate {
 
         repository.insertLog(row);
         logger.info("──── Log save complete");
-        logger.info("──── End Crawling");
+        endLog(dto.getDirectory());
     }
 
     protected void multipleCrawling(CrawlerDto dto, Map<String, Integer> map, Class clazz) throws Exception {
+        startLog(dto.getDirectory());
         initializer(dto.getAccount(), clazz);
 
         for (String urlKey : map.keySet()) {
@@ -127,17 +129,7 @@ public class CrawlerTemplate {
             logger.warn("─────────────────── End writing");
         }
         logger.warn("─────────────────── End Loop");
-    }
-
-    private void initializer(Account account, Class clazz) throws Exception {
-        loginService.doLogin(account.getUserId(), account.getPasswd());
-
-        this.cookies = loginService.getLoginCookie();
-        this.postInitializer = postInitializerFactory.getPostCreator(clazz);
-    }
-
-    private void clear() {
-        loginService.close();
+        endLog(dto.getDirectory());
     }
 
     public int getMaxPage(Document document, Class clazz) throws IOException {
@@ -161,5 +153,24 @@ public class CrawlerTemplate {
         }
 
         return maxPage;
+    }
+
+    private void initializer(Account account, Class clazz) throws Exception {
+        loginService.doLogin(account.getUserId(), account.getPasswd());
+
+        this.cookies = loginService.getLoginCookie();
+        this.postInitializer = postInitializerFactory.getPostCreator(clazz);
+    }
+
+    private void clear() {
+        loginService.close();
+    }
+
+    private void startLog(String crawlerName) {
+        logger.info("──── " + crawlerName + " Multiple Crawler initialize\n");
+    }
+
+    private void endLog(String crawlerName) {
+        logger.info("──── " + crawlerName + " Multiple Crawler finished\n");
     }
 }

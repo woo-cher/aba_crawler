@@ -39,27 +39,11 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                                 return CommonsUtils.getUrlWithSearch("진주", Naver.PETERPAN_CAFE_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
                             }
                         }
-                ), DivTagPostInitializer.class, NaverCafeType.PETERPAN);
-        logger.info("──── End PeterPan Single Crawling\n");
-    }
-
-    @Scheduled(cron = "0 30 23 ? * 7")
-    public void happyHouseCrawler() throws Exception {
-        logger.info("──── HappyHouse Crawler initialize\n");
-        singleCrawling(
-                new CrawlerDto(Naver.account, "직거래매물", 2, this.templateWithoutType, "행가집",
-                        new ObtainHtmlResourceStrategy() {
-                            @Override
-                            public String getUrlAfterSearch() throws IOException {
-                                return CommonsUtils.getUrlWithSearch("직거래", Naver.HAPPY_CAFE_URL, Naver.HAPPY_SEARCH_BUTTON_XPATH);
-                            }
-                        }
-                ), DivTagPostInitializer.class, NaverCafeType.HAPPY_HOUSE);
-        logger.info("──── End HappyHouse Crawling\n");
+                ), DivTagPostInitializer.class, NaverCafeType.PETERPAN
+        );
     }
 
     public void daehakDongOneRoomCrawler() throws Exception {
-        logger.info("──── daehakDong Crawler initialize\n");
         singleCrawling(
                 new CrawlerDto(Naver.account, "대학동", 100, this.templateWithoutType, "관악구_대학동",
                         new ObtainHtmlResourceStrategy() {
@@ -68,7 +52,7 @@ public class WithSearchAllScheduler extends CrawlerTemplate {
                                 return CommonsUtils.getUrlWithSearch("대학동", Naver.PETERPAN_GWANAKGU_URL, Naver.PETER_SEARCH_BUTTON_XPATH);
                             }
                         }
-                ), DivTagPostInitializer.class, NaverCafeType.PETERPAN);
-        logger.info("──── End daehakDong Crawler\n");
+                ), DivTagPostInitializer.class, NaverCafeType.PETERPAN
+        );
     }
 }
