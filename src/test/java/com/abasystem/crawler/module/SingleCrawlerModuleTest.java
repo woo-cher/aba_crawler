@@ -36,12 +36,6 @@ public class SingleCrawlerModuleTest {
 
     @Test
     @Transactional
-    public void happyCrawler() throws Exception {
-        searchAllScheduler.happyHouseCrawler();
-    }
-
-    @Test
-    @Transactional
     public void jinjuNCrawler() throws Exception {
         nonSearchScheduler.jinjuNCrawler();
     }

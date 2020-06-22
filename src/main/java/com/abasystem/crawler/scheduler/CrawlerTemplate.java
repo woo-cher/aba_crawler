@@ -97,7 +97,7 @@ public class CrawlerTemplate {
         endLog(dto.getDirectory());
     }
 
-    protected void multipleCrawling(CrawlerDto dto, Map<String, Integer> map, Class clazz) throws Exception {
+    protected void multipleCrawling(CrawlerDto dto, Map<String, Integer> map, Class clazz, NaverCafeType type) throws Exception {
         startLog(dto.getDirectory());
         initializer(dto.getAccount(), clazz);
 
@@ -112,7 +112,7 @@ public class CrawlerTemplate {
             String categoryTitle = document.select(Naver.CATEGORY_TITLE).text();
             dto.setFileName(DataConverter.convertNameToValidFileName(categoryTitle));
 
-            properties = dto.getParseTemplate().parseAll(elements, cookies, clazz, NaverCafeType.UNKNOWN);
+            properties = dto.getParseTemplate().parseAll(elements, cookies, clazz, type);
 
 //            int row = irregularPropertyRepository.createPropByList(properties);
             int row = 0;

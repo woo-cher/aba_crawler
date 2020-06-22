@@ -25,6 +25,7 @@ public abstract class PostInitializer implements InitStrategy {
     public Elements initPosts(Document document, int pageCount) throws IOException {
         this.elements = document.select(getPostArticleSelector());
         this.pageUrl = Naver.CAFE_PREFIX.concat(document.select(getPageNavigationSelector()).attr("href"));
+        logger.error("아 또뭐야 : " + this.pageUrl);
 
         for (int n = 2; n < pageCount + 1; n++) {
             elements.addAll(

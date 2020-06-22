@@ -4,6 +4,7 @@ import com.abasystem.crawler.builder.CrawlerDtoBuilder;
 import com.abasystem.crawler.api.service.Initializer.DivTagPostInitializer;
 import com.abasystem.crawler.api.service.Initializer.SpanTagPostInitializer;
 import com.abasystem.crawler.api.service.operator.ParseTemplate;
+import com.abasystem.crawler.model.type.NaverCafeType;
 import com.abasystem.crawler.storage.Naver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "춘천부동산")
-                        .build(), chuncheonMap, DivTagPostInitializer.class
+                        .build(), chuncheonMap, DivTagPostInitializer.class, NaverCafeType.UNKNOWN
         );
     }
 
@@ -38,7 +39,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "좋은점포구하기")
-                        .build(), goodShopMap, DivTagPostInitializer.class
+                        .build(), goodShopMap, DivTagPostInitializer.class, NaverCafeType.UNKNOWN
         );
     }
 
@@ -48,7 +49,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "피터팬의좋은방구하기")
-                        .build(), peterPanMap, DivTagPostInitializer.class
+                        .build(), peterPanMap, DivTagPostInitializer.class, NaverCafeType.PETERPAN
         );
     }
 
@@ -58,7 +59,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "부동산직거래")
-                        .build(), boodongDirectMap, SpanTagPostInitializer.class
+                        .build(), boodongDirectMap, SpanTagPostInitializer.class, NaverCafeType.UNKNOWN
         );
     }
 
@@ -68,7 +69,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "창원부동산직거래")
-                        .build(), changWonMap, SpanTagPostInitializer.class
+                        .build(), changWonMap, SpanTagPostInitializer.class, NaverCafeType.UNKNOWN
         );
     }
 
@@ -78,7 +79,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "부산부동산직거래")
-                        .build(), busanRoomMap, SpanTagPostInitializer.class
+                        .build(), busanRoomMap, SpanTagPostInitializer.class, NaverCafeType.UNKNOWN
         );
     }
 
@@ -88,7 +89,7 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "천안부동산직거래")
-                       .build(), cheonanDirectMap, SpanTagPostInitializer.class
+                       .build(), cheonanDirectMap, SpanTagPostInitializer.class, NaverCafeType.UNKNOWN
         );
     }
 
@@ -97,11 +98,16 @@ public class WithoutSearchMultipleScheduler extends CrawlerTemplate {
 
         multipleCrawling(
                 new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "러브양산맘")
-                        .build(), yangSanMap, DivTagPostInitializer.class
+                        .build(), yangSanMap, DivTagPostInitializer.class, NaverCafeType.UNKNOWN
         );
     }
 
-    public void HappyHouseCrawler() throws Exception {
+    public void happyHouseCrawler() throws Exception {
         Map<String, Integer> happyHouseMap = categoryMapFactory.getHappyHouseCategoryMap();
+
+        multipleCrawling(
+                new CrawlerDtoBuilder(Naver.account, this.parseTemplate, "행가집")
+                    .build(), happyHouseMap, DivTagPostInitializer.class, NaverCafeType.HAPPY_HOUSE
+        );
     }
 }

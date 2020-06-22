@@ -72,10 +72,17 @@ public abstract class ParseTemplate {
             Elements els = document.select("#main-area");
 
             // 2020~
-            String date = els.select(".m-tcol-c.date").text();
+            String date = els.select("date").text();
+
+
+            if(date.isEmpty()) {
+                date = els.select(".m-tcol-c.date").text();
+            }
+
+
             if(!date.contains("2020")) {
-                logger.warn("날짜뭔데 ? " + date);
-                break;
+                logger.error("Date Must be 2020~ . but was " + date);
+                continue;
             }
 
             if (validationStrategy.isInvalidPost(els)) {

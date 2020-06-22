@@ -56,4 +56,9 @@ public class MultipleCrawlerModuleTest {
     public void YangSanMom() throws Exception {
         scheduler.yangSanMomCrawler();
     }
+
+    @Test
+    public void HappyHouse() throws Exception {
+        scheduler.happyHouseCrawler();
+    }
 }
