@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class BeanConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(BeanConfiguration.class);
 
     @Bean
+    @Scope("prototype")
     public Map<String, String> hashMap() {
         return new HashMap<>();
     }
