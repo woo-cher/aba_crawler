@@ -61,6 +61,15 @@ public class CrawlerTemplate {
     protected BasicQueryStrategy queryStrategy;
     protected PostInitializer postInitializer;
 
+    /**
+     * Crawling for ordinary page that is not cafe like 'naver'
+     */
+    protected void ordinaryPageCrawling() throws Exception {
+        String url = "http://www.karhanbang.com/office/?topM=09";
+
+        Document document = Jsoup.connect(url).get();
+    }
+
     protected void singleCrawling(CrawlerDto dto, Class clazz, NaverCafeType type) throws Exception {
         startLog(dto.getDirectory());
         initializer(dto.getAccount(), clazz);
