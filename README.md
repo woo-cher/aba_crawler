@@ -1,3 +1,5 @@
+[시연 영상]: https://youtu.be/n6QW5m9Z6WA?si=TAOucoTp26IfqcSM
+
 >
 ><h1>Naver Crawler <sup><sup></sup></sup><sub><sub><sup><i>in cafe, use login, specified category</i></sup></sub></sub></h1>
 
@@ -16,6 +18,8 @@
   <br><br>
   
 - 실제 두 직원이 직접 카페에서 하나씩 보고, 기록 하던 형태의 업무 시스템을 **자동화**하기 위함
+
+- **[시연 영상][]**
 
 <br>
 
